@@ -21,7 +21,8 @@ h6 {
 h1 {
   font-size: 44px;
   line-height: 56px;
-  color: #fff; }
+  color: #fff; 
+  text-shadow: 2px 2px gray;}
 
 h2 {
   font-size: 30px;
@@ -94,7 +95,7 @@ a:active {
   border-radius: 0; }
 
 .btn-home {
-  background-color: #1bafb4;
+  background-color: #29abe2;
   border-radius: 0px;
   color: #fff;
   font-size: 18px;
@@ -117,6 +118,33 @@ a:active {
   width: 100%;
   z-index: 9999; }
 
+.reviews {
+    padding-top: 100px;
+    background: #28ABE3;
+    position: relative;
+    padding-bottom: 120px;
+    margin-bottom: 80px;
+}
+
+.message{
+  color: #fff;
+  font-size: 25px;
+  font-style: italic;
+  font-weight: bold;
+  padding: 10px 40px;
+}
+
+#map {
+  height: 400px;  /* The height is 400 pixels */
+  width: 100%;  /* The width is the width of the web page */
+ }
+
+@media screen and (max-width: 320px){#vid_intro{display:none;}}
+@media screen and (max-width: 480px){#vid_intro{display:none;}}
+@media screen and (max-width: 650px){#vid_intro{display:none;}}
+@media screen and (max-width: 980px){#vid_intro{display:none;}}
+@media screen and (max-width: 980px){#vid_intro{display:none;}}
+
 .book {
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -136,7 +164,7 @@ a:active {
   border-top: 5px solid #ecf0f1;
   border-bottom: 5px solid #ecf0f1;
   border-right: 5px solid #ecf0f1;
-  background: #1bafb4;
+  background: #29abe2;
   width: 50px;
   height: 60px;
   -webkit-transform-origin: 0% 50%;
@@ -167,13 +195,13 @@ a:active {
     -webkit-transform: perspective(600px) rotateY(0deg);
     transform: perspective(600px) rotateY(0deg); }
   20% {
-    background: #1bafb4; }
+    background: #29abe2; }
   29.9% {
-    background: #1bafb4; }
+    background: #29abe2; }
   30% {
     -webkit-transform: perspective(200px) rotateY(-90deg);
     transform: perspective(200px) rotateY(-90deg);
-    background: #1bafb4; }
+    background: #29abe2; }
   54.999% {
     opacity: 1; }
   55% {
@@ -181,24 +209,24 @@ a:active {
   60% {
     -webkit-transform: perspective(200px) rotateY(-180deg);
     transform: perspective(200px) rotateY(-180deg);
-    background: #1bafb4; }
+    background: #29abe2; }
   100% {
     -webkit-transform: perspective(200px) rotateY(-180deg);
     transform: perspective(200px) rotateY(-180deg);
-    background: #1bafb4; } }
+    background: #29abe2; } }
 
 @keyframes flip {
   0% {
     -webkit-transform: perspective(600px) rotateY(0deg);
     transform: perspective(600px) rotateY(0deg); }
   20% {
-    background: #1bafb4; }
+    background: #29abe2; }
   29.9% {
-    background: #1bafb4; }
+    background: #29abe2; }
   30% {
     -webkit-transform: perspective(200px) rotateY(-90deg);
     transform: perspective(200px) rotateY(-90deg);
-    background: #1bafb4; }
+    background: #29abe2; }
   54.999% {
     opacity: 1; }
   55% {
@@ -206,11 +234,11 @@ a:active {
   60% {
     -webkit-transform: perspective(200px) rotateY(-180deg);
     transform: perspective(200px) rotateY(-180deg);
-    background: #1bafb4; }
+    background: #29abe2; }
   100% {
     -webkit-transform: perspective(200px) rotateY(-180deg);
     transform: perspective(200px) rotateY(-180deg);
-    background: #1bafb4; } }
+    background: #29abe2; } }
 
 /*--
     .hero-area start
@@ -279,9 +307,9 @@ a:active {
     padding-top: 5px;
     display: inline-block; }
   .navigation .navbar-toggler {
-    background: #fff;
+    background: #29abe2;
     outline: none;
-    border-radius: 0;
+    border-radius: 1;
     float: right; }
     .navigation .navbar-toggler i {
       font-size: 22px; }
@@ -307,10 +335,10 @@ a:active {
   .service .block {
     margin-bottom: 50px; }
     .service .block i {
-      font-size: 30px;
+      font-size: 60px;
       display: inline-block;
       margin-bottom: 15px;
-      color: #1bafb4; }
+      color: #29abe2; }
     .service .block h3 {
       color: #333333;
       font-weight: 600;
@@ -374,7 +402,7 @@ a:active {
       border-radius: 0;
       border: none;
       box-shadow: none;
-      background: #1bafb4;
+      background: #29abe2;
       padding: 0px 35px;
       color: #fff;
       font-weight: bold; }
@@ -391,8 +419,8 @@ a:active {
 
 .btn-send {
   line-height: 48px;
-  border: 2px solid #1bafb4;
-  background: #1bafb4;
+  border: 2px solid #29abe2;
+  background: #29abe2;
   color: #fff;
   width: 100%;
   font-size: 14px;
