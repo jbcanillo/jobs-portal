@@ -134,6 +134,31 @@ a:active {
   padding: 10px 40px;
 }
 
+.login {
+  padding: 155px 0px;
+  background-image: url(../images/login.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  position: relative; 
+}
+
+.signup {
+  padding: 130px 0px;
+  background-image: url(../images/signup.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  position: relative; 
+}
+
+.transparent_block {
+  background-color: rgba(168, 160, 160, 0.8);
+  padding: 70px 50px 50px;
+ }
+
 #map {
   height: 400px;  /* The height is 400 pixels */
   width: 100%;  /* The width is the width of the web page */

@@ -1,44 +1,5 @@
-<!DOCTYPE html>
-<html class="no-js">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Neway Manpower - Job Portal</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('template/landing_page/images/icon.png') }}">
-        <link rel="icon" type="image/png" href="{{ asset('template/landing_page/images/icon.png') }}">
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400i|Source+Sans+Pro:300,400,600,700" rel="stylesheet">
-        <!-- CSS -->
-        <!-- Bootstrap CDN -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('template/landing_page/css/themefisher-fonts.css') }}" >
-        <link rel="stylesheet" href="{{ asset('template/landing_page/css/font-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('template/landing_page/css/owl.carousel.css') }}">
-        <link rel="stylesheet" href="{{ asset('template/landing_page/css/animate.css') }}">
-        <link rel="stylesheet" href="{{ asset('template/landing_page/css/style.css') }}">
-        <!-- Responsive Stylesheet -->
-        <link rel="stylesheet" href="{{ asset('template/landing_page/css/responsive.css') }}">
-    </head>
-    <body id="body">
-    	<div id="preloader">
-    		<div class="book">
-    		  <div class="book__page"></div>
-    		  <div class="book__page"></div>
-    		  <div class="book__page"></div>
-    		</div>
-    	</div>
-
-	    <!-- 
-	    Header start
-	    ==================== -->
-        <div class="container">
-            <nav class="navbar navbar-fixed-top  navigation " id="top-nav">
-                <a class="navbar-brand" href="#">
-                    <img src="{{ asset('template/landing_page/images/logo-small.png') }}" alt="">
-                </a>
-
+@extends('layout/general_container')
+@section('content')
               <button class="navbar-toggler hidden-lg-up float-lg-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" >
                   <i class="tf-ion-android-menu"></i>
               </button>
@@ -63,7 +24,7 @@
                     <a class="nav-link" href="#contact">CONTACT US</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#login">LOGIN</a>
+                    <a class="nav-link" href="{{ url('/login') }}">LOGIN</a>
                   </li>
                 </ul>
               </div>
@@ -76,11 +37,11 @@
 	            <div class="row">
 	                <div class="col-md-7">
 	                    <div class="block">
-                            <h1 class="wow fadeInDown" data-wow-delay="0.3s" data-wow-duration=".2s" >Neway <br> Manpower Sevices Inc.</h1>
+                            <h1 class="wow fadeInDown" data-wow-delay="0.3s" data-wow-duration=".2s" >Neway <br> Manpower Services Inc.</h1>
 	                        <p class="counter wow fadeInDown" data-wow-delay="0.5s" data-wow-duration=".5s" style="color:black">
                                 <b>A portal that opens possibilities of improving life of job seeker while  ensuring quality of services to its clients.</b></p>
 	                        <div class="wow fadeInDown" data-wow-delay="0.7s" data-wow-duration=".7s">
-	                        	<a class="btn btn-home" href="#about" role="button">Sign Up Now!</a>
+	                        	<a class="btn btn-home" href="{{ url('/sign_up') }}" role="button">Sign-Up Now!</a>
 	                        </div>
 	                    </div>
 	                </div>
@@ -142,14 +103,14 @@
             <div class="container">
                 <div class="row">
                     <div class="heading wow fadeInUp">
-                        <h2>Hiring Process: Five Easy Steps</h2>
+                        <h2>Hiring Process: 5 Easy Steps</h2>
                         <p>Ease of application for all job seekers.</p>
                     </div>
                     <div class="col-sm-6 col-md-4 wow fadeInLeft">
                         <div class="block">
                             <i class="tf-document3"></i>   
                             <h3>Step 1</h3>
-                            <p>Sign Up!</p>
+                            <p>Sign-Up!</p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-4 wow fadeInLeft">
@@ -350,38 +311,5 @@
                 </div>
             </div>
         </section>
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="block">
-                            <a href="#"><i class="tf-ion-social-facebook" style="font-size:30px"></i></a>&nbsp&nbsp&nbsp&nbsp&nbsp
-                            <a href="#"><i class="tf-ion-social-twitter" style="font-size:30px"></i></a>&nbsp&nbsp&nbsp&nbsp&nbsp
-                            <a href="#"><i class="tf-ion-social-linkedin-outline" style="font-size:30px"></i></a>&nbsp&nbsp&nbsp&nbsp&nbsp
-                        </div>
-                        <div class="block">
-                            <p>Copyright &copy;
-                                    <script>
-                                     document.write(new Date().getFullYear())
-                                    </script>
-                               Neway Manpower - Job Portal</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Js -->
-        <script src="{{ asset('template/landing_page/js/vendor/jquery-2.1.1.min.js') }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
-        <script src="{{ asset('template/landing_page/js/vendor/modernizr-2.6.2.min.js') }}"></script>
-        <script src="{{ asset('template/landing_page/js/jquery.lwtCountdown-1.0.js') }}"></script>
-        <script src="{{ asset('template/landing_page/js/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('template/landing_page/js/jquery.validate.min.js') }}"></script>
-        <script src="{{ asset('template/landing_page/js/jquery.form.js') }}"></script>
-        <script src="{{ asset('template/landing_page/js/jquery.nav.js') }}"></script>
-        <script src="{{ asset('template/landing_page/js/wow.min.js') }}"></script>
-        <script src="{{ asset('template/landing_page/js/main.js') }}"></script>
-    </body>
-</html>
+@endsection
 

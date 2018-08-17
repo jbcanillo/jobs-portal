@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/apple-icon.png') }}">
   <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
-
   <title>{{ config('app.name') }}</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -43,15 +42,16 @@
 <body>
     <div class="loader"></div>
   <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-background-color="blue" data-image="{{ asset("img/sidebarx.jpg") }}">
+    <div class="sidebar" data-color="azure" data-background-color="blue" data-image="{{ asset("img/sidebarx.jpg") }}">
       <div class="logo">
-        <a href="" class="simple-text logo-normal">
-          {{ config('app.name') }}
-        </a>
+          <center>
+          <a class="navbar-brand" href="#">
+             <img src="{{ asset('template/landing_page/images/logo-small.png') }}" alt=""></a>
+          </center>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="{{ ($current_route_name == 'dashboard') ? 'nav-item active' : 'nav-item' }}">
+          <li class="{{ ($current_route_name == 'dashboard' || $current_route_name == '' ) ? 'nav-item active' : 'nav-item' }}">
             <a class="nav-link" href="{{ url('dashboard') }}">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
@@ -81,28 +81,22 @@
               <p>Requests</p>
             </a>
           </li>
-          <li class="{{ ($current_route_name == 'jobs') ? 'nav-item active' : 'nav-item' }}">
-            <a class="nav-link" href="{{ url('jobs') }}">
-              <i class="material-icons">descriptions</i>
-              <p>Jobs</p>
-            </a>
-          </li>
           <li class="{{ ($current_route_name == 'job_matching') ? 'nav-item active' : 'nav-item' }}">
             <a class="nav-link" href="{{ url('job_matching') }}">
               <i class="material-icons">find_in_page</i>
               <p>Job Matching</p>
             </a>
           </li>
-          <li class="{{ ($current_route_name == 'customer_reviews') ? 'nav-item active' : 'nav-item' }}">
-            <a class="nav-link" href="{{ url('customer_reviews') }}">
+          <li class="{{ ($current_route_name == 'reviews') ? 'nav-item active' : 'nav-item' }}">
+            <a class="nav-link" href="{{ url('reviews') }}">
               <i class="material-icons">rate_review</i>
               <p>Customer Reviews</p>
             </a>
           </li>
           <li class="nav-item active-pro ">
-                <a class="nav-link" href="{{ url('settings') }}">
+                <a class="nav-link" href="{{ url('preferences') }}">
                     <i class="material-icons">settings</i>
-                    <p>Settings</p>
+                    <p>Preferences</p>
                 </a>
                 <a class="nav-link" href="{{ url('logout') }}">
                   <i class="material-icons">exit_to_app</i>
@@ -118,7 +112,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand">Welcome</a>
+            <a class="navbar-brand">Welcome Angie Monterde Ceniza! [Administrator]</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -150,7 +144,7 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2">
-                  <a class="dropdown-item" href="{{ url('settings') }}"><i class="material-icons">settings</i>&nbspSettings</a>
+                  <a class="dropdown-item" href="{{ url('preferences') }}"><i class="material-icons">settings</i>&nbspPreferences</a>
                   <a class="dropdown-item" href="{{ url('logout') }}"><i class="material-icons">exit_to_app</i>&nbspLogout</a>
                 </div>
               </li>
