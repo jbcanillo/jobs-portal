@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME'),
+    'name' => env('APP_NAME','Neway Manpower - Job Portal'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY',base64_decode('Zq+S/+Xp4IGFwscQCjHqfKWTfCZ+GBWQihjYS6hv9IM=')),
 
     'cipher' => 'AES-256-CBC',
 
