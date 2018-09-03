@@ -39,9 +39,9 @@ class CreateTables extends Migration
             $table->string('lastname');
             $table->string('nickname');
             $table->string('contact_number');
-            $table->binary('profile_picture');
-            $table->binary('resume_file');
-            $table->boolean('resume_public');
+            $table->binary('profile_picture')->nullable();
+            $table->binary('resume_file')->nullable();
+            $table->boolean('resume_public')->nullable();
             $table->string('status');
             $table->timestamps();
         });
@@ -66,7 +66,7 @@ class CreateTables extends Migration
             $table->string('city');
             $table->date('start');
             $table->date('end');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('status');
             $table->timestamps();
         });
@@ -76,7 +76,7 @@ class CreateTables extends Migration
             $table->integer('applicant_id');
             $table->string('degree');
             $table->string('school');
-            $table->string('field_of_study');
+            $table->string('field_of_study')->nullable();
             $table->string('country');
             $table->string('city');
             $table->date('start');
@@ -100,7 +100,7 @@ class CreateTables extends Migration
             $table->string('title');
             $table->date('start');
             $table->date('end');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('status');
             $table->timestamps();
         });
@@ -122,7 +122,7 @@ class CreateTables extends Migration
             $table->string('rank');
             $table->date('start');
             $table->date('end');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('status');
             $table->timestamps();
         });
@@ -132,7 +132,7 @@ class CreateTables extends Migration
             $table->integer('applicant_id');
             $table->string('title');
             $table->date('date_awarded');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('status');
             $table->timestamps();
         });
@@ -143,7 +143,7 @@ class CreateTables extends Migration
             $table->string('title');
             $table->date('start');
             $table->date('end');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('status');
             $table->timestamps();
         });
@@ -155,7 +155,7 @@ class CreateTables extends Migration
             $table->string('title');
             $table->string('url');
             $table->date('date_published');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('status');
             $table->timestamps();
         });
@@ -166,7 +166,7 @@ class CreateTables extends Migration
             $table->string('title');
             $table->string('url');
             $table->date('date_published');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('status');
             $table->timestamps();
         });
@@ -198,16 +198,16 @@ class CreateTables extends Migration
 
         Schema::create('employers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
             $table->string('firstname');
             $table->string('middlename');
             $table->string('lastname');
             $table->string('nickname');
-            $table->string('email')->unique();
-            $table->string('company_name');
-            $table->integer('company_size');
-            $table->string('contact_person');
+            $table->string('company_name')->nullable();
+            $table->integer('company_size')->nullable();
+            $table->string('contact_person')->nullable();
             $table->string('contact_number');
-            $table->text('how');
+            $table->text('how')->nullable();
             $table->string('status');
             $table->timestamps();
         });

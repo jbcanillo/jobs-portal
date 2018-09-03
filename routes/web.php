@@ -16,32 +16,26 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return view('landing_page/login');
-});
-
-Route::post('/dashboard', function () {
-    return view('admin/dashboard');
+    if(Auth::user()){
+        return redirect('/logout');
+    }else{
+        return view('landing_page/login');
+    }
 });
 
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
 
-Route::get('/logout', function () {
-    return view('landing_page/index');
-});
-
-Route::get('/sign_up', function () {
-    return view('landing_page/sign_up');
-});
-
-Route::get('/forgot_password', function () {
-    return view('landing_page/forgot_password');
-});
 
 Route::get('/preferences', function () {
     return view('/preferences');
 });
+
+Route::resource('/sign_up','SignUpController');
+
+Route::post('/home','LoginController@home');
+Route::get('/logout','LoginController@logout');
 
 Route::resource('/users','UsersController');
 Route::get('/users/delete/{id}',['uses' =>'UsersController@destroy']);

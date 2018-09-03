@@ -11,12 +11,27 @@
                         </center>
                         <br>
                     </div>
+                    @if ($message = Session::get('error'))
+                        <div class="alert alert-danger alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
                 <div class="form-group ">
-                    <form action="{{ url('dashboard') }}" method="post" id="contact-form">
+                    <form action="{{ url('home') }}" method="post" id="contact-form">
                         {{ csrf_field() }}
                         <div class="input-field">
-                            <input type="text" class="form-control" placeholder="Username" name="username">
+                            <input type="text" class="form-control" placeholder="Email" name="email">
                         </div>
                         <div class="input-field">
                             <input type="password" class="form-control" placeholder="Password" name="password">

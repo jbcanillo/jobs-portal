@@ -38,9 +38,7 @@
                 <a class="navbar-brand" href="./">
                     <img src="{{ asset('template/landing_page/images/logo-small.png') }}" alt="">
                 </a>
-
                 @yield('content')
-
             </nav>
         </div>
         @yield('content2')

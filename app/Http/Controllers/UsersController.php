@@ -31,7 +31,7 @@ class UsersController extends Controller
 
     private function validation($inputs,$id=NULL){
         $rules =[
-            'username' => 'required|string|max:40',
+            'username' => 'required|string|max:40|unique:users,name,'.$id,
             'email' => 'required|string|email|max:40|unique:users,email,'.$id,
             'role' => 'required|string',
             'status' => 'required|string'
@@ -53,9 +53,9 @@ class UsersController extends Controller
         $validationError = $this->validation($request);
         if(!$validationError){
             $user = new \App\User;
-            $user->name = strtolower($request->get('username'));
+            $user->name = strtolower(strip_tags($request->get('username')));
             $user->email = $request->get('email');
-            $user->password = md5($request->get('password'));
+            $user->password = bcrypt($request->get('password'));
             $user->role = $request->get('role');
             $user->status = $request->get('status');
             $user->created_at = strtotime(date('Y-m-d H:m:s'));
@@ -107,7 +107,7 @@ class UsersController extends Controller
             $user->name = strtolower($request->get('username'));
             $user->email = $request->get('email');
             if($request->get('password')!=""){
-                $user->password = md5($request->get('password'));
+                $user->password = bcrypt($request->get('password'));
             }
             $user->role = $request->get('role');
             $user->status = $request->get('status');
