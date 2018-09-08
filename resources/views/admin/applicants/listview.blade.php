@@ -23,7 +23,6 @@
                         <th class="mdl-data-table__cell--non-numeric">Lastname</th>
                         <th class="mdl-data-table__cell--non-numeric">Firstname</th>
                         <th class="mdl-data-table__cell--non-numeric">Middlename</th>
-                        <th class="mdl-data-table__cell--non-numeric">Public Resume?</th>
                         <th class="mdl-data-table__cell--non-numeric">Status</th>
                         <th class="mdl-data-table__cell--non-numeric">Manage</th>
                       </tr>
@@ -46,7 +45,6 @@
                         { data: 'lastname', name: 'lastname' },
                         { data: 'firstname', name: 'firstname' },
                         { data: 'middlename', name: 'middlename' },
-                        { data: 'resume_public', name: 'resume_public' },
                         { data: 'status', name: 'status' },
                         { 
                           "render": function ( data, type, full, meta ) { 

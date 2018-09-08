@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Datatables;
 use App\Applicant;
 
@@ -27,7 +28,22 @@ class ApplicantsController extends Controller
     public function create()
     {
         //
-        return view('admin/applicants/form');
+        $users= \App\User::all();
+        return view('admin/applicants/form',compact('users'));
+    }
+
+    private function validation($inputs,$id=NULL){
+        $rules =[
+            'firstname' => 'required|string',
+            'middlename' => 'required|string',
+            'lastname' => 'required|string',
+            'nickname' => 'required|string',
+            'contact' => 'required|string',
+            'resume_public' => 'required',
+            'user_id' => 'required|integer|unique:applicants,user_id,'.$id,
+            'status' => 'required|string',
+        ];
+        return $this->validate($inputs, $rules);
     }
 
     /**
@@ -39,6 +55,25 @@ class ApplicantsController extends Controller
     public function store(Request $request)
     {
         //
+        $validationError = $this->validation($request);
+        if(!$validationError){
+            $applicant = new \App\Applicant;
+            $applicant->firstname = ucwords(strip_tags($request->get('firstname')));
+            $applicant->middlename = ucwords(strip_tags($request->get('middlename')));
+            $applicant->lastname = ucwords(strip_tags($request->get('lastname')));
+            $applicant->nickname = ucwords(strip_tags($request->get('nickname')));
+            $applicant->contact_number = strip_tags($request->get('contact'));
+            if( $request->hasFile('resume_file')){
+                $path = $request->file('resume_file')->store('resumes');
+                $applicant->resume_filepath = $path;
+            }
+            $applicant->resume_public = $request->get('resume_public');
+            $applicant->user_id = $request->get('user_id');
+            $applicant->status = $request->get('status');
+            $applicant->created_at = strtotime(date('Y-m-d H:m:s'));
+            $applicant->save();
+            return redirect('applicants')->with('success', 'New applicant data has been added.');
+        }
     }
 
     /**
@@ -67,6 +102,9 @@ class ApplicantsController extends Controller
     public function edit($id)
     {
         //
+        $applicant = \App\Applicant::find($id);
+        $users= \App\User::all();
+        return view('admin/applicants/form',compact('applicant','users'));
     }
 
     /**
@@ -79,6 +117,26 @@ class ApplicantsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validationError = $this->validation($request,$id);
+        if(!$validationError){
+            $applicant = \App\Applicant::find($id);
+            $applicant->firstname = ucwords(strip_tags($request->get('firstname')));
+            $applicant->middlename = ucwords(strip_tags($request->get('middlename')));
+            $applicant->lastname = ucwords(strip_tags($request->get('lastname')));
+            $applicant->nickname = ucwords(strip_tags($request->get('nickname')));
+            $applicant->contact_number = strip_tags($request->get('contact'));
+            if( $request->hasFile('resume_file')){
+                Storage::delete($applicant->resume_filepath);
+                $path = $request->file('resume_file')->store('resumes');
+                $applicant->resume_filepath = $path;
+            }
+            $applicant->resume_public = $request->get('resume_public');
+            $applicant->user_id = $request->get('user_id');
+            $applicant->status = $request->get('status');
+            $applicant->updated_at = strtotime(date('Y-m-d H:m:s'));
+            $applicant->save();
+            return redirect('applicants')->with('success', 'Applicant ID'.$id.' has been updated.');
+        }
     }
 
     /**
@@ -90,5 +148,9 @@ class ApplicantsController extends Controller
     public function destroy($id)
     {
         //
+        $applicant = \App\Applicant::find($id);
+        Storage::delete($applicant->resume_filepath);
+        $applicant->delete();
+        return redirect('applicants')->with('success','Applicant ID'.$id.' has been deleted.');
     }
 }

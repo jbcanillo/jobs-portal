@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Datatables;
+use App\Employer;
 
 class EmployersController extends Controller
 {
@@ -14,6 +16,7 @@ class EmployersController extends Controller
     public function index()
     {
         //
+        return view('admin/employers/listview');
     }
 
     /**
@@ -24,6 +27,24 @@ class EmployersController extends Controller
     public function create()
     {
         //
+        $users= \App\User::all();
+        return view('admin/employers/form',compact('users'));
+    }
+
+    private function validation($inputs,$id=NULL){
+        $rules =[
+            'firstname' => 'required|string',
+            'middlename' => 'required|string',
+            'lastname' => 'required|string',
+            'nickname' => 'required|string',
+            'company_name' => 'required|string|unique:employers,company_name,'.$id,
+            'company_size' => 'required|integer',
+            'contact_person' => 'required|string',
+            'contact_number' => 'required|string',
+            'user_id' => 'required|integer|unique:employers,user_id,'.$id,
+            'status' => 'required|string',
+        ];
+        return $this->validate($inputs, $rules);
     }
 
     /**
@@ -35,6 +56,24 @@ class EmployersController extends Controller
     public function store(Request $request)
     {
         //
+        $validationError = $this->validation($request);
+        if(!$validationError){
+            $employer = new \App\Employer;
+            $employer->firstname = ucwords(strip_tags($request->get('firstname')));
+            $employer->middlename = ucwords(strip_tags($request->get('middlename')));
+            $employer->lastname = ucwords(strip_tags($request->get('lastname')));
+            $employer->nickname = ucwords(strip_tags($request->get('nickname')));
+            $employer->company_name = ucwords(strip_tags($request->get('company_name')));
+            $employer->company_size = $request->get('company_size');
+            $employer->contact_person = ucwords(strip_tags($request->get('contact_person')));
+            $employer->contact_number = strip_tags($request->get('contact_number'));
+            $employer->how = ucwords(strip_tags($request->get('how')));
+            $employer->user_id = $request->get('user_id');
+            $employer->status = $request->get('status');
+            $employer->created_at = strtotime(date('Y-m-d H:m:s'));
+            $employer->save();
+            return redirect('employers')->with('success', 'New employer data has been added.');
+        }
     }
 
     /**
@@ -46,6 +85,12 @@ class EmployersController extends Controller
     public function show($id)
     {
         //
+        if(!is_numeric($id)){
+            return Datatables::of(Employer::query())->make(true);
+        }else{
+            $employer= \App\Employer::find($id);
+            return $employer->toJson(JSON_PRETTY_PRINT);
+        }
     }
 
     /**
@@ -57,6 +102,9 @@ class EmployersController extends Controller
     public function edit($id)
     {
         //
+        $employer = \App\Employer::find($id);
+        $users= \App\User::all();
+        return view('admin/employers/form',compact('employer','users'));
     }
 
     /**
@@ -69,6 +117,24 @@ class EmployersController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validationError = $this->validation($request,$id);
+        if(!$validationError){
+            $employer = \App\Employer::find($id);
+            $employer->firstname = ucwords(strip_tags($request->get('firstname')));
+            $employer->middlename = ucwords(strip_tags($request->get('middlename')));
+            $employer->lastname = ucwords(strip_tags($request->get('lastname')));
+            $employer->nickname = ucwords(strip_tags($request->get('nickname')));
+            $employer->company_name = ucwords(strip_tags($request->get('company_name')));
+            $employer->company_size = $request->get('company_size');
+            $employer->contact_person = ucwords(strip_tags($request->get('contact_person')));
+            $employer->contact_number = strip_tags($request->get('contact_number'));
+            $employer->how = ucwords(strip_tags($request->get('how')));
+            $employer->user_id = $request->get('user_id');
+            $employer->status = $request->get('status');
+            $employer->created_at = strtotime(date('Y-m-d H:m:s'));
+            $employer->save();
+            return redirect('employers')->with('success', 'Employer ID'.$id.' has been updated.');
+        }
     }
 
     /**
@@ -80,5 +146,8 @@ class EmployersController extends Controller
     public function destroy($id)
     {
         //
+        $employer = \App\Employer::find($id);
+        $employer->delete();
+        return redirect('employers')->with('success','Employer ID'.$id.' has been deleted.');
     }
 }

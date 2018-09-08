@@ -39,8 +39,7 @@ class CreateTables extends Migration
             $table->string('lastname');
             $table->string('nickname');
             $table->string('contact_number');
-            $table->binary('profile_picture')->nullable();
-            $table->binary('resume_file')->nullable();
+            $table->string('resume_filepath')->nullable();
             $table->boolean('resume_public')->nullable();
             $table->string('status');
             $table->timestamps();

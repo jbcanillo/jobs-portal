@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('landing_page/index');
+    if(Auth::user()){
+        return redirect('/logout');
+    }else{
+        return view('landing_page/index');
+    }
 });
 
 Route::get('/login', function () {
@@ -38,6 +42,7 @@ Route::post('/home','LoginController@home');
 Route::get('/logout','LoginController@logout');
 
 Route::resource('/users','UsersController');
+
 Route::get('/users/delete/{id}',['uses' =>'UsersController@destroy']);
 Route::get('/users/show/{id}',['uses' =>'UsersController@show']);
 

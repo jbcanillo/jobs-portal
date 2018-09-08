@@ -7,10 +7,10 @@ if(!isset($applicant)){
     $middlename = $applicant->middlename;
     $lastname = $applicant->lastname;
     $nickname = $applicant->nickname;
-    $email = $applicant->email;
-    $profile_picture = $applicant->profile_picture;
+    $contact = $applicant->contact_number;
     $resume_file = $applicant->resume_file;
     $resume_public = $applicant->resume_public;
+    $user_id = $applicant->user_id;
     $status = $applicant->status;
     $created_at = $applicant->created_at;
     $updated_at = $applicant->updated_at;
@@ -35,19 +35,11 @@ if(!isset($applicant)){
             <?php if(!isset($applicant)){ ?>
                 <form method="post" action="{{ action('ApplicantsController@store') }}" enctype="multipart/form-data">
             <?php }else{ ?>
-                <form method="post" action="{{ action('ApplicantsController@update',$applicant->id) }}">
+                <form method="post" action="{{ action('ApplicantsController@update',$applicant->id) }}" enctype="multipart/form-data">
                 <input name="_method" type="hidden" value="PATCH">
             <?php } ?>
                 {{ csrf_field() }}
               <div class="row">
-                <div class='col-md-12 col-lg-6'>  
-                    <label for="Profile_Picture">Profile Picture:</label>
-                    <input type="file" class="form-control" name="profile_picture">
-                </div>
-                <div class='col-md-12 col-lg-6'>  
-                    <label for="Email">Email:</label>
-                    <input type="text" class="form-control" name="email" value="{{ (isset($applicant))? $email :old('email') }}">
-                </div>
                 <div class='col-md-12 col-lg-6'>
                   <label for="Firstname">Firstname:</label>
                   <input type="text" class="form-control" name="firstname" value="{{ (isset($applicant))? $firstname : old('firstname') }}">
@@ -65,26 +57,37 @@ if(!isset($applicant)){
                     <input type="text" class="form-control" name="nickname" value="{{ (isset($applicant))? $nickname : old('nickname') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
+                    <label for="Contact">Contact Number/s:</label>
+                    <input type="text" class="form-control" name="contact" value="{{ (isset($applicant))? $contact : old('contact') }}">
+                </div>
+                <div class='col-md-12 col-lg-6'>  
                     <label for="Resume">Resume:</label>
-                    <input type="file" class="form-control" name="resume_file">
+                    <input type="file" class="form-control" id="resume_file" name="resume_file" accept=".jpeg,.jpg,application/pdf,application/msword">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Resume_Public">Resume viewable in public?</label>
                     <select class="form-control" name="resume_public">
                         <option value="" selected></option>
                         <?php if(!isset($applicant)){ ?>
-                            <option value="1" {{ (old('resume_public') == '1') ? 'selected' : '' }}>Yes</option>
-                            <option value="0" {{ (old('resume_public') == '0') ? 'selected' : '' }}>No</option>
+                            <option value="1" {{ (old('resume_public') == 1) ? 'selected' : '' }}>Yes</option>
+                            <option value="0" {{ (old('resume_public') == 0) ? 'selected' : '' }}>No</option>
                         <?php }else{ ?>
-                            <option value="1" {{ ($resume_public == '1') ? 'selected' : '' }}>Yes</option>
-                            <option value="0" {{ ($resume_public == '0') ? 'selected' : '' }}>No</option>
+                            <option value="1" {{ ($resume_public == 1) ? 'selected' : '' }}>Yes</option>
+                            <option value="0" {{ ($resume_public == 0) ? 'selected' : '' }}>No</option>
                         <?php }?>
                     </select>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Username">Link to Username:</label>
-                    <select class="form-control" name="username">
+                    <select class="form-control" name="user_id">
                         <option value="" selected></option>
+                        @foreach ($users as $user)
+                            @if(!isset($applicant))
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @else
+                                <option value="{{ $user->id }}" {{ ($user_id == $user->id) ? 'selected' : '' }}>{{ $user->name }}</option>
+                            @endif
+                        @endforeach
                     </select>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
@@ -104,7 +107,7 @@ if(!isset($applicant)){
               <div class="row">
                 <div class="form-group col-md-8 col-lg-12">
                   <span class="pull-right">
-                      <a href="{{url('users')}}" class="btn btn-md btn-danger">Cancel</a>
+                      <a href="{{url('applicants')}}" class="btn btn-md btn-danger">Cancel</a>
                   </span>
                   <span class="pull-right">
                     <button type="submit" class="btn btn-md btn-success">{{ $button }}</button>

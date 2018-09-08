@@ -1,4 +1,4 @@
-@if(Auth::user() && Auth::user()->role=='Administrator')
+@if(Auth::user() && Auth::user()->role=='Employer')
   <!DOCTYPE html>
   <html lang="{{ app()->getLocale() }}">
   <head>
@@ -58,22 +58,10 @@
                 <p>Dashboard</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'users') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('users') }}">
-                <i class="material-icons">account_circle</i>
-                <p>Users</p>
-              </a>
-            </li>
             <li class="{{ ($current_route_name == 'applicants') ? 'nav-item active' : 'nav-item' }}">
               <a class="nav-link" href="{{ url('applicants') }}">
                 <i class="material-icons">assignment_ind</i>
                 <p>Applicants</p>
-              </a>
-            </li>
-            <li class="{{ ($current_route_name == 'employers') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('employers') }}">
-                <i class="material-icons">people</i>
-                <p>Employers</p>
               </a>
             </li>
             <li class="{{ ($current_route_name == 'requests') ? 'nav-item active' : 'nav-item' }}">
@@ -88,13 +76,17 @@
                 <p>Job Matching</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'archives') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('archives') }}">
-                <i class="material-icons">archive</i>
-                <p>Archives</p>
+            <li class="{{ ($current_route_name == 'reviews') ? 'nav-item active' : 'nav-item' }}">
+              <a class="nav-link" href="{{ url('reviews') }}">
+                <i class="material-icons">rate_review</i>
+                <p>Customer Reviews</p>
               </a>
             </li>
-            <li class="nav-item ">
+            <li class="nav-item active-pro ">
+                  <a class="nav-link" href="{{ url('preferences') }}">
+                      <i class="material-icons">settings</i>
+                      <p>Preferences</p>
+                  </a>
                   <a class="nav-link" href="{{ url('logout') }}">
                     <i class="material-icons">exit_to_app</i>
                     <p>Logout</p>
@@ -109,7 +101,7 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
           <div class="container-fluid">
             <div class="navbar-wrapper">
-            <a class="navbar-brand">Welcome {{ Auth::user()->name }}, [{{ Auth::user()->role }}]</a>
+              <a class="navbar-brand">Welcome Angie Monterde Ceniza! [Administrator]</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
               <span class="sr-only">Toggle navigation</span>
@@ -141,6 +133,7 @@
                     </p>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2">
+                    <a class="dropdown-item" href="{{ url('preferences') }}"><i class="material-icons">settings</i>&nbspPreferences</a>
                     <a class="dropdown-item" href="{{ url('logout') }}"><i class="material-icons">exit_to_app</i>&nbspLogout</a>
                   </div>
                 </li>
