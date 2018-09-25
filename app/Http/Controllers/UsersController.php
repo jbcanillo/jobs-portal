@@ -109,6 +109,7 @@ class UsersController extends Controller
             if($request->get('password')!=""){
                 $user->password = bcrypt($request->get('password'));
             }
+            $user->activation_code = md5($user->name);
             $user->role = $request->get('role');
             $user->status = $request->get('status');
             $user->updated_at = strtotime(date('Y-m-d H:m:s'));

@@ -1,13 +1,14 @@
 @extends('layout/general_container')
 @section('content2')
-<section id="login" class="login section">      
+<section id="sign_up" class="signup section">      
     <div class="container">
         <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 offset-md-3 wow fadeInDown transparent_block" data-wow-delay="0.3s">
                 <div class="col-sm-12 col-md-12">
                     <div class="block">
                         <center>
-                            <i class="tf-ion-lock-combination" style="font-size:50px"></i> 
+                            <i class="tf-ion-email" style="font-size:50px"></i>
+                            <h1>Reset Password</h1>
                         </center>
                         <br>
                     </div>
@@ -32,22 +33,18 @@
                             </ul>
                         </div>
                     @endif
+                    <div class="form-group ">
+                            <form action="{{ url('forgot_password') }}" method="post" id="form">
+                                {{ csrf_field() }}
+                                <div class="input-field">
+                                    <input type="text" class="form-control" placeholder="Email" name="email">
+                                </div>
+                                <button class="btn btn-send" type="submit">Send</button>
+                            </form>
+                            <a href='/login' class='pull-left' style="font-weight:bold;color:#FFF">< Back</a>
+                    </div>
                 </div>
-                <div class="form-group ">
-                    <form action="{{ url('home') }}" method="post" id="contact-form">
-                        {{ csrf_field() }}
-                        <div class="input-field">
-                            <input type="text" class="form-control" placeholder="Email" name="email">
-                        </div>
-                        <div class="input-field">
-                            <input type="password" class="form-control" placeholder="Password" name="password">
-                        </div>
-                        <button class="btn btn-send" type="submit">Login</button>
-                    </form>
-                    <a href='./' class='pull-left' style="font-weight:bold;color:#FFF">< Back</a>
-                    <a href='{{ url('forgot_password') }}' class='pull-right' style="font-weight:bold;color:#FFF">Forgot Password?</a>
-                </div>
-            </div>
+        </div>
         </div>
     </div>
 </section>

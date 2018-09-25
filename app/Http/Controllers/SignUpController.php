@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailProcessor;
 
 class SignUpController extends Controller
 {
@@ -45,6 +47,7 @@ class SignUpController extends Controller
             $user->name = strtolower(strip_tags($request->get('username')));
             $user->email = $request->get('email');
             $user->password = bcrypt($request->get('password'));
+            $user->activation_code = md5($user->name);
             $user->role = $request->get('role');
             $user->status = 'Inactive';
             $user->created_at = strtotime(date('Y-m-d H:m:s'));
@@ -65,7 +68,23 @@ class SignUpController extends Controller
             $register->status = 'Inactive';
             $register->created_at = strtotime(date('Y-m-d H:m:s'));
             $register->save();
-            return redirect('sign_up')->with('success', 'Your account has been created.');
+
+            $action = 'Account Activation';
+            $email = $user->email;
+            Mail::to($user->email)->send(new EmailProcessor($action,$user));        
+            return redirect('sign_up')->with('success', 'Your account has been created. Kindly check your email on how to activate your account.');
+        }
+    }
+    public function activateAccount($activation_code){
+
+        $user = User::where('activation_code',$activation_code)->first();
+        //$user = \App\User::find($user->id);
+        if($user){
+            $user->status = "Active";
+            $user->save();
+            return redirect('login')->with('success', 'Your account ('.$user->name.') has been activated. You can now login.');
+        }else{
+            return redirect('login')->with('error', 'There was an error activating your account, try again later.');
         }
     }
 }

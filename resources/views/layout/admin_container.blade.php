@@ -79,10 +79,10 @@
             <li class="{{ ($current_route_name == 'requests') ? 'nav-item active' : 'nav-item' }}">
               <a class="nav-link" href="{{ url('requests') }}">
                 <i class="material-icons">assignment</i>
-                <p>Requests</p>
+                <p>Job/Applicant Requests</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'job_matching') ? 'nav-item active' : 'nav-item' }}">
+            <!--<li class="{{ ($current_route_name == 'job_matching') ? 'nav-item active' : 'nav-item' }}">
               <a class="nav-link" href="{{ url('job_matching') }}">
                 <i class="material-icons">find_in_page</i>
                 <p>Job Matching</p>
@@ -93,14 +93,13 @@
                 <i class="material-icons">archive</i>
                 <p>Archives</p>
               </a>
-            </li>
+            </li>-->
             <li class="nav-item ">
-                  <a class="nav-link" href="{{ url('logout') }}">
-                    <i class="material-icons">exit_to_app</i>
-                    <p>Logout</p>
-                </a>
-              </li>
-              
+                <a class="nav-link" href="{{ url('logout') }}">
+                  <i class="material-icons">exit_to_app</i>
+                  <p>Logout</p>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -118,32 +117,9 @@
               <span class="navbar-toggler-icon icon-bar"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end">
-              
               <ul class="navbar-nav">
-                
-                <li class="nav-item dropdown">
-                  <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="material-icons">notifications</i>
-                    <span class="notification">99</span>
-                    <p class="d-lg-none d-md-block">
-                      Notifications
-                    </p>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    @yield('notifications')
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="material-icons">account_circle</i>
-                    <p class="d-lg-none d-md-block">
-                      Account
-                    </p>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2">
-                    <a class="dropdown-item" href="{{ url('logout') }}"><i class="material-icons">exit_to_app</i>&nbspLogout</a>
-                  </div>
-                </li>
+                <a class="dropdown-item" href="{{ url('change_password/'.Auth::user()->remember_token) }}"><i class="material-icons">https</i>&nbspChange Password</a> 
+                <a class="dropdown-item" href="{{ url('logout') }}"><i class="material-icons">exit_to_app</i>&nbspLogout</a>
               </ul>
             </div>
           </div>

@@ -20,29 +20,46 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    if(Auth::user()){
-        return redirect('/logout');
-    }else{
+    //if(Auth::user()){
+    //    return redirect('/logout');
+    //}else{
         return view('landing_page/login');
-    }
+   // }
 });
 
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
 
+Route::resource('/sign_up','SignUpController');
 
-Route::get('/preferences', function () {
-    return view('/preferences');
+Route::get('/forgot_password', function () {
+    return view('/landing_page/forgot_password');
 });
 
-Route::resource('/sign_up','SignUpController');
+Route::get('/forgot_password', function () {
+    return view('/landing_page/forgot_password');
+});
+
+Route::get('/request/assign/{id}', function () {
+    return view('/requests/assignments','id');
+});
+
+Route::post('/reset_password','LoginController@saveNewPassword');
+Route::get('/reset_password/{token}','LoginController@updatePassword');
+
+Route::post('/change_password','LoginController@saveNewPassword');
+Route::get('/change_password/{token}','LoginController@updatePassword');
+
+Route::get('/account_activation/{activation_code}',['uses' => 'SignUpController@activateAccount']);
+
+Route::post('/forgot_password','MailController@sendForgotPasswordEmail');
+Route::get('/logout','LoginController@logout');
 
 Route::post('/home','LoginController@home');
 Route::get('/logout','LoginController@logout');
 
 Route::resource('/users','UsersController');
-
 Route::get('/users/delete/{id}',['uses' =>'UsersController@destroy']);
 Route::get('/users/show/{id}',['uses' =>'UsersController@show']);
 
@@ -61,7 +78,3 @@ Route::get('/requests/show/{id}',['uses' =>'RequestsController@show']);
 Route::resource('/job_matching','JobMatchingController');
 Route::get('/job_matching/void/{id}',['uses' =>'JobMatchingController@destroy']);
 Route::get('/job_matching/show/{id}',['uses' =>'JobMatchingController@show']);
-
-Route::resource('/reviews','ReviewsController');
-Route::get('/reviews/void/{id}',['uses' =>'ReviewsController@destroy']);
-Route::get('/reviews/show/{id}',['uses' =>'ReviewsController@show']);
