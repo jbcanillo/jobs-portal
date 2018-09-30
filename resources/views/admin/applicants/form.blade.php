@@ -1,66 +1,48 @@
 <?php
-if(!isset($applicant)){
-    $method = "Add Applicant";
-    $button = "Submit";
-}else{
-    $firstname = $applicant->firstname;
-    $middlename = $applicant->middlename;
-    $lastname = $applicant->lastname;
-    $nickname = $applicant->nickname;
-    $contact = $applicant->contact_number;
-    $resume_file = $applicant->resume_file;
-    $resume_public = $applicant->resume_public;
-    $user_id = $applicant->user_id;
-    $status = $applicant->status;
-    $created_at = $applicant->created_at;
-    $updated_at = $applicant->updated_at;
-    $method = "Edit Applicant";
-    $button = "Update";
-}
 
 $desired_jobs = '<div class="row item-row-desired-jobs command-row-desired-jobs card-body">
                         <div class="col-md-4 col-sm-2 col-xs-12">
                             <label>Title</label>
-                            <input type="text" id="desired_jobs_title[]" name="desired_jobs_title[]" class="form-control">
+                            <input type="text" id="desired_jobs_title[]" name="desired_jobs_title[]" class="form-control" required>
                         </div>
                         <div class="col-md-2 col-sm-5 col-xs-12">
                             <label>Type</label>
-                            <select id="desired_jobs_type[]" name="desired_jobs_type[]" class="form-control">
+                            <select id="desired_jobs_type[]" name="desired_jobs_type[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="full-time">Full-time</option>
-                                <option value="part-time">Part-time</option>
-                                <option value="temporary">Temporary</option>
-                                <option value="newly graduated">Newly Graduated</option>
-                                <option value="internship">Internship</option>
-                                <option value="contractual">Contractual</option>
-                                <option value="commission">Commission</option>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                                <option value="Temporary">Temporary</option>
+                                <option value="Newly Graduated">Newly Graduated</option>
+                                <option value="Internship">Internship</option>
+                                <option value="Contractual">Contractual</option>
+                                <option value="Commission">Commission</option>
                             </select>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Salary</label>
-                            <select id="desired_jobs_salary[]" name="desired_jobs_salary[]" class="form-control">
+                            <select id="desired_jobs_salary[]" name="desired_jobs_salary[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="hourly">Hourly</option>
-                                <option value="daily">Daily</option>
-                                <option value="weekly">Weekly</option>
-                                <option value="monthly">Monthly</option>
-                                <option value="yearly">Yearly</option>
+                                <option value="Hourly">Hourly</option>
+                                <option value="Daily">Daily</option>
+                                <option value="Weekly">Weekly</option>
+                                <option value="Monthly">Monthly</option>
+                                <option value="Yearly">Yearly</option>
                             </select>    
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Relocation</label>
-                            <select id="desired_jobs_relocation[]" name="desired_jobs_relocation[]" class="form-control">
+                            <select id="desired_jobs_relocation[]" name="desired_jobs_relocation[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
                             </select>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="desired_jobs_status[]" name="desired_jobs_status[]" class="form-control">
+                            <select id="desired_jobs_status[]" name="desired_jobs_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-desired-jobs btn btn-danger btn-sm">x</a>-->
@@ -69,38 +51,38 @@ $desired_jobs = '<div class="row item-row-desired-jobs command-row-desired-jobs 
 $work_experience = '<div class="row item-row-work-experience command-row-work-experience card-body">
                         <div class="col-md-4 col-sm-2 col-xs-12">
                             <label>Job Title</label>
-                            <input type="text" id="work_experience_job_title[]" name="work_experience_job_title[]" class="form-control">
+                            <input type="text" id="work_experience_job_title[]" name="work_experience_job_title[]" class="form-control" required>
                         </div>
                         <div class="col-md-4 col-sm-5 col-xs-12">
                             <label>Company</label>
-                            <input type="text" id="work_experience_company[]" name="work_experience_company[]" class="form-control">
+                            <input type="text" id="work_experience_company[]" name="work_experience_company[]" class="form-control" required>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Country</label>
-                            <input type="text" id="work_experience_country[]" name="work_experience_country[]" class="form-control">   
+                            <input type="text" id="work_experience_country[]" name="work_experience_country[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>City</label>
-                            <input type="text" id="work_experience_city[]" name="work_experience_city[]" class="form-control">   
+                            <input type="text" id="work_experience_city[]" name="work_experience_city[]" class="form-control" required>   
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Date Started</label>
-                            <input type="date" id="work_experience_start[]" name="work_experience_start[]" class="form-control">   
+                            <input type="date" id="work_experience_start[]" name="work_experience_start[]" class="form-control" required>   
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Date Ended</label>
-                            <input type="date" id="work_experience_end[]" name="work_experience_end[]" class="form-control">   
+                            <input type="date" id="work_experience_end[]" name="work_experience_end[]" class="form-control" required>   
                         </div>
                         <div class="col-md-4 col-sm-2 col-xs-12">
                             <label>Description</label>
-                            <input type="text" id="work_experience_description[]" name="work_experience_description[]" class="form-control">   
+                            <input type="text" id="work_experience_description[]" name="work_experience_description[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="work_experience_status[]" name="work_experience_status[]" class="form-control">
+                            <select id="work_experience_status[]" name="work_experience_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-work-experience btn btn-danger btn-sm">x</a>-->
@@ -108,38 +90,38 @@ $work_experience = '<div class="row item-row-work-experience command-row-work-ex
 $education_background = '<div class="row item-row-education-background command-row-education-background card-body">
                         <div class="col-md-4 col-sm-2 col-xs-12">
                             <label>Degree</label>
-                            <input type="text" id="education_background_degree[]" name="education_background_degree[]" class="form-control">
+                            <input type="text" id="education_background_degree[]" name="education_background_degree[]" class="form-control" required>
                         </div>
                         <div class="col-md-4 col-sm-5 col-xs-12">
                             <label>School</label>
-                            <input type="text" id="education_background_school[]" name="education_background_school[]" class="form-control">
+                            <input type="text" id="education_background_school[]" name="education_background_school[]" class="form-control" required>
                         </div>
                         <div class="col-md-4 col-sm-2 col-xs-12">
                             <label>Field of Study</label>
-                            <input type="text" id="education_background_field_of_study[]" name="education_background_field_of_study[]" class="form-control">   
+                            <input type="text" id="education_background_field_of_study[]" name="education_background_field_of_study[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Country</label>
-                            <input type="text" id="education_background_country[]" name="education_background_country[]" class="form-control">   
+                            <input type="text" id="education_background_country[]" name="education_background_country[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>City</label>
-                            <input type="text" id="education_background_city[]" name="education_background_city[]" class="form-control">   
+                            <input type="text" id="education_background_city[]" name="education_background_city[]" class="form-control" required>   
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Date Started</label>
-                            <input type="date" id="education_background_start[]" name="education_background_start[]" class="form-control">   
+                            <input type="date" id="education_background_start[]" name="education_background_start[]" class="form-control" required>   
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Date Ended</label>
-                            <input type="date" id="education_background_end[]" name="education_background_end[]" class="form-control">   
+                            <input type="date" id="education_background_end[]" name="education_background_end[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="education_background_status[]" name="education_background_status[]" class="form-control">
+                            <select id="education_background_status[]" name="education_background_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-education-background btn btn-danger btn-sm">x</a>-->
@@ -147,18 +129,18 @@ $education_background = '<div class="row item-row-education-background command-r
 $skills = '<div class="row item-row-skills command-row-skills card-body">
                         <div class="col-md-6 col-sm-2 col-xs-12">
                             <label>Skill</label>
-                            <input type="text" id="skill[]" name="skill[]" class="form-control">
+                            <input type="text" id="skill[]" name="skill[]" class="form-control" required>
                         </div>
                         <div class="col-md-4 col-sm-5 col-xs-12">
                             <label>Years of Experience</label>
-                            <input type="number" id="skills_years[]" name="skills_years[]" class="form-control">
+                            <input type="number" id="skills_years[]" name="skills_years[]" class="form-control" required>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="skills_status[]" name="skills_status[]" class="form-control">
+                            <select id="skills_status[]" name="skills_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-skills btn btn-danger btn-sm">x</a>-->
@@ -166,26 +148,26 @@ $skills = '<div class="row item-row-skills command-row-skills card-body">
 $certifications = '<div class="row item-row-certifications command-row-certifications card-body">
                         <div class="col-md-6 col-sm-2 col-xs-12">
                             <label>Title</label>
-                            <input type="text" id="certifications_title[]" name="certifications_title[]" class="form-control">
+                            <input type="text" id="certifications_title[]" name="certifications_title[]" class="form-control" required>
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Start</label>
-                            <input type="date" id="certifications_start[]" name="certifications_start[]" class="form-control">   
+                            <input type="date" id="certifications_start[]" name="certifications_start[]" class="form-control" required>   
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>End</label>
-                            <input type="date" id="certifications_end[]" name="certifications_end[]" class="form-control">   
+                            <input type="date" id="certifications_end[]" name="certifications_end[]" class="form-control" required>   
                         </div>
                         <div class="col-md-10 col-sm-2 col-xs-12">
                             <label>Description</label>
-                            <input type="text" id="certifications_description[]" name="certifications_description[]" class="form-control">   
+                            <input type="text" id="certifications_description[]" name="certifications_description[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="certifications_status[]" name="certifications_status[]" class="form-control">
+                            <select id="certifications_status[]" name="certifications_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-certifications btn btn-danger btn-sm">x</a>-->
@@ -193,7 +175,7 @@ $certifications = '<div class="row item-row-certifications command-row-certifica
 $social_media = '<div class="row item-row-social-media command-row-social-media card-body">
                         <div class="col-md-4 col-sm-2 col-xs-12">
                             <label>Social Media</label>
-                            <select id="social_media[]" name="social_media[]" class="form-control">
+                            <select id="social_media[]" name="social_media[]" class="form-control" required>
                                 <option value=""></option>
                                 <option value="facebook">Facebook</option>
                                 <option value="instagram">Instagram</option>
@@ -204,14 +186,14 @@ $social_media = '<div class="row item-row-social-media command-row-social-media 
                         </div>
                         <div class="col-md-6 col-sm-2 col-xs-12">
                             <label>Link</label>
-                            <input type="text" id="social_media_link[]" name="social_media_link[]" class="form-control">   
+                            <input type="text" id="social_media_link[]" name="social_media_link[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="social_media_status[]" name="social_media_status[]" class="form-control">
+                            <select id="social_media_status[]" name="social_media_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-certifications btn btn-danger btn-sm">x</a>-->
@@ -219,34 +201,34 @@ $social_media = '<div class="row item-row-social-media command-row-social-media 
 $military_service = '<div class="row item-row-military-service command-row-military-service card-body">
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Country</label>
-                            <input type="text" id="military_service_country[]" name="military_service_country[]" class="form-control">
+                            <input type="text" id="military_service_country[]" name="military_service_country[]" class="form-control" required>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Branch</label>
-                            <input type="text" id="military_service_branch[]" name="military_service_branch[]" class="form-control">
+                            <input type="text" id="military_service_branch[]" name="military_service_branch[]" class="form-control" required>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Rank</label>
-                            <input type="text" id="military_service_rank[]" name="military_service_rank[]" class="form-control">
+                            <input type="text" id="military_service_rank[]" name="military_service_rank[]" class="form-control" required>
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Date Started</label>
-                            <input type="date" id="military_service_start[]" name="military_service_start[]" class="form-control">   
+                            <input type="date" id="military_service_start[]" name="military_service_start[]" class="form-control" required>   
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Date Ended</label>
-                            <input type="date" id="military_service_end[]" name="military_service_end[]" class="form-control">   
+                            <input type="date" id="military_service_end[]" name="military_service_end[]" class="form-control" required>   
                         </div>
                         <div class="col-md-10 col-sm-2 col-xs-12">
                             <label>Description</label>
-                            <input type="text" id="military_service_description[]" name="military_service_description[]" class="form-control">   
+                            <input type="text" id="military_service_description[]" name="military_service_description[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="military_service_status[]" name="military_service_status[]" class="form-control">
+                            <select id="military_service_status[]" name="military_service_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-military-service btn btn-danger btn-sm">x</a>-->
@@ -254,22 +236,22 @@ $military_service = '<div class="row item-row-military-service command-row-milit
 $awards = '<div class="row item-row-awards command-row-awards card-body">
                         <div class="col-md-9 col-sm-2 col-xs-12">
                             <label>Title</label>
-                            <input type="text" id="awards_title[]" name="awards_title[]" class="form-control">
+                            <input type="text" id="awards_title[]" name="awards_title[]" class="form-control" required>
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Date Awarded</label>
-                            <input type="date" id="awards_date_awarded[]" name="awards_date_awarded[]" class="form-control">   
+                            <input type="date" id="awards_date_awarded[]" name="awards_date_awarded[]" class="form-control" required>   
                         </div>
                         <div class="col-md-10 col-sm-2 col-xs-12">
                             <label>Description</label>
-                            <input type="text" id="awards_description[]" name="awards_description[]" class="form-control">   
+                            <input type="text" id="awards_description[]" name="awards_description[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="awards_status[]" name="awards_status[]" class="form-control">
+                            <select id="awards_status[]" name="awards_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-awards btn btn-danger btn-sm">x</a>-->
@@ -277,26 +259,26 @@ $awards = '<div class="row item-row-awards command-row-awards card-body">
 $organizations = '<div class="row item-row-organizations command-row-organizations card-body">
                         <div class="col-md-6 col-sm-2 col-xs-12">
                             <label>Title</label>
-                            <input type="text" id="organizations_title[]" name="organizations_title[]" class="form-control">
+                            <input type="text" id="organizations_title[]" name="organizations_title[]" class="form-control" required>
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Date Started</label>
-                            <input type="date" id="organizations_date_awarded[]" name="organizationsdate_awarded[]" class="form-control">   
+                            <input type="date" id="organizations_start[]" name="organizations_start[]" class="form-control" required>   
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Date Ended</label>
-                            <input type="date" id="organizations_date_awarded[]" name="organizations_date_awarded[]" class="form-control">   
+                            <input type="date" id="organizations_end[]" name="organizations_end[]" class="form-control" required>   
                         </div>
                         <div class="col-md-10 col-sm-2 col-xs-12">
                             <label>Description</label>
-                            <input type="text" id="organizations_description[]" name="organizations_description[]" class="form-control">   
+                            <input type="text" id="organizations_description[]" name="organizations_description[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="organizations_status[]" name="organizations_status[]" class="form-control">
+                            <select id="organizations_status[]" name="organizations_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-organizations btn btn-danger btn-sm">x</a>-->
@@ -304,30 +286,30 @@ $organizations = '<div class="row item-row-organizations command-row-organizatio
 $patents = '<div class="row item-row-patents command-row-patents card-body">
                         <div class="col-md-9 col-sm-2 col-xs-12">
                             <label>Title</label>
-                            <input type="text" id="patents_title[]" name="patents_title[]" class="form-control">
+                            <input type="text" id="patents_title[]" name="patents_title[]" class="form-control" required>
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Patent No.</label>
-                            <input type="text" id="patent_number[]" name="patent_number[]" class="form-control">
+                            <input type="text" id="patent_number[]" name="patent_number[]" class="form-control" required>
                         </div>
                         <div class="col-md-9 col-sm-2 col-xs-12">
                             <label>URL</label>
-                            <input type="text" id="patents_url[]" name="patents_url[]" class="form-control">
+                            <input type="text" id="patents_url[]" name="patents_url[]" class="form-control" required>
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Date Published</label>
-                            <input type="date" id="patents_date_published[]" name="patents_date_published[]" class="form-control">   
+                            <input type="date" id="patents_date_published[]" name="patents_date_published[]" class="form-control" required>   
                         </div>
                         <div class="col-md-10 col-sm-2 col-xs-12">
                             <label>Description</label>
-                            <input type="text" id="patents_description[]" name="patents_description[]" class="form-control">   
+                            <input type="text" id="patents_description[]" name="patents_description[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="patents_status[]" name="patents_status[]" class="form-control">
+                            <select id="patents_status[]" name="patents_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-patents btn btn-danger btn-sm">x</a>-->
@@ -335,26 +317,26 @@ $patents = '<div class="row item-row-patents command-row-patents card-body">
 $publications = '<div class="row item-row-publications command-row-publications card-body">
                         <div class="col-md-12 col-sm-2 col-xs-12">
                             <label>Title</label>
-                            <input type="text" id="publications_title[]" name="publications_title[]" class="form-control">
+                            <input type="text" id="publications_title[]" name="publications_title[]" class="form-control" required>
                         </div>
                         <div class="col-md-9 col-sm-2 col-xs-12">
                             <label>URL</label>
-                            <input type="text" id="publications_url[]" name="publications_url[]" class="form-control">
+                            <input type="text" id="publications_url[]" name="publications_url[]" class="form-control" required>
                         </div>
                         <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Date Published</label>
-                            <input type="date" id="publications_date_published[]" name="publications_date_published[]" class="form-control">   
+                            <input type="date" id="publications_date_published[]" name="publications_date_published[]" class="form-control" required>   
                         </div>
                         <div class="col-md-10 col-sm-2 col-xs-12">
                             <label>Description</label>
-                            <input type="text" id="publications_description[]" name="publications_description[]" class="form-control">   
+                            <input type="text" id="publications_description[]" name="publications_description[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="publications_status[]" name="publications_status[]" class="form-control">
+                            <select id="publications_status[]" name="publications_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-publications btn btn-danger btn-sm">x</a>-->
@@ -362,52 +344,52 @@ $publications = '<div class="row item-row-publications command-row-publications 
 $language_spoken = '<div class="row item-row-language-spoken command-row-language-spoken card-body">
                         <div class="col-md-6 col-sm-2 col-xs-12">
                             <label>Language</label>
-                            <input type="text" id="language_spoken[]" name="language_spoken[]" class="form-control">
+                            <input type="text" id="language_spoken[]" name="language_spoken[]" class="form-control" required>
                         </div>
                         <div class="col-md-4 col-sm-2 col-xs-12">
                             <label>Fluency (Rate 1-10)</label>
-                            <input type="number" id="language_spoken_fluency[]" name="language_spoken_fluency[]" min="1" max="10" class="form-control">
+                            <input type="number" id="language_spoken_fluency[]" name="language_spoken_fluency[]" min="1" max="10" class="form-control" required>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="language_spoken_status[]" name="language_spoken_status[]" class="form-control">
+                            <select id="language_spoken_status[]" name="language_spoken_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-language-spoken btn btn-danger btn-sm">x</a>-->
                     </div>';
 $government_documents = '<div class="row item-row-government-documents command-row-government-documents card-body">
-                        <div class="col-md-5 col-sm-2 col-xs-12">
+                        <div class="col-md-3 col-sm-2 col-xs-12">
                             <label>Document Type</label>
-                            <input type="text" id="government_documents_type[]" name="government_documents_type[]" class="form-control">
+                            <input type="text" id="government_documents_type[]" name="government_documents_type[]" class="form-control" required>
                         </div>
-                        <div class="col-md-5 col-sm-2 col-xs-12">
-                            <label>Document File</label>
-                            <input type="file" id="government_documents_file[]" name="government_documents_file[]"accept=".jpeg,.jpg,application/pdf,application/msword" class="form-control">
+                        <div class="col-md-7 col-sm-2 col-xs-12">
+                            <label>Document File (Limit to 20mb file-types *.jpeg, *.jpg, *.doc, *.pdf)</label>
+                            <input type="file" id="government_documents_file[]" name="government_documents_file[]"accept=".jpeg,.jpg,application/pdf,application/msword" class="form-control" >
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="government_documents_status[]" name="government_documents_status[]" class="form-control">
+                            <select id="government_documents_status[]" name="government_documents_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-government-documents btn btn-danger btn-sm">x</a>-->
                     </div>';
 $upload_video = '<div class="row item-row-upload-video command-row-upload-video card-body">
                         <div class="col-md-10 col-sm-2 col-xs-12">
-                            <label>Video File</label>
-                            <input type="file" id="upload_video_file[]" name="upload_video_file[]" accept=".avi,.mp4,.mov,.wmv,.flv" class="form-control">
+                            <label>Video File (Limit to 20mb file-types *.mp4, *.avi, *.mov):</label>
+                            <input type="file" id="upload_video_file[]" name="upload_video_file[]" accept=".avi,.mp4,.mov,.wmv,.flv" class="form-control" >
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <label>Status</label>
-                            <select id="upload_video_file_status[]" name="upload_video_file_status[]" class="form-control">
+                            <select id="upload_video_file_status[]" name="upload_video_file_status[]" class="form-control" required>
                                 <option value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                         </div>
                         <!--<a class="btn-remove-row-upload-video btn btn-danger btn-sm">x</a>-->
@@ -427,6 +409,469 @@ $publications_append = trim(preg_replace('/\s+/',' ', $publications));
 $language_spoken_append = trim(preg_replace('/\s+/',' ', $language_spoken));
 $government_documents_append = trim(preg_replace('/\s+/',' ', $government_documents));
 $upload_video_append = trim(preg_replace('/\s+/',' ', $upload_video));
+
+$desired_jobs = '';
+$work_experience = '';
+$education_background = '';
+$skills = '';
+$certifications = ''; 
+$social_media = '';
+$military_service = '';
+$awards = '';
+$organizations = '';
+$patents = '';
+$publications = '';
+$language_spoken = '';
+$government_documents = '';
+$upload_video = '';
+
+if(!isset($applicant)){
+    $method = "Add Applicant";
+    $button = "Submit";
+}else{
+    $firstname = $applicant->firstname;
+    $middlename = $applicant->middlename;
+    $lastname = $applicant->lastname;
+    $nickname = $applicant->nickname;
+    $contact = $applicant->contact_number;
+    $picture = $applicant->picture;
+    $resume_file = $applicant->resume_filepath;
+    $resume_public = $applicant->resume_public;
+    $user_id = $applicant->user_id;
+    $status = $applicant->status;
+    $created_at = $applicant->created_at;
+    $updated_at = $applicant->updated_at;
+    $method = "Edit Applicant";
+    $button = "Update";
+
+    foreach($desired_jobs_details as $row){
+        $desired_jobs .= '<div class="row item-row-desired-jobs command-row-desired-jobs card-body">
+                        <div class="col-md-4 col-sm-2 col-xs-12">
+                            <label>Title</label>
+                            <input type="text" id="desired_jobs_title[]" name="desired_jobs_title[]" class="form-control" value="'.$row->title.'" required>
+                        </div>
+                        <div class="col-md-2 col-sm-5 col-xs-12">
+                            <label>Type</label>
+                            <select id="desired_jobs_type[]" name="desired_jobs_type[]" class="form-control" required>
+                                <option value="'.$row->type.'" selected>'.$row->type.'</option>
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                                <option value="Temporary">Temporary</option>
+                                <option value="Newly Graduated">Newly Graduated</option>
+                                <option value="Internship">Internship</option>
+                                <option value="Contractual">Contractual</option>
+                                <option value="Commission">Commission</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <label>Salary</label>
+                            <select id="desired_jobs_salary[]" name="desired_jobs_salary[]" class="form-control" required>
+                                <option value="'.$row->salary.'">'.$row->salary.'</option>
+                                <option value="Hourly">Hourly</option>
+                                <option value="Daily">Daily</option>
+                                <option value="Weekly">Weekly</option>
+                                <option value="Monthly">Monthly</option>
+                                <option value="Yearly">Yearly</option>
+                            </select>    
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <label>Relocation</label>
+                            <select id="desired_jobs_relocation[]" name="desired_jobs_relocation[]" class="form-control" required>
+                                <option value="'.$row->relocation.'">'.$row->relocation.'</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <label>Status</label>
+                            <select id="desired_jobs_status[]" name="desired_jobs_status[]" class="form-control" required>
+                                <option value="'.$row->status.'">'.$row->status.'</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <!--<a class="btn-remove-row-desired-jobs btn btn-danger btn-sm">x</a>-->
+                    </div>';
+    }
+
+    foreach($work_experience_details as $row){
+        $work_experience .= '<div class="row item-row-work-experience command-row-work-experience card-body">
+                            <div class="col-md-4 col-sm-2 col-xs-12">
+                                <label>Job Title</label>
+                                <input type="text" id="work_experience_job_title[]" name="work_experience_job_title[]" class="form-control" value="'.$row->job_title.'" required>
+                            </div>
+                            <div class="col-md-4 col-sm-5 col-xs-12">
+                                <label>Company</label>
+                                <input type="text" id="work_experience_company[]" name="work_experience_company[]" class="form-control" value="'.$row->company.'" required>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Country</label>
+                                <input type="text" id="work_experience_country[]" name="work_experience_country[]" class="form-control" value="'.$row->country.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>City</label>
+                                <input type="text" id="work_experience_city[]" name="work_experience_city[]" class="form-control" value="'.$row->city.'" required>   
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Date Started</label>
+                                <input type="date" id="work_experience_start[]" name="work_experience_start[]" class="form-control" value="'.$row->start.'" required>   
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Date Ended</label>
+                                <input type="date" id="work_experience_end[]" name="work_experience_end[]" class="form-control" value="'.$row->end.'" required>   
+                            </div>
+                            <div class="col-md-4 col-sm-2 col-xs-12">
+                                <label>Description</label>
+                                <input type="text" id="work_experience_description[]" name="work_experience_description[]" class="form-control" value="'.$row->description.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="work_experience_status[]" name="work_experience_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-work-experience btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+
+    foreach($education_background_details as $row){
+        $education_background .= '<div class="row item-row-education-background command-row-education-background card-body">
+                            <div class="col-md-4 col-sm-2 col-xs-12">
+                                <label>Degree</label>
+                                <input type="text" id="education_background_degree[]" name="education_background_degree[]" class="form-control" value="'.$row->degree.'" required>
+                            </div>
+                            <div class="col-md-4 col-sm-5 col-xs-12">
+                                <label>School</label>
+                                <input type="text" id="education_background_school[]" name="education_background_school[]" class="form-control" value="'.$row->school.'" required>
+                            </div>
+                            <div class="col-md-4 col-sm-2 col-xs-12">
+                                <label>Field of Study</label>
+                                <input type="text" id="education_background_field_of_study[]" name="education_background_field_of_study[]" class="form-control" value="'.$row->field_of_study.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Country</label>
+                                <input type="text" id="education_background_country[]" name="education_background_country[]" class="form-control" value="'.$row->country.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>City</label>
+                                <input type="text" id="education_background_city[]" name="education_background_city[]" class="form-control" value="'.$row->city.'" required>   
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Date Started</label>
+                                <input type="date" id="education_background_start[]" name="education_background_start[]" class="form-control" value="'.$row->start.'" required>   
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Date Ended</label>
+                                <input type="date" id="education_background_end[]" name="education_background_end[]" class="form-control" value="'.$row->end.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="education_background_status[]" name="education_background_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-education-background btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+    foreach($skills_details as $row){
+        $skills .= '<div class="row item-row-skills command-row-skills card-body">
+                            <div class="col-md-6 col-sm-2 col-xs-12">
+                                <label>Skill</label>
+                                <input type="text" id="skill[]" name="skill[]" class="form-control" value="'.$row->skill.'" required>
+                            </div>
+                            <div class="col-md-4 col-sm-5 col-xs-12">
+                                <label>Years of Experience</label>
+                                <input type="number" id="skills_years[]" name="skills_years[]" class="form-control" value="'.$row->years.'" required>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="skills_status[]" name="skills_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-skills btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+    foreach($certifications_details as $row){
+        $certifications .= '<div class="row item-row-certifications command-row-certifications card-body">
+                            <div class="col-md-6 col-sm-2 col-xs-12">
+                                <label>Title</label>
+                                <input type="text" id="certifications_title[]" name="certifications_title[]" class="form-control" value="'.$row->title.'" required>
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Start</label>
+                                <input type="date" id="certifications_start[]" name="certifications_start[]" class="form-control" value="'.$row->start.'" required>   
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>End</label>
+                                <input type="date" id="certifications_end[]" name="certifications_end[]" class="form-control" value="'.$row->end.'" required>   
+                            </div>
+                            <div class="col-md-10 col-sm-2 col-xs-12">
+                                <label>Description</label>
+                                <input type="text" id="certifications_description[]" name="certifications_description[]" class="form-control" value="'.$row->description.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="certifications_status[]" name="certifications_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-certifications btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+    foreach($social_media_details as $row){
+        $social_media .= '<div class="row item-row-social-media command-row-social-media card-body">
+                            <div class="col-md-4 col-sm-2 col-xs-12">
+                                <label>Social Media</label>
+                                <select id="social_media[]" name="social_media[]" class="form-control" required>
+                                    <option value="'.$row->media.'">'.$row->media.'</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="google plus">Google Plus</option>
+                                    <option value="twitter">Twitter</option>
+                                    <option value="linkedin">LinkedIn</option>
+                                </select>   
+                            </div>
+                            <div class="col-md-6 col-sm-2 col-xs-12">
+                                <label>Link</label>
+                                <input type="text" id="social_media_link[]" name="social_media_link[]" class="form-control"  value="'.$row->link.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="social_media_status[]" name="social_media_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-certifications btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+    foreach($military_service_details as $row){
+        $military_service .= '<div class="row item-row-military-service command-row-military-service card-body">
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Country</label>
+                                <input type="text" id="military_service_country[]" name="military_service_country[]" class="form-control" value="'.$row->country.'" required>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Branch</label>
+                                <input type="text" id="military_service_branch[]" name="military_service_branch[]" class="form-control" value="'.$row->branch.'" required>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Rank</label>
+                                <input type="text" id="military_service_rank[]" name="military_service_rank[]" class="form-control" value="'.$row->rank.'" required>
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Date Started</label>
+                                <input type="date" id="military_service_start[]" name="military_service_start[]" class="form-control" value="'.$row->start.'" required>   
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Date Ended</label>
+                                <input type="date" id="military_service_end[]" name="military_service_end[]" class="form-control" value="'.$row->end.'" required>   
+                            </div>
+                            <div class="col-md-10 col-sm-2 col-xs-12">
+                                <label>Description</label>
+                                <input type="text" id="military_service_description[]" name="military_service_description[]" class="form-control" value="'.$row->description.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="military_service_status[]" name="military_service_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-military-service btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+    foreach($awards_details as $row){
+        $awards .= '<div class="row item-row-awards command-row-awards card-body">
+                            <div class="col-md-9 col-sm-2 col-xs-12">
+                                <label>Title</label>
+                                <input type="text" id="awards_title[]" name="awards_title[]" class="form-control" value="'.$row->title.'" required>
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Date Awarded</label>
+                                <input type="date" id="awards_date_awarded[]" name="awards_date_awarded[]" class="form-control" value="'.$row->date_awarded.'" required>   
+                            </div>
+                            <div class="col-md-10 col-sm-2 col-xs-12">
+                                <label>Description</label>
+                                <input type="text" id="awards_description[]" name="awards_description[]" class="form-control" value="'.$row->description.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="awards_status[]" name="awards_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-awards btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+    foreach($organizations_details as $row){
+        $organizations .= '<div class="row item-row-organizations command-row-organizations card-body">
+                            <div class="col-md-6 col-sm-2 col-xs-12">
+                                <label>Title</label>
+                                <input type="text" id="organizations_title[]" name="organizations_title[]" class="form-control" value="'.$row->title.'" required>
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Date Started</label>
+                                <input type="date" id="organizations_start[]" name="organizations_start[]" class="form-control" value="'.$row->start.'" required>   
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Date Ended</label>
+                                <input type="date" id="organizations_end[]" name="organizations_end[]" class="form-control" value="'.$row->end.'" required>   
+                            </div>
+                            <div class="col-md-10 col-sm-2 col-xs-12">
+                                <label>Description</label>
+                                <input type="text" id="organizations_description[]" name="organizations_description[]" class="form-control" value="'.$row->description.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="organizations_status[]" name="organizations_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-organizations btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+    foreach($patents_details as $row){
+        $patents .= '<div class="row item-row-patents command-row-patents card-body">
+                            <div class="col-md-9 col-sm-2 col-xs-12">
+                                <label>Title</label>
+                                <input type="text" id="patents_title[]" name="patents_title[]" class="form-control" value="'.$row->title.'" required>
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Patent No.</label>
+                                <input type="text" id="patent_number[]" name="patent_number[]" class="form-control" value="'.$row->patent_number.'" required>
+                            </div>
+                            <div class="col-md-9 col-sm-2 col-xs-12">
+                                <label>URL</label>
+                                <input type="text" id="patents_url[]" name="patents_url[]" class="form-control" value="'.$row->url.'" required>
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Date Published</label>
+                                <input type="date" id="patents_date_published[]" name="patents_date_published[]" class="form-control" value="'.$row->date_published.'" required>   
+                            </div>
+                            <div class="col-md-10 col-sm-2 col-xs-12">
+                                <label>Description</label>
+                                <input type="text" id="patents_description[]" name="patents_description[]" class="form-control" value="'.$row->description.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="patents_status[]" name="patents_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-patents btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+    foreach($publications_details as $row){
+        $publications .= '<div class="row item-row-publications command-row-publications card-body">
+                            <div class="col-md-12 col-sm-2 col-xs-12">
+                                <label>Title</label>
+                                <input type="text" id="publications_title[]" name="publications_title[]" class="form-control" value="'.$row->title.'" required>
+                            </div>
+                            <div class="col-md-9 col-sm-2 col-xs-12">
+                                <label>URL</label>
+                                <input type="text" id="publications_url[]" name="publications_url[]" class="form-control" value="'.$row->url.'" required>
+                            </div>
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Date Published</label>
+                                <input type="date" id="publications_date_published[]" name="publications_date_published[]" class="form-control" value="'.$row->date_published.'" required>   
+                            </div>
+                            <div class="col-md-10 col-sm-2 col-xs-12">
+                                <label>Description</label>
+                                <input type="text" id="publications_description[]" name="publications_description[]" class="form-control" value="'.$row->description.'" required>   
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="publications_status[]" name="publications_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-publications btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+    foreach($language_spoken_details as $row){
+        $language_spoken .= '<div class="row item-row-language-spoken command-row-language-spoken card-body">
+                            <div class="col-md-6 col-sm-2 col-xs-12">
+                                <label>Language</label>
+                                <input type="text" id="language_spoken[]" name="language_spoken[]" class="form-control" value="'.$row->language.'" required>
+                            </div>
+                            <div class="col-md-4 col-sm-2 col-xs-12">
+                                <label>Fluency (Rate 1-10)</label>
+                                <input type="number" id="language_spoken_fluency[]" name="language_spoken_fluency[]" min="1" max="10" class="form-control" value="'.$row->fluency.'" required>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="language_spoken_status[]" name="language_spoken_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-language-spoken btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+    foreach($government_documents_details as $row){
+        $government_documents .= '<div class="row item-row-government-documents command-row-government-documents card-body">
+                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                <label>Document Type</label>
+                                <input type="text" id="government_documents_type[]" name="government_documents_type[]" class="form-control" value="'.$row->document_type.'" required>
+                            </div>
+                            <div class="col-md-7 col-sm-2 col-xs-12">
+                                <label>Document File (Limit to 20mb file-types *.jpeg, *.jpg, *.doc, *.pdf)</label>
+                                <input type="text" id="government_documents_file_temp[]" name="government_documents_file_temp[]" value="'.$row->document_file.'" class="form-control" readonly>
+                                <input type="file" id="government_documents_file[]" name="government_documents_file[]"accept=".jpeg,.jpg,application/pdf,application/msword" class="form-control" >
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="government_documents_status[]" name="government_documents_status[]" class="form-control" required>
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-government-documents btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+
+    foreach($upload_video_details as $row){
+        $upload_video .= '<div class="row item-row-upload-video command-row-upload-video card-body">
+                            <div class="col-md-10 col-sm-2 col-xs-12">
+                                <label>Video File</label>
+                                <input type="text" id="upload_video_file_temp[]" name="upload_video_file_temp[]" value="'.$row->video_file.'" class="form-control" readonly>
+                                <input type="file" id="upload_video_file[]" name="upload_video_file[]" accept=".avi,.mp4,.mov" class="form-control">
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <label>Status</label>
+                                <select id="upload_video_file_status[]" name="upload_video_file_status[]" class="form-control" required >
+                                    <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                            <!--<a class="btn-remove-row-upload-video btn btn-danger btn-sm">x</a>-->
+                        </div>';
+    }
+}
+
 
 ?>
 @extends('layout/admin_container')
@@ -468,11 +913,17 @@ $upload_video_append = trim(preg_replace('/\s+/',' ', $upload_video));
                     <input type="text" class="form-control" name="nickname" value="{{ (isset($applicant))? $nickname : old('nickname') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
+                    <label for="Picture">Picture:</label>
+                    <input type="text" class="form-control" name="picture_def" value="{{ (isset($applicant))? $picture : old('picture_def') }}" readonly>
+                    <input type="file" class="form-control" id="picture" name="picture" accept=".jpeg,.jpg,.png">
+                </div>
+                <div class='col-md-12 col-lg-6'>  
                     <label for="Contact">Contact Number/s:</label>
                     <input type="text" class="form-control" name="contact" value="{{ (isset($applicant))? $contact : old('contact') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Resume">Resume (Limit to 10mb file-types *.jpeg, *.doc, *.pdf):</label>
+                    <label for="Resume">Resume (Limit to 20mb file-types *.jpeg, *.doc, *.pdf):</label>
+                    <input type="text" class="form-control" name="resume_file_def" value="{{ (isset($applicant))? $resume_file : old('resume_file_def') }}" readonly>
                     <input type="file" class="form-control" id="resume_file" name="resume_file" accept=".jpeg,.jpg,application/pdf,application/msword">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
@@ -767,8 +1218,8 @@ $upload_video_append = trim(preg_replace('/\s+/',' ', $upload_video));
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="upload_video">
-                                        <!--<a id="btn_add_row_upload_video" class="btn btn-success btn-sm" href="#">+</a>								
-                                        <a id="btn_remove_row_upload_video" class="btn btn-danger btn-sm" href="#">-</a>-->
+                                        <a id="btn_add_row_upload_video" class="btn btn-success btn-sm" href="#">+</a>								
+                                        <a id="btn_remove_row_upload_video" class="btn btn-danger btn-sm" href="#">-</a>
                                         <div class='panel-body item-row-container-upload-video'>
                                             <?php echo $upload_video;?>
                                         </div>
