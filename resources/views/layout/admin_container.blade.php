@@ -81,13 +81,7 @@
                 <i class="material-icons">assignment</i>
                 <p>Job/Applicant Requests</p>
               </a>
-            </li>
-            <!--<li class="{{ ($current_route_name == 'job_matching') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('job_matching') }}">
-                <i class="material-icons">find_in_page</i>
-                <p>Job Matching</p>
-              </a>
-            </li>
+            <!--
             <li class="{{ ($current_route_name == 'archives') ? 'nav-item active' : 'nav-item' }}">
               <a class="nav-link" href="{{ url('archives') }}">
                 <i class="material-icons">archive</i>

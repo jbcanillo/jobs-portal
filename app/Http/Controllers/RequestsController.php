@@ -130,6 +130,46 @@ class RequestsController extends Controller
     }
 
     /**
+     * Show the form for processing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function process($id){
+        $request = \App\Requests::find($id);
+        $current_route_name = 'requests';
+        return view('admin/requests/process',compact('request','current_route_name'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function set_request(Request $request, $id)
+    {
+        $request = \App\Requests::find($id);
+        $current_route_name = 'requests';
+
+        $deleted = \App\DesiredJobs::where('request_id',$id)->delete();
+        if(isset($request->desired_jobs_title)){
+            foreach ($request->desired_jobs_title as $key => $row){
+                $details = new \App\DesiredJobs();
+                $details->applicant_id = $id;
+                $details->title = $request->desired_jobs_title[$key];
+                $details->type = $request->desired_jobs_type[$key];
+                $details->salary = $request->desired_jobs_salary[$key];
+                $details->relocation = $request->desired_jobs_relocation[$key];
+                $details->status = $request->desired_jobs_status[$key];
+                $details->created_at = strtotime(date('Y-m-d H:m:s'));
+                $details->save();
+            }
+        } 
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -142,4 +182,5 @@ class RequestsController extends Controller
         $requests->delete();
         return redirect('requests')->with('success','Request ID'.$id.' has been deleted.');
     }
+    
 }

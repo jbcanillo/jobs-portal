@@ -41,10 +41,6 @@ Route::get('/forgot_password', function () {
     return view('/landing_page/forgot_password');
 });
 
-Route::get('/request/assign/{id}', function () {
-    return view('/requests/assignments','id');
-});
-
 Route::post('/reset_password','LoginController@saveNewPassword');
 Route::get('/reset_password/{token}','LoginController@updatePassword');
 
@@ -74,7 +70,5 @@ Route::get('/employers/show/{id}',['uses' =>'EmployersController@show']);
 Route::resource('/requests','RequestsController');
 Route::get('/requests/delete/{id}',['uses' =>'RequestsController@destroy']);
 Route::get('/requests/show/{id}',['uses' =>'RequestsController@show']);
-
-Route::resource('/job_matching','JobMatchingController');
-Route::get('/job_matching/void/{id}',['uses' =>'JobMatchingController@destroy']);
-Route::get('/job_matching/show/{id}',['uses' =>'JobMatchingController@show']);
+Route::get('/requests/process/{id}',['uses' =>'RequestsController@process']);
+Route::post('/requests/set/{id}',['uses' =>'RequestsController@set_request']);
