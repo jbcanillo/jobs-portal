@@ -2,7 +2,7 @@
 @section('content')
         <div class="card">
           <div class="card-header card-header-tabs card-header-info">
-            <h4 class="card-title"><i class="material-icons">assignment</i> Job/Applicant Requests 
+            <h4 class="card-title"><i class="material-icons">assignment</i> Job Requests 
               <span class="pull-right">
                 <a href="{{action('RequestsController@create')}}" class="btn btn-sm btn-success"><i class="material-icons">add</i></a>
               </span>
@@ -43,17 +43,24 @@
              ajax: '{{ url("requests/show") }}',
              columns: [
                         { data: 'id', name: 'id' },
-                        { data: 'title', name: 'title' },
+                        { data: 'job_title', name: 'job_title' },
                         { data: 'company', name: 'company' },
                         { data: 'location', name: 'location' },
                         { data: 'type', name: 'type' },
                         { data: 'status', name: 'status' },
                         { 
                           "render": function ( data, type, full, meta ) { 
-                           return '<a href="/requests/assign/'+full.id+'" class="btn btn-sm btn-success"><i class="material-icons">search</i></a><a href="/requests/'+full.id+'/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a><a href="#" onclick="deleteRecord('+full.id+');" class="btn btn-sm btn-danger"><i class="material-icons">close</i></a>';
+                           return '<a href="/requests/process/'+full.id+'" class="btn btn-sm btn-success"><i class="material-icons">search</i></a><a href="/requests/'+full.id+'/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a><a href="#" onclick="deleteRecord('+full.id+');" class="btn btn-sm btn-danger"><i class="material-icons">close</i></a>';
                            }
                         }  
-                     ]
+                     ],
+                     dom: 'Bfrtip',
+                      buttons: [
+                          'copyHtml5',
+                          'excelHtml5',
+                          'csvHtml5',
+                          'pdfHtml5'
+                      ]
          });
      });
    </script>

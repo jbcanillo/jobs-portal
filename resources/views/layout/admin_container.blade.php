@@ -18,14 +18,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
     <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.material.min.css">-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"> </script>
-
     <!-- Javascript for Bootbox confirmation box -->
     <script src="{{ asset('vendor/bootbox/bootbox.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-
     <style>
       .loader {
         position: fixed;
@@ -79,7 +76,7 @@
             <li class="{{ ($current_route_name == 'requests') ? 'nav-item active' : 'nav-item' }}">
               <a class="nav-link" href="{{ url('requests') }}">
                 <i class="material-icons">assignment</i>
-                <p>Job/Applicant Requests</p>
+                <p>Job Requests</p>
               </a>
             <!--
             <li class="{{ ($current_route_name == 'archives') ? 'nav-item active' : 'nav-item' }}">
@@ -102,7 +99,7 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
           <div class="container-fluid">
             <div class="navbar-wrapper">
-            <a class="navbar-brand">Welcome {{ Auth::user()->name }}, [{{ Auth::user()->role }}]</a>
+            <a class="navbar-brand"><h5>Welcome {{ Auth::user()->name }}</h5> [ User-level: {{ Auth::user()->role }}, Last log-in: {{ date('j F Y H:m A',strtotime(Auth::user()->last_login)) }} ]</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
               <span class="sr-only">Toggle navigation</span>
@@ -139,6 +136,26 @@
         </footer>
       </div>
     </div>
+    <script type="text/javascript">
+      function viewRecord(path,id){
+          $.ajax({
+              type: 'GET',
+              url: path+id,
+              success: function(data) {
+                  bootbox.dialog({
+                      message: data,
+                      size:'large',
+                      buttons: {
+                          success: {
+                              label: "OK",
+                              className: "btn-success",
+                          },
+                      }
+                  });
+              }
+          });
+      }
+  </script>
     <!--   Core JS Files   -->
     <script src="{{ asset('template/material_design/js/core/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('template/material_design/js/core/popper.min.js') }}" type="text/javascript"></script>
@@ -167,6 +184,12 @@
     <!-- Javascript for DataTables -->
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <!--<script src="https://cdn.datatables.net/1.10.19/js/dataTables.material.min.js"></script>-->
+    <!-- Javascript for DataTables Export buttons -->
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
     @yield('datatable')
   </body>
   </html>

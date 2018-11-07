@@ -18,14 +18,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
     <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.material.min.css">-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"> </script>
-
     <!-- Javascript for Bootbox confirmation box -->
     <script src="{{ asset('vendor/bootbox/bootbox.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-
     <style>
       .loader {
         position: fixed;
@@ -52,47 +49,24 @@
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
-            <li class="{{ ($current_route_name == 'dashboard' || $current_route_name == '' ) ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('dashboard') }}">
-                <i class="material-icons">dashboard</i>
-                <p>Dashboard</p>
+            <li class="{{ ($current_route_name == '') ? 'nav-item active' : 'nav-item' }}">
+              <a class="nav-link" href="{{ url('employer/profile') }}">
+                <i class="material-icons">account_circle</i>
+                <p>Profile</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'applicants') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('applicants') }}">
-                <i class="material-icons">assignment_ind</i>
-                <p>Applicants</p>
-              </a>
-            </li>
-            <li class="{{ ($current_route_name == 'requests') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('requests') }}">
+            <li class="{{ ($current_route_name == 'employer/requests') ? 'nav-item active' : 'nav-item' }}">
+              <a class="nav-link" href="{{ url('employer/requests') }}">
                 <i class="material-icons">assignment</i>
-                <p>Requests</p>
+                <p>Job/Applicant Requests</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'job_matching') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('job_matching') }}">
-                <i class="material-icons">find_in_page</i>
-                <p>Job Matching</p>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ url('logout') }}">
+                  <i class="material-icons">exit_to_app</i>
+                  <p>Logout</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'reviews') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('reviews') }}">
-                <i class="material-icons">rate_review</i>
-                <p>Customer Reviews</p>
-              </a>
-            </li>
-            <li class="nav-item active-pro ">
-                  <a class="nav-link" href="{{ url('preferences') }}">
-                      <i class="material-icons">settings</i>
-                      <p>Preferences</p>
-                  </a>
-                  <a class="nav-link" href="{{ url('logout') }}">
-                    <i class="material-icons">exit_to_app</i>
-                    <p>Logout</p>
-                </a>
-              </li>
-              
           </ul>
         </div>
       </div>
@@ -101,7 +75,7 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
           <div class="container-fluid">
             <div class="navbar-wrapper">
-              <a class="navbar-brand">Welcome Angie Monterde Ceniza! [Administrator]</a>
+            <a class="navbar-brand">Welcome {{ Auth::user()->name }}, [{{ Auth::user()->role }}], Last log-in: {{ date('j F Y H:m A',strtotime(Auth::user()->last_login)) }}</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
               <span class="sr-only">Toggle navigation</span>
@@ -110,33 +84,9 @@
               <span class="navbar-toggler-icon icon-bar"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end">
-              
               <ul class="navbar-nav">
-                
-                <li class="nav-item dropdown">
-                  <a class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="material-icons">notifications</i>
-                    <span class="notification">99</span>
-                    <p class="d-lg-none d-md-block">
-                      Notifications
-                    </p>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    @yield('notifications')
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="material-icons">account_circle</i>
-                    <p class="d-lg-none d-md-block">
-                      Account
-                    </p>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2">
-                    <a class="dropdown-item" href="{{ url('preferences') }}"><i class="material-icons">settings</i>&nbspPreferences</a>
-                    <a class="dropdown-item" href="{{ url('logout') }}"><i class="material-icons">exit_to_app</i>&nbspLogout</a>
-                  </div>
-                </li>
+                <a class="dropdown-item" href="{{ url('change_password/'.Auth::user()->remember_token) }}"><i class="material-icons">https</i>&nbspChange Password</a> 
+                <a class="dropdown-item" href="{{ url('logout') }}"><i class="material-icons">exit_to_app</i>&nbspLogout</a>
               </ul>
             </div>
           </div>
@@ -167,24 +117,13 @@
     <script src="{{ asset('template/material_design/js/core/popper.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('template/material_design/js/core/bootstrap-material-design.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('template/material_design/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
-    <!-- Chartist JS -->
-    <script src="{{ asset('template/material_design/js/plugins/chartist.min.js') }}"></script>
     <!--  Notifications Plugin    -->
     <script src="{{ asset('template/material_design/js/plugins/bootstrap-notify.js') }}"></script>
-    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{{ asset('template/material_design/js/material-dashboard.min.js?v=2.1.0') }}" type="text/javascript"></script>
     <!-- For Loading animation -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script type="text/javascript">
       $(window).load(function() {
           $(".loader").fadeOut("slow");
-      });
-      </script>
-    <!-- For Dashboard -->
-    <script type="text/javascript">
-      $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
-        md.initDashboardPageCharts();
       });
     </script>
     <!-- Javascript for DataTables -->

@@ -25,10 +25,18 @@ Route::get('/login', function () {
     //}else{
         return view('landing_page/login');
    // }
+   
+
 });
 
-Route::get('/dashboard', function () {
-    return view('admin/dashboard');
+Route::get('/dashboard', 'DashboardController@index');
+
+Route::get('employer/profile', function () {
+    return view('employer/profile');
+});
+
+Route::get('applicant/profile', function () {
+    return view('applicant/profile');
 });
 
 Route::resource('/sign_up','SignUpController');
@@ -53,6 +61,7 @@ Route::post('/forgot_password','MailController@sendForgotPasswordEmail');
 Route::get('/logout','LoginController@logout');
 
 Route::post('/home','LoginController@home');
+Route::get('/home','LoginController@home');
 Route::get('/logout','LoginController@logout');
 
 Route::resource('/users','UsersController');
@@ -71,4 +80,6 @@ Route::resource('/requests','RequestsController');
 Route::get('/requests/delete/{id}',['uses' =>'RequestsController@destroy']);
 Route::get('/requests/show/{id}',['uses' =>'RequestsController@show']);
 Route::get('/requests/process/{id}',['uses' =>'RequestsController@process']);
-Route::post('/requests/set/{id}',['uses' =>'RequestsController@set_request']);
+Route::get('/requests/getApplicantDetails/{id}',['uses' =>'RequestsController@getApplicantDetails']);
+
+Route::get('test/session','DashboardController@getUsers');

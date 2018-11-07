@@ -1,18 +1,25 @@
 <?php
 if(!isset($request)){
-    $method = "Add Request";
+    $method = "Add Job Request";
     $button = "Submit";
 }else{
-    $title = $request->title;
+    $job_title = $request->job_title;
     $company = $request->company;
     $location = $request->location;
-    $description = $request->description;
+    $years_of_experience = $request->years_of_experience;
+    $education_level = $request->education_level;
+    $age = $request->age;
+    $gender = $request->gender;
     $type = $request->type;
+    $minimum_salary = $request->minimum_salary;
+    $maximum_salary = $request->maximum_salary;
+    $language = $request->language;
+    $description = $request->description;
     $status = $request->status;
     $created_at = $request->created_at;
     $updated_at = $request->updated_at;
     $status = $request->status;
-    $method = "Edit Request";
+    $method = "Edit Job Request";
     $button = "Update";
 }
 $company_options = "";
@@ -51,8 +58,8 @@ if(isset($employers)){
                 {{ csrf_field() }}
               <div class="row">
                 <div class='col-md-12 col-lg-6'>
-                  <label for="Title">Title:</label>
-                  <input type="text" class="form-control" name="title" value="{{ (isset($request))? $title : old('title') }}">
+                  <label for="Title">Job Title:</label>
+                  <input type="text" class="form-control" name="job_title" value="{{ (isset($request))? $job_title : old('job_title') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Company">Company:</label>
@@ -62,39 +69,89 @@ if(isset($employers)){
                         <?php echo $company_options;?>
                     </select>
                 </div>
+                <div class='col-md-12 col-lg-12'>  
+                    <label for="Description">Job Description:</label>
+                    <!--<input type="text" class="form-control" name="description" value="{{ (isset($request))? $description : old('description') }}">-->
+                    <textarea class="form-control" name="description" rows="20">{{ (isset($request))? $description : old('description') }}</textarea>
+                </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Lastname">Location:</label>
+                    <label for="Location">Location:</label>
                     <input type="text" class="form-control" name="location" value="{{ (isset($request))? $location : old('location') }}">
                 </div>
-               
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="Years">Years of Experience:</label>
+                    <input type="number" class="form-control" name="years_of_experience" value="{{ (isset($request))? $years_of_experience : old('years_of_experience') }}">
+                </div>
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="Education">Education Level:</label>
+                    <input type="text" class="form-control" name="education_level" value="{{ (isset($request))? $education_level : old('education_level') }}">
+                </div>
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="Age">Age:</label>
+                    <input type="number" class="form-control" name="age" value="{{ (isset($request))? $age : old('age') }}">
+                </div>
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="Gender">Gender:</label>
+                    <select class="form-control" name="gender">
+                    <option value="" selected></option>
+                    <?php if(!isset($request)){ ?>
+                        <option value="Any" {{ (old('gender') == 'Any') ? 'selected' : '' }}>Any</option>
+                        <option value="Male" {{ (old('gender') == 'Male') ? 'selected' : '' }}>Male</option>
+                        <option value="Female" {{ (old('gender') == 'Female') ? 'selected' : '' }}>Female</option>
+                    <?php }else{ ?>
+                        <option value="Any" {{ ($gender == 'Any') ? 'selected' : '' }}>Any</option>
+                        <option value="Male" {{ ($gender == 'Male') ? 'selected' : '' }}>Male</option>
+                        <option value="Female" {{ ($gender == 'Female') ? 'selected' : '' }}>Female</option>
+                    <?php }?>
+                    </select>
+                </div>
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="Language">Language:</label>
+                    <input type="text" class="form-control" name="language" value="{{ (isset($request))? $language : old('language') }}">
+                </div>
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="Minimum">Minimum Salary:</label>
+                    <input type="number" class="form-control" name="minimum_salary" value="{{ (isset($request))? $minimum_salary : old('minimum_salary') }}">
+                </div>
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="Maximum">Maximum Salary:</label>
+                    <input type="number" class="form-control" name="maximum_salary" value="{{ (isset($request))? $maximum_salary : old('maximum_salary') }}">
+                </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Type">Type:</label>
                     <select class="form-control" name="type">
                     <option value="" selected></option>
                     <?php if(!isset($request)){ ?>
-                        <option value="Job Request" {{ (old('type') == 'Job Request') ? 'selected' : '' }}>Job Request</option>
-                        <option value="Applicant Request" {{ (old('type') == 'Applicant Request') ? 'selected' : '' }}>Applicant Request</option>
+                        <option value="Full-time" {{ (old('type') == 'Full-time') ? 'selected' : '' }}>Full-time</option>
+                        <option value="Part-time" {{ (old('type') == 'Part-time') ? 'selected' : '' }}>Part-time</option>
+                        <option value="Temporary" {{ (old('type') == 'Temporary') ? 'selected' : '' }}>Temporary</option>
+                        <option value="Newly Graduated" {{ (old('type') == 'Newly Graduated') ? 'selected' : '' }}>Newly Graduated</option>
+                        <option value="Internship" {{ (old('type') == 'Internship') ? 'selected' : '' }}>Internship</option>
+                        <option value="Contractual" {{ (old('type') == 'Contractual') ? 'selected' : '' }}>Contractual</option>
+                        <option value="Commision" {{ (old('type') == 'Commision') ? 'selected' : '' }}>Commision</option>
                     <?php }else{ ?>
-                        <option value="Job Request" {{ ($type == 'Job Request') ? 'selected' : '' }}>Job Request</option>
-                        <option value="Applicant Request" {{ ($type == 'Applicant Request') ? 'selected' : '' }}>Applicant Request</option>
+                        <option value="Full-time" {{ ($type == 'Full-time') ? 'selected' : '' }}>Full-time</option>
+                        <option value="Part-time" {{ ($type == 'Part-time') ? 'selected' : '' }}>Part-time</option>
+                        <option value="Temporary" {{ ($type == 'Temporary') ? 'selected' : '' }}>Temporary</option>
+                        <option value="Newly Graduated" {{ ($type == 'Newly Graduated') ? 'selected' : '' }}>Newly Graduated</option>
+                        <option value="Internship" {{ ($type == 'Internship') ? 'selected' : '' }}>Internship</option>
+                        <option value="Contractual" {{ ($type == 'Contractual') ? 'selected' : '' }}>Contractual</option>
+                        <option value="Commision" {{ ($type == 'Commision') ? 'selected' : '' }}>Commision</option>
                     <?php }?>
                     </select>
-                </div>
-                <div class='col-md-12 col-lg-12'>  
-                    <label for="Description">Description:</label>
-                    <!--<input type="text" class="form-control" name="description" value="{{ (isset($request))? $description : old('description') }}">-->
-                    <textarea class="form-control" name="description" rows="10">{{ (isset($request))? $description : old('description') }}</textarea>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Status">Status:</label>
                     <select class="form-control" name="status">
                       <option value="" selected></option>
                       <?php if(!isset($request)){ ?>
-                        <option value="Active" {{ (old('status') == 'Active') ? 'selected' : '' }}>Active</option>
-                        <option value="Inactive" {{ (old('status') == 'Inactive') ? 'selected' : '' }}>Inactive</option>
+                        <option value="Open" {{ (old('status') == 'Open') ? 'selected' : '' }}>Open</option>
+                        <option value="Processing" {{ (old('status') == 'Processing') ? 'selected' : '' }}>Processing</option>
+                        <option value="Closed" {{ (old('status') == 'Closed') ? 'selected' : '' }}>Closed</option>
                       <?php }else{ ?>
-                        <option value="Active" {{ ($status == 'Active') ? 'selected' : '' }}>Active</option>
-                        <option value="Inactive" {{ ($status == 'Inactive') ? 'selected' : '' }}>Inactive</option>
+                        <option value="Open" {{ ($status == 'Open') ? 'selected' : '' }}>Open</option>
+                        <option value="Processing" {{ ($status == 'Processing') ? 'selected' : '' }}>Processing</option>
+                        <option value="Closed" {{ ($status == 'Closed') ? 'selected' : '' }}>Closed</option>
                       <?php }?>
                     </select>
                 </div>

@@ -59,7 +59,7 @@ if(!isset($employer)){
                     <input type="text" class="form-control" name="nickname" value="{{ (isset($employer))? $nickname : old('nickname') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Company">Company Name:</label>
+                    <label for="Company">Company/Employer Name:</label>
                     <input type="text" class="form-control" name="company_name" value="{{ (isset($employer))? $company_name : old('company_name') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  

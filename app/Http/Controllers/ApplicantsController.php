@@ -51,7 +51,8 @@ class ApplicantsController extends Controller
             'firstname' => 'required|string',
             'middlename' => 'required|string',
             'lastname' => 'required|string',
-            'nickname' => 'required|string',
+            'gender' => 'required|string',
+            'birthdate' => 'required|date',
             'contact' => 'required|string',
             'resume_public' => 'required',
             'user_id' => 'required|integer|unique:applicants,user_id,'.$id,
@@ -75,16 +76,17 @@ class ApplicantsController extends Controller
             $applicant->firstname = ucwords(strip_tags($request->get('firstname')));
             $applicant->middlename = ucwords(strip_tags($request->get('middlename')));
             $applicant->lastname = ucwords(strip_tags($request->get('lastname')));
-            $applicant->nickname = ucwords(strip_tags($request->get('nickname')));
+            $applicant->gender = ucwords(strip_tags($request->get('gender')));
+            $applicant->birthdate = ucwords(strip_tags($request->get('birthdate')));
             $applicant->contact_number = strip_tags($request->get('contact'));
             $this->validate($request, ['picture.*' => 'mimes:jpg,jpeg,png','file' => 'max:10240']); 
             if($request->hasFile('picture')){
-                $path = $request->file('picture')->store('applicant_pictures');
+                $path = $request->file('picture')->store('public/applicant_pictures');
                 $applicant->picture = $path;
             }
             $this->validate($request, ['resume_file.*' => 'mimes:doc,pdf,docx,jpg,jpeg,zip','file' => 'max:10240']);
             if( $request->hasFile('resume_file')){
-                $path = $request->file('resume_file')->store('resumes');
+                $path = $request->file('resume_file')->store('public/resumes');
                 $applicant->resume_filepath = $path;
             }
             $applicant->resume_public = $request->get('resume_public');
@@ -272,7 +274,7 @@ class ApplicantsController extends Controller
                     $this->validate($request, ['government_documents_file.*' => 'mimes:doc,pdf,docx,jpg,jpeg,zip','file' => 'max:50000']); 
                     if($request->hasFile('government_documents_file')){
                         $file_upload = $request->file('government_documents_file')[$key];
-                        $path = $file_upload->store('government_documents');
+                        $path = $file_upload->store('public/government_documents');
                         $details->document_file = $path;
                     }
                     $details->status = $request->government_documents_status[$key];
@@ -288,7 +290,7 @@ class ApplicantsController extends Controller
                     $this->validate($request, ['upload_video_file.*' => 'mimes:mp4,avi,mov','file' => 'max:50000']); 
                     if($request->hasFile('upload_video_file')){
                         $file_upload = $request->file('upload_video_file')[$key];
-                        $path = $file_upload->store('video_intro');
+                        $path = $file_upload->store('public/video_intro');
                         $details->video_file = $path;
                     }
                     $details->status = $request->upload_video_file_status[$key];
@@ -315,7 +317,12 @@ class ApplicantsController extends Controller
             return Datatables::of(Applicant::query())->make(true);
         }else{
             $applicant= \App\Applicant::find($id);
-            return $applicant->toJson(JSON_PRETTY_PRINT);
+            $desired_jobs_details = \App\DesiredJobs::where('applicant_id',$id)->get();
+            $work_experience_details = \App\WorkExperience::where('applicant_id',$id)->get();
+            $education_background_details = \App\EducationBackground::where('applicant_id',$id)->get();
+            $skills_details = \App\Skills::where('applicant_id',$id)->get();
+            //return $applicant->toJson(JSON_PRETTY_PRINT);
+            return view('admin/applicants/view',compact('applicant','desired_jobs_details','work_experience_details','education_background_details','skills_details'));
         }
     }
 
@@ -380,18 +387,19 @@ class ApplicantsController extends Controller
             $applicant->firstname = ucwords(strip_tags($request->get('firstname')));
             $applicant->middlename = ucwords(strip_tags($request->get('middlename')));
             $applicant->lastname = ucwords(strip_tags($request->get('lastname')));
-            $applicant->nickname = ucwords(strip_tags($request->get('nickname')));
+            $applicant->gender = ucwords(strip_tags($request->get('gender')));
+            $applicant->birthdate = ucwords(strip_tags($request->get('birthdate')));
             $applicant->contact_number = strip_tags($request->get('contact'));
             $this->validate($request, ['picture.*' => 'mimes:jpg,jpeg,png','file' => 'max:10240']); 
             if($request->hasFile('picture')){
                 Storage::delete($applicant->picture);
-                $path = $request->file('picture')->store('applicant_pictures');
+                $path = $request->file('picture')->store('public/applicant_pictures');
                 $applicant->picture = $path;
             }
             $this->validate($request, ['resume_file.*' => 'mimes:doc,pdf,docx,jpg,jpeg,zip','file' => 'max:10240']); 
             if( $request->hasFile('resume_file')){
                 Storage::delete($applicant->resume_filepath);
-                $path = $request->file('resume_file')->store('resumes');
+                $path = $request->file('resume_file')->store('public/resumes');
                 $applicant->resume_filepath = $path;
             }
             $applicant->resume_public = $request->get('resume_public');
@@ -594,7 +602,7 @@ class ApplicantsController extends Controller
                             unlink(storage_path('app/'.$request->government_documents_file_temp[$key]));
                         }
                         $file_upload = $request->file('government_documents_file')[$key];
-                        $path = $file_upload->store('government_documents');
+                        $path = $file_upload->store('public/government_documents');
                         $details->document_file = $path;
                     }else{
                         if(isset($request->government_documents_file_temp[$key])){
@@ -621,7 +629,7 @@ class ApplicantsController extends Controller
                             unlink(storage_path('app/'.$request->upload_video_file_temp[$key]));
                         }
                         $file_upload = $request->file('upload_video_file')[$key];
-                        $path = $file_upload->store('video_intro');
+                        $path = $file_upload->store('public/video_intro');
                         $details->video_file = $path;
                     }else{
                         if(isset($request->upload_video_file_temp[$key])){

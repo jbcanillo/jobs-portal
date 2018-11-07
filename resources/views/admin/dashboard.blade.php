@@ -13,12 +13,12 @@
                                     <i class="material-icons">account_circle</i>
                                 </div>
                                     <p class="card-category">No. of Users Online</p>
-                                    <h3 class="card-title">49/50</h3>
+                            <h3 class="card-title">{{ $online_users }}/{{ $active_users + $inactive_users }}</h3>
                                 </div>
                             <div class="card-footer">
                                 <div class="stats">
                                     <i class="material-icons text-danger">warning</i>
-                                    Max users reached 
+                                    No. of Unactivated User Accounts: {{ $inactive_users }} 
                                 </div>
                                 <br><br>
                             </div>
@@ -30,8 +30,8 @@
                                 <div class="card-icon">
                                     <i class="material-icons">assignment</i>
                                 </div>
-                                    <p class="card-category">Requests Completed</p>
-                                    <h3 class="card-title">159/232</h3>
+                                    <p class="card-category">Job Requests</p>
+                            <h3 class="card-title">{{ $inactiveRequests}} / {{ $activeRequests }}</h3>
                                 </div>
                             <div class="card-footer">
                                 <div class="stats">

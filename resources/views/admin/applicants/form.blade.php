@@ -89,15 +89,15 @@ $work_experience = '<div class="row item-row-work-experience command-row-work-ex
                     </div>';
 $education_background = '<div class="row item-row-education-background command-row-education-background card-body">
                         <div class="col-md-4 col-sm-2 col-xs-12">
-                            <label>Degree</label>
+                            <label>Degree/Level</label>
                             <input type="text" id="education_background_degree[]" name="education_background_degree[]" class="form-control" required>
                         </div>
                         <div class="col-md-4 col-sm-5 col-xs-12">
-                            <label>School</label>
+                            <label>School/University</label>
                             <input type="text" id="education_background_school[]" name="education_background_school[]" class="form-control" required>
                         </div>
                         <div class="col-md-4 col-sm-2 col-xs-12">
-                            <label>Field of Study</label>
+                            <label>Field of Study/Specialization</label>
                             <input type="text" id="education_background_field_of_study[]" name="education_background_field_of_study[]" class="form-control" required>   
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
@@ -432,9 +432,10 @@ if(!isset($applicant)){
     $firstname = $applicant->firstname;
     $middlename = $applicant->middlename;
     $lastname = $applicant->lastname;
-    $nickname = $applicant->nickname;
+    $gender = $applicant->gender;
+    $birthdate = $applicant->birthdate;
     $contact = $applicant->contact_number;
-    $picture = $applicant->picture;
+    $picture = substr($applicant->picture,6) ;
     $resume_file = $applicant->resume_filepath;
     $resume_public = $applicant->resume_public;
     $user_id = $applicant->user_id;
@@ -539,15 +540,15 @@ if(!isset($applicant)){
     foreach($education_background_details as $row){
         $education_background .= '<div class="row item-row-education-background command-row-education-background card-body">
                             <div class="col-md-4 col-sm-2 col-xs-12">
-                                <label>Degree</label>
+                                <label>Degree/Level</label>
                                 <input type="text" id="education_background_degree[]" name="education_background_degree[]" class="form-control" value="'.$row->degree.'" required>
                             </div>
                             <div class="col-md-4 col-sm-5 col-xs-12">
-                                <label>School</label>
+                                <label>School/University</label>
                                 <input type="text" id="education_background_school[]" name="education_background_school[]" class="form-control" value="'.$row->school.'" required>
                             </div>
                             <div class="col-md-4 col-sm-2 col-xs-12">
-                                <label>Field of Study</label>
+                                <label>Field of Study/Specialization</label>
                                 <input type="text" id="education_background_field_of_study[]" name="education_background_field_of_study[]" class="form-control" value="'.$row->field_of_study.'" required>   
                             </div>
                             <div class="col-md-2 col-sm-2 col-xs-12">
@@ -893,6 +894,22 @@ if(!isset($applicant)){
             <?php }else{ ?>
                 <form method="post" action="{{ action('ApplicantsController@update',$applicant->id) }}" enctype="multipart/form-data">
                 <input name="_method" type="hidden" value="PATCH">
+                <?php if(isset($picture)){ ?><br><br>
+                    <div class='col-md-12 col-lg-12'>
+                        <div class="card card-profile">
+                            <div class="card-avatar">
+                                <center><img src="{{ URL::asset('storage'.$picture) }}" style="width:200px;height:200px;"></center>
+                            </div>
+                            <div class="card-body">
+                                
+                            </div>
+                        </div>
+                    </div>
+                <?php }else{ ?>
+                    <div class='col-md-12 col-lg-12'>
+                            <center><img src="{{ asset('img/no_pic.png') }}" style="width:200px;height:200px;"></center><br><hr>
+                        </div>
+                <?php } ?>
             <?php } ?>
                 {{ csrf_field() }}
               <div class="row">
@@ -909,8 +926,21 @@ if(!isset($applicant)){
                     <input type="text" class="form-control" name="lastname" value="{{ (isset($applicant))? $lastname : old('lastname') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Nickname">Nickname:</label>
-                    <input type="text" class="form-control" name="nickname" value="{{ (isset($applicant))? $nickname : old('nickname') }}">
+                    <label for="Gender">Gender:</label>
+                    <select class="form-control" name="gender">
+                        <option value="" selected></option>
+                        <?php if(!isset($applicant)){ ?>
+                            <option value="Male" {{ (old('gender') == "Male") ? 'selected' : '' }}>Male</option>
+                            <option value="Female" {{ (old('gender') == "Female") ? 'selected' : '' }}>Female</option>
+                        <?php }else{ ?>
+                            <option value="Male" {{ ($gender == "Male") ? 'selected' : '' }}>Male</option>
+                            <option value="Female" {{ ($gender == "Female") ? 'selected' : '' }}>Female</option>
+                        <?php }?>
+                    </select>
+                </div>
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="Birthdate">Birthdate:</label>
+                    <input type="date" class="form-control" name="birthdate" value="{{ (isset($applicant))? $birthdate : old('birthdate') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Picture">Picture:</label>

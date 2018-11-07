@@ -53,7 +53,14 @@
                            return '<a href="/users/'+full.id+'/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a><a href="#" onclick="deleteRecord('+full.id+');" class="btn btn-sm btn-danger"><i class="material-icons">close</i></a>';
                            }
                         }  
-                     ]
+                     ],
+                     dom: 'Bfrtip',
+                      buttons: [
+                          'copyHtml5',
+                          'excelHtml5',
+                          'csvHtml5',
+                          'pdfHtml5'
+                      ]
          });
      });
    </script>

@@ -16,7 +16,7 @@
               </div><br />
             @endif 
            <div style="overflow-x:auto;">
-                <table class="datatable mdl-data-table mdl-shadow--2dp table-hovered responsive" cellspacing="0">
+                <table class="datatable mdl-data-table mdl-shadow--2dp table-hovered responsive" cellspacing="0" style="width:100%">
                   <thead>
                       <tr>
                         <th>ID</th>
@@ -37,6 +37,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
          $('.datatable').DataTable({
+            responsive: true,
              processing: true,
              serverSide: true,
              rowId: 'id',
@@ -53,7 +54,14 @@
                            return '<a href="/employers/'+full.id+'/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a><a href="#" onclick="deleteRecord('+full.id+');" class="btn btn-sm btn-danger"><i class="material-icons">close</i></a>';
                            }
                         }  
-                     ]
+                     ],
+                     dom: 'Bfrtip',
+                      buttons: [
+                          'copyHtml5',
+                          'excelHtml5',
+                          'csvHtml5',
+                          'pdfHtml5'
+                      ]
          });
      });
    </script>

@@ -46,10 +46,11 @@ class LoginController extends Controller
                     if($role=='Administrator'){
                             return view('admin/dashboard');
                     }elseif($role=='Employer'){
-                            return view('employer/dashboard');
+                            return view('employer/profile');
                     }elseif($role=='Applicant'){
-                            return view('applicant/dashboard');
+                            return view('applicant/profile');
                     }
+
                 }else{
                     return back()->with('error', 'Your account is not yet activated. Kindly check your email for the instruction on how to activate your account.');
                 }
