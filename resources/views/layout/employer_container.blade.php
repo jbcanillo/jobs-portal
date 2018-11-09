@@ -35,6 +35,9 @@
     .sidebar {
         background-color: #ffffff;
     }
+    .mdl-data-table.mdl-data-table-default-non-numeric td {
+      text-align: left;
+    }
     </style>
   </head>
   <body>
@@ -49,16 +52,16 @@
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
-            <li class="{{ ($current_route_name == '') ? 'nav-item active' : 'nav-item' }}">
+            <li class="{{ ($current_route_name == 'profile') ? 'nav-item active' : 'nav-item' }}">
               <a class="nav-link" href="{{ url('employer/profile') }}">
                 <i class="material-icons">account_circle</i>
                 <p>Profile</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'employer/requests') ? 'nav-item active' : 'nav-item' }}">
+            <li class="{{ ($current_route_name == 'requests') ? 'nav-item active' : 'nav-item' }}">
               <a class="nav-link" href="{{ url('employer/requests') }}">
                 <i class="material-icons">assignment</i>
-                <p>Job/Applicant Requests</p>
+                <p>Post Job Requests</p>
               </a>
             </li>
             <li class="nav-item ">
@@ -75,7 +78,7 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
           <div class="container-fluid">
             <div class="navbar-wrapper">
-            <a class="navbar-brand">Welcome {{ Auth::user()->name }}, [{{ Auth::user()->role }}], Last log-in: {{ date('j F Y H:m A',strtotime(Auth::user()->last_login)) }}</a>
+              <a class="navbar-brand"><h5>Welcome {{ Auth::user()->name }}</h5> [ User-level: {{ Auth::user()->role }}, Last log-in: {{ date('j F Y H:m A',strtotime(Auth::user()->last_login)) }} ]</a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
               <span class="sr-only">Toggle navigation</span>
@@ -95,6 +98,7 @@
         <div class="content">
           <div class="container-fluid">
               <!-- Add your contents here -->
+              <br>
               @yield('content')
           </div>
         </div>
@@ -112,26 +116,63 @@
         </footer>
       </div>
     </div>
+    <script type="text/javascript">
+      function viewRecord(path,id){
+          $.ajax({
+              type: 'GET',
+              url: path+id,
+              success: function(data) {
+                  bootbox.dialog({
+                      message: data,
+                      size:'large',
+                      buttons: {
+                          success: {
+                              label: "OK",
+                              className: "btn-success",
+                          },
+                      }
+                  });
+              }
+          });
+      }
+  </script>
     <!--   Core JS Files   -->
     <script src="{{ asset('template/material_design/js/core/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('template/material_design/js/core/popper.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('template/material_design/js/core/bootstrap-material-design.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('template/material_design/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+    <!-- Chartist JS -->
+    <script src="{{ asset('template/material_design/js/plugins/chartist.min.js') }}"></script>
     <!--  Notifications Plugin    -->
     <script src="{{ asset('template/material_design/js/plugins/bootstrap-notify.js') }}"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{{ asset('template/material_design/js/material-dashboard.min.js?v=2.1.0') }}" type="text/javascript"></script>
     <!-- For Loading animation -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script type="text/javascript">
       $(window).load(function() {
           $(".loader").fadeOut("slow");
       });
+      </script>
+    <!-- For Dashboard -->
+    <script type="text/javascript">
+      $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/demos.js
+        md.initDashboardPageCharts();
+      });
     </script>
     <!-- Javascript for DataTables -->
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <!--<script src="https://cdn.datatables.net/1.10.19/js/dataTables.material.min.js"></script>-->
+    <!-- Javascript for DataTables Export buttons 
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>-->
     @yield('datatable')
   </body>
   </html>
   @else
-    <script>window.location = "/logout";</script>
+    <script>window.location = "/login";</script>
   @endif

@@ -432,6 +432,7 @@ if(!isset($applicant)){
     $firstname = $applicant->firstname;
     $middlename = $applicant->middlename;
     $lastname = $applicant->lastname;
+    $nickname = $applicant->nickname;
     $gender = $applicant->gender;
     $birthdate = $applicant->birthdate;
     $contact = $applicant->contact_number;
@@ -925,6 +926,10 @@ if(!isset($applicant)){
                     <label for="Lastname">Lastname:</label>
                     <input type="text" class="form-control" name="lastname" value="{{ (isset($applicant))? $lastname : old('lastname') }}">
                 </div>
+                <div class='col-md-12 col-lg-6'>  
+                        <label for="Nickname">Nickname:</label>
+                        <input type="text" class="form-control" name="nickname" value="{{ (isset($applicant))? $nickname : old('nickname') }}">
+                    </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Gender">Gender:</label>
                     <select class="form-control" name="gender">

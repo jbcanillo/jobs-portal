@@ -35,6 +35,9 @@
     .sidebar {
         background-color: #ffffff;
     }
+    .mdl-data-table.mdl-data-table-default-non-numeric td {
+      text-align: left;
+    }
     </style>
   </head>
   <body>
@@ -119,6 +122,7 @@
         <div class="content">
           <div class="container-fluid">
               <!-- Add your contents here -->
+              <br>
               @yield('content')
           </div>
         </div>
@@ -148,7 +152,7 @@
                       buttons: {
                           success: {
                               label: "OK",
-                              className: "btn-success",
+                              className: "btn-primary",
                           },
                       }
                   });
@@ -184,15 +188,15 @@
     <!-- Javascript for DataTables -->
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <!--<script src="https://cdn.datatables.net/1.10.19/js/dataTables.material.min.js"></script>-->
-    <!-- Javascript for DataTables Export buttons -->
+    <!-- Javascript for DataTables Export buttons 
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>-->
     @yield('datatable')
   </body>
   </html>
   @else
-    <script>window.location = "/logout";</script>
+    <script>window.location = "/login";</script>
   @endif

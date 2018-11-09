@@ -31,7 +31,7 @@
                                     <i class="material-icons">assignment</i>
                                 </div>
                                     <p class="card-category">Job Requests</p>
-                            <h3 class="card-title">{{ $inactiveRequests}} / {{ $activeRequests }}</h3>
+                            <h3 class="card-title">{{ $open_requests }} / {{ $closed_requests }}</h3>
                                 </div>
                             <div class="card-footer">
                                 <div class="stats">

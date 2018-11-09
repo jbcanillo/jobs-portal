@@ -18,13 +18,15 @@ class DashboardController extends Controller
         $online_users = $this->getUsers('Online');
         $active_users = $this->getUsers('Active');
         $inactive_users = $this->getUsers('Inactive');
-        $inactiveRequests = $this->getJobRequests('Inactive');
-        $activeRequests = $this->getJobRequests('Active');
-        $inactiveApplicants = $this->getApplicants('Inactive');
-        $activeApplicants = $this->getApplicants('Active');
-        $inactiveEmployers = $this->getEmployers('Inactive');
-        $activeEmployers = $this->getEmployers('Active');
-        return view('admin/dashboard',compact('online_users','active_users','inactive_users','open_requests','processing_requests','closed_requests','inactiveApplicants','activeApplicants','inactiveEmployers','activeEmployers'));
+        $open_requests = $this->getJobRequests('Open');
+        $processing_requests = $this->getJobRequests('Processing');
+        $closed_requests = $this->getJobRequests('Closed');
+        $inactive_applicants = $this->getApplicants('Inactive');
+        $active_applicants = $this->getApplicants('Active');
+        $inactiv_employers = $this->getEmployers('Inactive');
+        $active_employers = $this->getEmployers('Active');
+        return view('admin/dashboard',compact('online_users','active_users','inactive_users','open_requests','processing_requests','closed_requests','inactive_applicants','active_applicants','inactive_employers','active_employers'));
+        //return view('admin/requests/listview');
     }
     public function getUsers($param){
         if($param=='Online'){
@@ -43,37 +45,25 @@ class DashboardController extends Controller
         return $result;
     }
     public function getJobRequests($param){
-        if($param=='Active'){
+        if(isset($param)){
             $result =  DB::table('requests')
-                    ->where('status','=','Active')
-                    ->count();
-        }elseif($param=='Inactive'){
-            $result =  DB::table('requests')
-                    ->where('status','=','Inactive')
+                    ->where('status','=',$param)
                     ->count();
         }
         return $result;
     }
     public function getApplicants($param){
-        if($param=='Active'){
+        if(isset($param)){
             $result =  DB::table('applicants')
-                    ->where('status','=','Active')
-                    ->count();
-        }elseif($param=='Inactive'){
-            $result =  DB::table('applicants')
-                    ->where('status','=','Inactive')
+                    ->where('status','=',$param)
                     ->count();
         }
         return $result;
     }
     public function getEmployers($param){
-        if($param=='Active'){
+        if(isset($param)){
             $result =  DB::table('employers')
-                    ->where('status','=','Active')
-                    ->count();
-        }elseif($param=='Inactive'){
-            $result =  DB::table('employers')
-                    ->where('status','=','Inactive')
+                    ->where('status','=',$param)
                     ->count();
         }
         return $result;

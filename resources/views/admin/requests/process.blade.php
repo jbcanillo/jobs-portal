@@ -57,6 +57,8 @@ if(isset($request)){
     $minimum_salary = $request->minimum_salary;
     $maximum_salary = $request->maximum_salary;
     $language = $request->language;
+    $license = $request->license;
+    $number_of_applicants = $request->number_of_applicants;
     $description = $request->description;
     $status = $request->status;
     $created_at = $request->created_at;
@@ -132,12 +134,10 @@ if(isset($request)){
                     <label for="Company">Company/Employer:</label>
                     <input type="text" class="form-control" name="company" value="{{ $company }}" readonly>
                 </div>
-
                 <div class='col-md-12 col-lg-12'>  
                     <label for="Description">Description:</label>
                     <textarea class="form-control" name="description" rows="20" readonly>{{ $description }}</textarea>
                 </div>
-
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Location">Location:</label>
                     <input type="text" class="form-control" name="location" value="{{ $location }}" readonly>
@@ -146,38 +146,38 @@ if(isset($request)){
                     <label for="Years">Years of Experience:</label>
                     <input type="number" class="form-control" name="years_of_experience" value="{{ $years_of_experience }}" readonly>
                 </div>
-
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Education">Education Level:</label>
                     <input type="text" class="form-control" name="education_level" value="{{ $education_level }}" readonly>
                 </div>
-
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Age">Age:</label>
                     <input type="number" class="form-control" name="age" value="{{ $age }}" readonly>
                 </div>
-
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Gender">Gender:</label>
                     <input type="text" class="form-control" name="gender" value="{{ $gender }}" readonly>
                 </div>
-
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Language">Language:</label>
                     <input type="text" class="form-control" name="language" value="{{ $language }}" readonly>
                 </div>
-
-               
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="License">License(s):</label>
+                    <input type="text" class="form-control" name="license" value="{{ $license }}" readonly>
+                </div>
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="number_applicants">Required no. of applicants to hire:</label>
+                    <input type="number" class="form-control" name="number_of_applicants" value="{{ $number_of_applicants }}" readonly>
+                </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Minimum">Minimum Salary:</label>
                     <input type="number" class="form-control" name="minimum_salary" value="{{ $minimum_salary }}" readonly>
                 </div>
-
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Maximum">Maximum Salary:</label>
                     <input type="number" class="form-control" name="maximum_salary" value="{{ $maximum_salary }}" readonly>
                 </div>
-
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Type">Type:</label>
                     <input type="text" class="form-control" name="type" value="{{ $type }}" readonly>
@@ -186,7 +186,6 @@ if(isset($request)){
                     <label for="Status">Status:</label>
                     <input type="text" class="form-control" name="status" value="{{ $status }}" readonly>
                 </div>
-                
               </div>
               <hr>
               <div class="panel-body">

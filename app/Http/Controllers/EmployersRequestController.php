@@ -8,7 +8,7 @@ use App\Employer;
 use App\Applicant;
 use DB;
 
-class RequestsController extends Controller
+class EmployersRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class RequestsController extends Controller
     public function index()
     {
         //
-        return view('admin/requests/listview');
+        return view('employer/requests/listview');
     }
 
     /**
@@ -30,7 +30,7 @@ class RequestsController extends Controller
     {
         //
         $employers= \App\Employer::where('status', 'active')->get();
-        return view('admin/requests/form',compact('employers'));
+        return view('employer/requests/form',compact('employers'));
     }
 
     private function validation($inputs,$id=NULL){
@@ -81,7 +81,7 @@ class RequestsController extends Controller
             $requests->status = $request->get('status');
             $requests->created_at = strtotime(date('Y-m-d H:m:s'));
             $requests->save();
-            return redirect('requests')->with('success', 'New Job Request has been added.');
+            return redirect('employer/requests')->with('success', 'New Job Request has been added.');
         }
     }
 
@@ -95,7 +95,9 @@ class RequestsController extends Controller
     {
         //
         if(!is_numeric($id)){
-            return Datatables::of(Requests::query())->make(true);
+            $employer = \App\Employer::where('user_id','=',Auth::user()->id)->get();
+            $requests = \App\Requests::where('employer_id','=',$employer[0]->id)->get();
+            return Datatables::of($requests)->make(true);
         }else{
             $requests= \App\Requests::find($id);
             return $requests->toJson(JSON_PRETTY_PRINT);
@@ -113,7 +115,7 @@ class RequestsController extends Controller
         //
         $request = \App\Requests::find($id);
         $employers= \App\Employer::where('status', 'active')->get();
-        return view('admin/requests/form',compact('request','employers'));
+        return view('employer/requests/form',compact('request','employers'));
     }
 
     /**
@@ -150,103 +152,11 @@ class RequestsController extends Controller
                 $requests->status = $request->get('status');
                 $requests->updated_at = strtotime(date('Y-m-d H:m:s'));
                 $requests->save();
-                return redirect('requests')->with('success', 'Job Request ID'.$id.' has been updated.');
+                return redirect('employer/requests')->with('success', 'Job Request ID'.$id.' has been updated.');
             }
-        }elseif(isset($request->applicant_id) || count($request->applicant_id)==0){
-            $request_data = \App\Requests::find($id);
-            $deleted = \App\RequestAssignments::where('request_id',$id)->delete();
-            $flag_hired = false;
-            foreach ($request->applicant_id as $key => $row){
-                $assign = new \App\RequestAssignments();
-                $assign->request_id = $id;
-                $assign->applicant_id = $request->applicant_id[$key];
-                $assign->employer_id = $request_data->employer_id;
-                $assign->remarks = $request->remarks[$key];
-                $assign->status = $request->applicant_status[$key];
-                $assign->created_at = strtotime(date('Y-m-d H:m:s'));
-                $assign->save();
-                if($request->applicant_status[$key]=='Hired'){
-                    $flag_hired = true;
-                }else{
-                    $flag_hired = false;
-                }
-            }
-            if(count($request->applicant_id)>0){
-                $requests = \App\Requests::find($id);
-                $requests->status = 'Processing';
-                $requests->updated_at = strtotime(date('Y-m-d H:m:s'));
-                $requests->save();
-            }else{
-                $requests = \App\Requests::find($id);
-                $requests->status = 'Open';
-                $requests->updated_at = strtotime(date('Y-m-d H:m:s'));
-                $requests->save();
-            }
-            if($flag_hired){
-                $requests = \App\Requests::find($id);
-                $requests->status = 'Closed';
-                $requests->updated_at = strtotime(date('Y-m-d H:m:s'));
-                $requests->save();
-            }else{
-                $requests = \App\Requests::find($id);
-                $requests->status = 'Processing';
-                $requests->updated_at = strtotime(date('Y-m-d H:m:s'));
-                $requests->save();
-            }
-            return redirect('requests')->with('success', 'Job Request ID'.$id.' has been processed.');
-        }  
+        }
     }
 
-    /**
-     * Show the form for processing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function process($id){
-
-        $current_route_name = 'requests';
-
-        $request = \App\Requests::find($id);
-
-        $request_assignments = DB::table('request_assignments')
-                            ->join('applicants','applicants.id','=','request_assignments.applicant_id')
-                            ->join('applicant_education_background','applicant_education_background.applicant_id','=','request_assignments.applicant_id')
-                            ->join('applicant_work_experience','applicant_work_experience.applicant_id','=','request_assignments.applicant_id')
-                            ->join('applicant_desired_jobs','applicant_desired_jobs.applicant_id','=','request_assignments.applicant_id')
-                            ->select('request_assignments.*','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate','applicant_desired_jobs.type','applicant_desired_jobs.salary','applicant_desired_jobs.relocation', DB::raw('MAX(applicant_education_background.degree) as degree'),DB::raw('MAX(applicant_work_experience.start) as work_experience_start'),DB::raw('MAX(applicant_work_experience.end) as work_experience_end'))
-                            ->where('request_assignments.request_id','=',$id)
-                            ->where('applicant_desired_jobs.title','like','%'. $request->job_title .'%')
-                            ->groupBy('applicant_id')
-                            ->get();
-
-        $applicant_names = DB::table('applicant_desired_jobs')
-                            ->join('applicants','applicants.id','=','applicant_desired_jobs.applicant_id')
-                            ->select('applicants.id','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate')
-                            ->where('applicant_desired_jobs.title','like','%'. $request->job_title .'%')
-                            ->where('applicant_desired_jobs.status','=','Active')
-                            ->get();
-
-        return view('admin/requests/process',compact('request','request_assignments','applicant_names','current_route_name'));
-    }
-
-    /**
-     * Show the form for processing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getApplicantDetails($id){
-       $applicant_details =  DB::table('applicants')
-                            ->join('applicant_education_background','applicant_education_background.applicant_id','=','applicants.id')
-                            ->join('applicant_work_experience','applicant_work_experience.applicant_id','=','applicants.id')
-                            ->join('applicant_desired_jobs','applicant_desired_jobs.applicant_id','=','applicants.id')
-                            ->select('applicants.id','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate','applicant_desired_jobs.type','applicant_desired_jobs.salary','applicant_desired_jobs.relocation',DB::raw('MAX(applicant_education_background.degree) as degree'),DB::raw('MAX(applicant_work_experience.start) as work_experience_start'),DB::raw('MAX(applicant_work_experience.end) as work_experience_end'))
-                            ->where('applicants.id','=',$id)
-                            ->get();
-        
-        return response()->json($applicant_details);
-    }
 
     /**
      * Remove the specified resource from storage.

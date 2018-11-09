@@ -13,31 +13,33 @@
 
 Route::get('/', function () {
     if(Auth::user()){
-        return redirect('/logout');
+        if(Auth::user()->role=='Administrator'){
+            return redirect('/dashboard');
+        }elseif(Auth::user()->role=='Employer'){
+            return redirect('employer/profile');
+        }elseif(Auth::user()->role=='Applicant'){
+            return redirect('applicant/profile');
+        }
     }else{
         return view('landing_page/index');
     }
 });
 
 Route::get('/login', function () {
-    //if(Auth::user()){
-    //    return redirect('/logout');
-    //}else{
+    if(Auth::user()){
+        if(Auth::user()->role=='Administrator'){
+            return redirect('/dashboard');
+        }elseif(Auth::user()->role=='Employer'){
+            return redirect('employer/profile');
+        }elseif(Auth::user()->role=='Applicant'){
+            return redirect('applicant/profile');
+        }
+    }else{
         return view('landing_page/login');
-   // }
-   
-
+    }
 });
 
 Route::get('/dashboard', 'DashboardController@index');
-
-Route::get('employer/profile', function () {
-    return view('employer/profile');
-});
-
-Route::get('applicant/profile', function () {
-    return view('applicant/profile');
-});
 
 Route::resource('/sign_up','SignUpController');
 
@@ -82,4 +84,14 @@ Route::get('/requests/show/{id}',['uses' =>'RequestsController@show']);
 Route::get('/requests/process/{id}',['uses' =>'RequestsController@process']);
 Route::get('/requests/getApplicantDetails/{id}',['uses' =>'RequestsController@getApplicantDetails']);
 
-Route::get('test/session','DashboardController@getUsers');
+Route::resource('/employer/profile','EmployersProfileController');
+
+Route::resource('/employer/requests','EmployersRequestController');
+Route::get('/employer/requests/delete/{id}',['uses' =>'EmployersRequestController@destroy']);
+Route::get('/employer/requests/show/{id}',['uses' =>'EmployersRequestController@show']);
+
+Route::get('/applicant/profile', function () {
+    return view('applicant/view_profile');
+});
+
+Route::get('test_mod','DashboardController@getUsers');

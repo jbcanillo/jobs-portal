@@ -76,6 +76,7 @@ class ApplicantsController extends Controller
             $applicant->firstname = ucwords(strip_tags($request->get('firstname')));
             $applicant->middlename = ucwords(strip_tags($request->get('middlename')));
             $applicant->lastname = ucwords(strip_tags($request->get('lastname')));
+            $applicant->nickname = ucwords(strip_tags($request->get('nickname')));
             $applicant->gender = ucwords(strip_tags($request->get('gender')));
             $applicant->birthdate = ucwords(strip_tags($request->get('birthdate')));
             $applicant->contact_number = strip_tags($request->get('contact'));
@@ -387,6 +388,7 @@ class ApplicantsController extends Controller
             $applicant->firstname = ucwords(strip_tags($request->get('firstname')));
             $applicant->middlename = ucwords(strip_tags($request->get('middlename')));
             $applicant->lastname = ucwords(strip_tags($request->get('lastname')));
+            $applicant->nickname = ucwords(strip_tags($request->get('nickname')));
             $applicant->gender = ucwords(strip_tags($request->get('gender')));
             $applicant->birthdate = ucwords(strip_tags($request->get('birthdate')));
             $applicant->contact_number = strip_tags($request->get('contact'));

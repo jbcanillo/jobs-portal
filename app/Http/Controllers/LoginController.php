@@ -44,11 +44,11 @@ class LoginController extends Controller
                     Log::info($user->name." has logged in.");
                 
                     if($role=='Administrator'){
-                            return view('admin/dashboard');
+                        return redirect('/dashboard');
                     }elseif($role=='Employer'){
-                            return view('employer/profile');
+                        return redirect('/employer/profile');
                     }elseif($role=='Applicant'){
-                            return view('applicant/profile');
+                        return redirect('/applicant/profile');
                     }
 
                 }else{

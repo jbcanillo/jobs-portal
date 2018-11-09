@@ -37,7 +37,7 @@ if(isset($employers)){
 }
 
 ?>
-@extends('layout/admin_container')
+@extends('layout/employer_container')
 @section('content')
     <div class="card">
         <div class="card-header card-header-tabs card-header-info  ">
