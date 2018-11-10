@@ -50,7 +50,7 @@
                         { data: 'status', name: 'status' },
                         { 
                           "render": function ( data, type, full, meta ) { 
-                           return '<a href="/requests/process/'+full.id+'" class="btn btn-sm btn-success"><i class="material-icons">search</i></a><a href="/requests/'+full.id+'/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a><a href="#" onclick="deleteRecord('+full.id+');" class="btn btn-sm btn-danger"><i class="material-icons">close</i></a>';
+                           return '<a href="/requests/process/'+full.id+'" class="btn btn-sm btn-default"><i class="material-icons">search</i></a><a href="/requests/'+full.id+'/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a><a href="#" onclick="deleteRecord('+full.id+');" class="btn btn-sm btn-danger"><i class="material-icons">close</i></a>';
                            }
                         }  
                      ],

@@ -11,7 +11,7 @@ foreach($applicant_names as $row){
 }
 
 $applicant = '<div class="row item-row-applicant command-row-applicant card-body">
-                        <div class="col-md-11 col-sm-2 col-xs-12">
+                        <div class="col-md-11 col-sm-12 col-xs-12">
                             <label>Applicant Name</label>
                             <select id="applicant_id[]" name="applicant_id[]" class="form-control applicant" required>
                                 <option value=""></option>
@@ -20,16 +20,16 @@ $applicant = '<div class="row item-row-applicant command-row-applicant card-body
                             <a class="btn btn-warning btn-sm" onclick="" href="#" style="color:white;left:700px;bottom:43px"><i class="material-icons">search</i></a>
                         </div>
                         
-                        <div class="col-md-1 col-sm-1 col-xs-12">
+                        <div class="col-md-1 col-sm-12 col-xs-12">
                             <label></label>
                             <a class="btn-remove-row-applicant btn btn-danger btn-sm" style="color:white"> x </a>
                         </div>
                         
-                        <div class="col-md-10 col-sm-2 col-xs-12">
+                        <div class="col-md-10 col-sm-12 col-xs-12">
                             <label>Remarks</label>
                             <input type="text" id="remarks[]" name="remarks[]" class="form-control" row="5" required>
                         </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
+                        <div class="col-md-2 col-sm-12 col-xs-12">
                             <label>Status</label>
                             <select id="applicant_status[]" name="applicant_status[]" class="form-control" required>
                                 <option value=""></option>
@@ -74,7 +74,7 @@ if(isset($request)){
             $applicant_age = $interval->y;
 
             $applicant .= '<div class="row item-row-applicant command-row-applicant card-body">
-                            <div class="col-md-11 col-sm-2 col-xs-12">
+                            <div class="col-md-11 col-sm-12 col-xs-12">
                             <label>Applicant Name</label>
                                 <select id="applicant_id[]" name="applicant_id[]" class="form-control applicant" required>
                                     <option value="'.$row->applicant_id.'" selected>'.$row->lastname.', '.$row->firstname.' '.$row->middlename.' ( '.$row->gender.', '.$applicant_age.' years old )</option>
@@ -83,16 +83,16 @@ if(isset($request)){
                                 <a class="btn btn-warning btn-sm" onclick="viewRecord(\'/applicants/show/\','.$row->applicant_id.');" href="#" style="color:white;left:700px;bottom:43px"><i class="material-icons">search</i></a>
                             </div>
                            
-                            <div class="col-md-1 col-sm-1 col-xs-12">
+                            <div class="col-md-1 col-sm-12 col-xs-12">
                                 <label></label>
                                 <a class="btn-remove-row-applicant btn btn-danger btn-sm" style="color:white">x</a>
                             </div>
                            
-                            <div class="col-md-10 col-sm-2 col-xs-12">
+                            <div class="col-md-10 col-sm-12 col-xs-12">
                                 <label>Remarks</label>
                                 <input type="text" id="remarks[]" name="remarks[]" class="form-control" row="5" value="'.$row->remarks.'" required>
                             </div>
-                            <div class="col-md-2 col-sm-2 col-xs-12">
+                            <div class="col-md-2 col-sm-12 col-xs-12">
                                 <label>Status</label>
                                 <select id="applicant_status[]" name="applicant_status[]" class="form-control" required>
                                     <option value="'.$row->status.'">'.$row->status.'</option>
@@ -112,7 +112,7 @@ if(isset($request)){
 @section('content')
     <div class="card">
         <div class="card-header card-header-tabs card-header-info ">
-        <h4 class="card-title"><i class="material-icons">search</i> Process Request</h4>
+        <h4 class="card-title"><i class="material-icons">search</i> Process Job Request</h4>
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -151,7 +151,7 @@ if(isset($request)){
                     <input type="text" class="form-control" name="education_level" value="{{ $education_level }}" readonly>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Age">Age:</label>
+                    <label for="Age">Minimum Age:</label>
                     <input type="number" class="form-control" name="age" value="{{ $age }}" readonly>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
@@ -244,10 +244,6 @@ if(isset($request)){
                     success:function(data){
                         $('.applicant',this).next().val( "xx" );
                         console.log(data[0].gender);
-                        console.log(data[0].degree);
-                        console.log(data[0].type);
-                        console.log(data[0].salary);
-                        console.log(data[0].relocation);
                     },
                     error:function(){
                         bootbox.alert({

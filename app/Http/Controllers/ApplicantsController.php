@@ -318,12 +318,22 @@ class ApplicantsController extends Controller
             return Datatables::of(Applicant::query())->make(true);
         }else{
             $applicant= \App\Applicant::find($id);
-            $desired_jobs_details = \App\DesiredJobs::where('applicant_id',$id)->get();
-            $work_experience_details = \App\WorkExperience::where('applicant_id',$id)->get();
-            $education_background_details = \App\EducationBackground::where('applicant_id',$id)->get();
-            $skills_details = \App\Skills::where('applicant_id',$id)->get();
+            $desired_jobs_details = \App\DesiredJobs::where('applicant_id',$id)->where('status','Active')->get();
+            $work_experience_details = \App\WorkExperience::where('applicant_id',$id)->where('status','Active')->get();
+            $education_background_details = \App\EducationBackground::where('applicant_id',$id)->where('status','Active')->get();
+            $skills_details = \App\Skills::where('applicant_id',$id)->where('status','Active')->get();
+            $certifications_details = \App\Certifications::where('applicant_id',$id)->where('status','Active')->get();
+            $social_media_details = \App\SocialMedia::where('applicant_id',$id)->where('status','Active')->get();
+            $military_service_details = \App\MilitaryService::where('applicant_id',$id)->where('status','Active')->get();
+            $awards_details = \App\Awards::where('applicant_id',$id)->where('status','Active')->get();
+            $organizations_details = \App\Organizations::where('applicant_id',$id)->where('status','Active')->get();
+            $patents_details = \App\Patents::where('applicant_id',$id)->where('status','Active')->get();
+            $publications_details = \App\Publications::where('applicant_id',$id)->where('status','Active')->get();
+            $language_details = \App\LanguageSpoken::where('applicant_id',$id)->where('status','Active')->get();
+            $government_documents_details = \App\GovernmentDocuments::where('applicant_id',$id)->where('status','Active')->get();
+            $video_intro_details = \App\VideoIntro::where('applicant_id',$id)->where('status','Active')->get();
             //return $applicant->toJson(JSON_PRETTY_PRINT);
-            return view('admin/applicants/view',compact('applicant','desired_jobs_details','work_experience_details','education_background_details','skills_details'));
+            return view('admin/applicants/view',compact('applicant','desired_jobs_details','work_experience_details','education_background_details','skills_details','certifications_details','social_media_details','military_service_details','awards_details','organizations_details','patents_details','publications_details','language_details','government_documents_details','video_intro_details'));
         }
     }
 
@@ -661,6 +671,20 @@ class ApplicantsController extends Controller
         $applicant = \App\Applicant::find($id);
         Storage::delete($applicant->resume_filepath);
         $applicant->delete();
+        \App\DesiredJobs::where('applicant_id',$id)->delete();
+        \App\WorkExperience::where('applicant_id',$id)->delete();
+        \App\EducationBackground::where('applicant_id',$id)->delete();
+        \App\Skills::where('applicant_id',$id)->delete();
+        \App\Certifications::where('applicant_id',$id)->delete();
+        \App\SocialMedia::where('applicant_id',$id)->delete();
+        \App\MilitaryService::where('applicant_id',$id)->delete();
+        \App\Awards::where('applicant_id',$id)->delete();
+        \App\Organizations::where('applicant_id',$id)->delete();
+        \App\Patents::where('applicant_id',$id)->delete();
+        \App\Publications::where('applicant_id',$id)->delete();
+        \App\LanguageSpoken::where('applicant_id',$id)->delete();
+        \App\GovernmentDocuments::where('applicant_id',$id)->delete();
+        \App\VideoIntro::where('applicant_id',$id)->delete();
         return redirect('applicants')->with('success','Applicant ID'.$id.' has been deleted.');
     }
 }

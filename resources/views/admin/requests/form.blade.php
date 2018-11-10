@@ -89,7 +89,7 @@ if(isset($employers)){
                     <input type="text" class="form-control" name="education_level" value="{{ (isset($request))? $education_level : old('education_level') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Age">Age:</label>
+                    <label for="Age">Minimum Age:</label>
                     <input type="number" class="form-control" name="age" value="{{ (isset($request))? $age : old('age') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  

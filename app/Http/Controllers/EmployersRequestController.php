@@ -99,8 +99,20 @@ class EmployersRequestController extends Controller
             $requests = \App\Requests::where('employer_id','=',$employer[0]->id)->get();
             return Datatables::of($requests)->make(true);
         }else{
-            $requests= \App\Requests::find($id);
-            return $requests->toJson(JSON_PRETTY_PRINT);
+            $request= \App\Requests::find($id);
+            //$request_assignments = \App\RequestAssignments::where('request_id',$id)->get();
+
+            $request_assignments = DB::table('request_assignments')
+                            ->join('applicants','applicants.id','=','request_assignments.applicant_id')
+                            ->join('applicant_education_background','applicant_education_background.applicant_id','=','request_assignments.applicant_id')
+                            ->join('applicant_work_experience','applicant_work_experience.applicant_id','=','request_assignments.applicant_id')
+                            ->join('applicant_desired_jobs','applicant_desired_jobs.applicant_id','=','request_assignments.applicant_id')
+                            ->select('request_assignments.*','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate','applicant_desired_jobs.type','applicant_desired_jobs.salary','applicant_desired_jobs.relocation', DB::raw('MAX(applicant_education_background.degree) as degree'),DB::raw('MAX(applicant_work_experience.start) as work_experience_start'),DB::raw('MAX(applicant_work_experience.end) as work_experience_end'))
+                            ->where('request_assignments.request_id','=',$id)
+                            ->groupBy('applicant_id')
+                            ->get();
+
+            return view('employer/requests/view',compact('request','request_assignments'));
         }
     }
 
@@ -115,7 +127,11 @@ class EmployersRequestController extends Controller
         //
         $request = \App\Requests::find($id);
         $employers= \App\Employer::where('status', 'active')->get();
-        return view('employer/requests/form',compact('request','employers'));
+        if($request->status=='Open'){
+            return view('employer/requests/form',compact('request','employers'));
+        }else{
+            return redirect('employer/requests')->with('error','You cannot edit this job request if the status is no longer "Open".');
+        }
     }
 
     /**
@@ -168,8 +184,12 @@ class EmployersRequestController extends Controller
     {
         //
         $requests = \App\Requests::find($id);
-        $requests->delete();
-        return redirect('requests')->with('success','Request ID'.$id.' has been deleted.');
+        if($requests->status=='Open'){
+            $requests->delete();
+            return redirect('employer/requests')->with('success','Request ID'.$id.' has been deleted.');
+        }else{
+            return redirect('employer/requests')->with('error','You cannot delete this job request if the status is no longer "Open".');
+        }
     }
     
 }

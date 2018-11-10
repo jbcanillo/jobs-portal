@@ -58,7 +58,7 @@
                 <p>Profile</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'requests') ? 'nav-item active' : 'nav-item' }}">
+            <li class="{{ ($current_route_name == 'requests' || $current_route_name =='') ? 'nav-item active' : 'nav-item' }}">
               <a class="nav-link" href="{{ url('employer/requests') }}">
                 <i class="material-icons">assignment</i>
                 <p>Post Job Requests</p>
@@ -128,7 +128,7 @@
                       buttons: {
                           success: {
                               label: "OK",
-                              className: "btn-success",
+                              className: "btn-primary",
                           },
                       }
                   });

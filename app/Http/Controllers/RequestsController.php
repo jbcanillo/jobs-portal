@@ -259,6 +259,7 @@ class RequestsController extends Controller
         //
         $requests = \App\Requests::find($id);
         $requests->delete();
+        \App\RequestAssignments::where('request_id',$id)->delete();
         return redirect('requests')->with('success','Request ID'.$id.' has been deleted.');
     }
     

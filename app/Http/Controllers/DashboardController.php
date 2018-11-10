@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $closed_requests = $this->getJobRequests('Closed');
         $inactive_applicants = $this->getApplicants('Inactive');
         $active_applicants = $this->getApplicants('Active');
-        $inactiv_employers = $this->getEmployers('Inactive');
+        $inactive_employers = $this->getEmployers('Inactive');
         $active_employers = $this->getEmployers('Active');
         return view('admin/dashboard',compact('online_users','active_users','inactive_users','open_requests','processing_requests','closed_requests','inactive_applicants','active_applicants','inactive_employers','active_employers'));
         //return view('admin/requests/listview');

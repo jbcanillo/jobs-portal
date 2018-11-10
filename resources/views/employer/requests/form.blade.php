@@ -52,10 +52,10 @@ if(isset($employers)){
               </div>
             @endif
             <?php if(!isset($request)){ ?>
-                <form method="post" action="{{ action('RequestsController@store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ action('EmployersRequestController@store') }}" enctype="multipart/form-data">
             <?php }else{ ?>
-                <form method="post" action="{{ action('RequestsController@update',$request->id) }}" enctype="multipart/form-data">
-                <!--<input name="_method" type="hidden" value="PATCH">-->
+                <form method="post" action="{{ action('EmployersRequestController@update',$request->id) }}" enctype="multipart/form-data">
+                <input name="_method" type="hidden" value="PATCH">
             <?php } ?>
                 {{ csrf_field() }}
               <div class="row">
@@ -65,7 +65,6 @@ if(isset($employers)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Company">Company:</label>
-                    <!--<input type="text" class="form-control" name="company" value="{{ (isset($request))? $company : old('company') }}">-->
                     <select class="form-control" name="company">
                         <option value=''></option>
                         <?php echo $company_options;?>
@@ -73,7 +72,6 @@ if(isset($employers)){
                 </div>
                 <div class='col-md-12 col-lg-12'>  
                     <label for="Description">Job Description:</label>
-                    <!--<input type="text" class="form-control" name="description" value="{{ (isset($request))? $description : old('description') }}">-->
                     <textarea class="form-control" name="description" rows="20">{{ (isset($request))? $description : old('description') }}</textarea>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
@@ -89,7 +87,7 @@ if(isset($employers)){
                     <input type="text" class="form-control" name="education_level" value="{{ (isset($request))? $education_level : old('education_level') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Age">Age:</label>
+                    <label for="Age">Minimum Age:</label>
                     <input type="number" class="form-control" name="age" value="{{ (isset($request))? $age : old('age') }}">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
@@ -152,24 +150,13 @@ if(isset($employers)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Status">Status:</label>
-                    <select class="form-control" name="status">
-                      <option value="" selected></option>
-                      <?php if(!isset($request)){ ?>
-                        <option value="Open" {{ (old('status') == 'Open') ? 'selected' : '' }}>Open</option>
-                        <option value="Processing" {{ (old('status') == 'Processing') ? 'selected' : '' }}>Processing</option>
-                        <option value="Closed" {{ (old('status') == 'Closed') ? 'selected' : '' }}>Closed</option>
-                      <?php }else{ ?>
-                        <option value="Open" {{ ($status == 'Open') ? 'selected' : '' }}>Open</option>
-                        <option value="Processing" {{ ($status == 'Processing') ? 'selected' : '' }}>Processing</option>
-                        <option value="Closed" {{ ($status == 'Closed') ? 'selected' : '' }}>Closed</option>
-                      <?php }?>
-                    </select>
+                    <input type="text" class="form-control" name="status" value="Open" readonly>
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-md-8 col-lg-12">
                   <span class="pull-right">
-                      <a href="{{url('requests')}}" class="btn btn-md btn-danger">Cancel</a>
+                      <a href="{{url('employer/requests')}}" class="btn btn-md btn-danger">Cancel</a>
                   </span>
                   <span class="pull-right">
                     <button type="submit" class="btn btn-md btn-success">{{ $button }}</button>
