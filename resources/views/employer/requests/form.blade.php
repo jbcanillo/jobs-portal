@@ -61,7 +61,7 @@ if(isset($employers)){
               <div class="row">
                 <div class='col-md-12 col-lg-6'>
                   <label for="Title">Job Title:</label>
-                  <input type="text" class="form-control" name="job_title" value="{{ (isset($request))? $job_title : old('job_title') }}">
+                  <input type="text" class="form-control" name="job_title" value="{{ (isset($request))? $job_title : old('job_title') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Company">Company:</label>
@@ -72,27 +72,27 @@ if(isset($employers)){
                 </div>
                 <div class='col-md-12 col-lg-12'>  
                     <label for="Description">Job Description:</label>
-                    <textarea class="form-control" name="description" rows="20">{{ (isset($request))? $description : old('description') }}</textarea>
+                    <textarea class="form-control" name="description" rows="20" required>{{ (isset($request))? $description : old('description') }}</textarea>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Location">Location:</label>
-                    <input type="text" class="form-control" name="location" value="{{ (isset($request))? $location : old('location') }}">
+                    <input type="text" class="form-control" name="location" value="{{ (isset($request))? $location : old('location') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Years">Years of Experience:</label>
-                    <input type="number" class="form-control" name="years_of_experience" value="{{ (isset($request))? $years_of_experience : old('years_of_experience') }}">
+                    <input type="number" class="form-control" name="years_of_experience" value="{{ (isset($request))? $years_of_experience : old('years_of_experience') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Education">Education Level:</label>
-                    <input type="text" class="form-control" name="education_level" value="{{ (isset($request))? $education_level : old('education_level') }}">
+                    <input type="text" class="form-control" name="education_level" value="{{ (isset($request))? $education_level : old('education_level') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Age">Minimum Age:</label>
-                    <input type="number" class="form-control" name="age" value="{{ (isset($request))? $age : old('age') }}">
+                    <input type="number" class="form-control" name="age" value="{{ (isset($request))? $age : old('age') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Gender">Gender:</label>
-                    <select class="form-control" name="gender">
+                    <select class="form-control" name="gender" required>
                     <option value="" selected></option>
                     <?php if(!isset($request)){ ?>
                         <option value="Any" {{ (old('gender') == 'Any') ? 'selected' : '' }}>Any</option>
@@ -107,7 +107,7 @@ if(isset($employers)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Language">Language(s):</label>
-                    <input type="text" class="form-control" name="language" value="{{ (isset($request))? $language : old('language') }}">
+                    <input type="text" class="form-control" name="language" value="{{ (isset($request))? $language : old('language') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="License">License(s):</label>
@@ -115,7 +115,7 @@ if(isset($employers)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="number_applicants">Required no. of applicants to hire:</label>
-                    <input type="number" class="form-control" name="number_of_applicants" value="{{ (isset($request))? $number_of_applicants : old('number_of_applicants') }}">
+                    <input type="number" class="form-control" name="number_of_applicants" value="{{ (isset($request))? $number_of_applicants : old('number_of_applicants') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Minimum">Minimum Salary:</label>
@@ -127,7 +127,7 @@ if(isset($employers)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Type">Type:</label>
-                    <select class="form-control" name="type">
+                    <select class="form-control" name="type" required>
                     <option value="" selected></option>
                     <?php if(!isset($request)){ ?>
                         <option value="Full-time" {{ (old('type') == 'Full-time') ? 'selected' : '' }}>Full-time</option>

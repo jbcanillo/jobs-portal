@@ -436,7 +436,7 @@ if(!isset($applicant)){
     $gender = $applicant->gender;
     $birthdate = $applicant->birthdate;
     $contact = $applicant->contact_number;
-    $picture = substr($applicant->picture,6) ;
+    $picture = $applicant->picture ;
     $resume_file = $applicant->resume_filepath;
     $resume_public = $applicant->resume_public;
     $user_id = $applicant->user_id;
@@ -899,7 +899,7 @@ if(!isset($applicant)){
                     <div class='col-md-12 col-lg-12'>
                         <div class="card card-profile">
                             <div class="card-avatar">
-                                <center><img src="{{ URL::asset('storage'.$picture) }}" style="width:200px;height:200px;"></center>
+                                <center><img src="{{ URL::asset('storage'.substr($picture,6)) }}" style="width:200px;height:200px;"></center>
                             </div>
                             <div class="card-body">
                                 
@@ -916,15 +916,15 @@ if(!isset($applicant)){
               <div class="row">
                 <div class='col-md-12 col-lg-6'>
                   <label for="Firstname">Firstname:</label>
-                  <input type="text" class="form-control" name="firstname" value="{{ (isset($applicant))? $firstname : old('firstname') }}">
+                  <input type="text" class="form-control" name="firstname" value="{{ (isset($applicant))? $firstname : old('firstname') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Middlename">Middlename:</label>
-                    <input type="text" class="form-control" name="middlename" value="{{ (isset($applicant))? $middlename : old('middlename') }}">
+                    <input type="text" class="form-control" name="middlename" value="{{ (isset($applicant))? $middlename : old('middlename') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Lastname">Lastname:</label>
-                    <input type="text" class="form-control" name="lastname" value="{{ (isset($applicant))? $lastname : old('lastname') }}">
+                    <input type="text" class="form-control" name="lastname" value="{{ (isset($applicant))? $lastname : old('lastname') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                         <label for="Nickname">Nickname:</label>
@@ -932,7 +932,7 @@ if(!isset($applicant)){
                     </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Gender">Gender:</label>
-                    <select class="form-control" name="gender">
+                    <select class="form-control" name="gender" required>
                         <option value="" selected></option>
                         <?php if(!isset($applicant)){ ?>
                             <option value="Male" {{ (old('gender') == "Male") ? 'selected' : '' }}>Male</option>
@@ -945,7 +945,7 @@ if(!isset($applicant)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Birthdate">Birthdate:</label>
-                    <input type="date" class="form-control" name="birthdate" value="{{ (isset($applicant))? $birthdate : old('birthdate') }}">
+                    <input type="date" class="form-control" name="birthdate" value="{{ (isset($applicant))? $birthdate : old('birthdate') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Picture">Picture:</label>
@@ -963,7 +963,7 @@ if(!isset($applicant)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Resume_Public">Resume viewable in public?</label>
-                    <select class="form-control" name="resume_public">
+                    <select class="form-control" name="resume_public" required>
                         <option value="" selected></option>
                         <?php if(!isset($applicant)){ ?>
                             <option value="1" {{ (old('resume_public') == 1) ? 'selected' : '' }}>Yes</option>
@@ -976,7 +976,7 @@ if(!isset($applicant)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Username">Link to Username:</label>
-                    <select class="form-control" name="user_id">
+                    <select class="form-control" name="user_id" required>
                         <option value="" selected></option>
                         @foreach ($users as $user)
                             @if(!isset($applicant))
@@ -989,7 +989,7 @@ if(!isset($applicant)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Status">Status:</label>
-                    <select class="form-control" name="status">
+                    <select class="form-control" name="status" required>
                       <option value="" selected></option>
                       <?php if(!isset($applicant)){ ?>
                         <option value="Active" {{ (old('status') == 'Active') ? 'selected' : '' }}>Active</option>

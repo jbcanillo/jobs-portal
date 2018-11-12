@@ -209,7 +209,7 @@ class RequestsController extends Controller
 
         $request = \App\Requests::find($id);
 
-        $request_assignments = DB::table('request_assignments')
+        /*$request_assignments = DB::table('request_assignments')
                             ->join('applicants','applicants.id','=','request_assignments.applicant_id')
                             ->join('applicant_education_background','applicant_education_background.applicant_id','=','request_assignments.applicant_id')
                             ->join('applicant_work_experience','applicant_work_experience.applicant_id','=','request_assignments.applicant_id')
@@ -218,6 +218,12 @@ class RequestsController extends Controller
                             ->where('request_assignments.request_id','=',$id)
                             ->where('applicant_desired_jobs.title','like','%'. $request->job_title .'%')
                             ->groupBy('applicant_id')
+                            ->get();*/
+
+        $request_assignments = DB::table('request_assignments')
+                            ->join('applicants','applicants.id','=','request_assignments.applicant_id')
+                            ->where('request_assignments.request_id','=',$id)
+                            ->select('request_assignments.*','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate')
                             ->get();
 
         $applicant_names = DB::table('applicant_desired_jobs')

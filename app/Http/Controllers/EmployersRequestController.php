@@ -100,18 +100,13 @@ class EmployersRequestController extends Controller
             return Datatables::of($requests)->make(true);
         }else{
             $request= \App\Requests::find($id);
-            //$request_assignments = \App\RequestAssignments::where('request_id',$id)->get();
 
-            $request_assignments = DB::table('request_assignments')
+             $request_assignments = DB::table('request_assignments')
                             ->join('applicants','applicants.id','=','request_assignments.applicant_id')
-                            ->join('applicant_education_background','applicant_education_background.applicant_id','=','request_assignments.applicant_id')
-                            ->join('applicant_work_experience','applicant_work_experience.applicant_id','=','request_assignments.applicant_id')
-                            ->join('applicant_desired_jobs','applicant_desired_jobs.applicant_id','=','request_assignments.applicant_id')
-                            ->select('request_assignments.*','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate','applicant_desired_jobs.type','applicant_desired_jobs.salary','applicant_desired_jobs.relocation', DB::raw('MAX(applicant_education_background.degree) as degree'),DB::raw('MAX(applicant_work_experience.start) as work_experience_start'),DB::raw('MAX(applicant_work_experience.end) as work_experience_end'))
                             ->where('request_assignments.request_id','=',$id)
-                            ->groupBy('applicant_id')
+                            ->select('request_assignments.*','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate')
                             ->get();
-
+                                               
             return view('employer/requests/view',compact('request','request_assignments'));
         }
     }

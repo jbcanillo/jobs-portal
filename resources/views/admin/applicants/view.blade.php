@@ -16,7 +16,9 @@
                 echo "Contact No.(s): ".$applicant->contact_number."<br>";
                
             ?>
-            <a href="{{ URL::asset('storage'.substr($applicant->resume_filepath,6)) }}" class="btn btn-success btn-round"  download="{{ strtolower($applicant->lastname ."_". $applicant->firstname ."_". $applicant->middlename."_"."resume") }}">Download Resume</a>
+            @if($applicant->resume_public || Auth::user()->role=="Administrator")
+                <a href="{{ URL::asset('storage'.substr($applicant->resume_filepath,6)) }}" class="btn btn-success btn-round"  download="{{ strtolower($applicant->lastname ."_". $applicant->firstname ."_". $applicant->middlename."_"."resume") }}">Download Resume</a>
+            @endif
         </div>
     </div>
     <div class="card">

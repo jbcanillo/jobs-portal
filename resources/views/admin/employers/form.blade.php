@@ -44,40 +44,40 @@ if(!isset($employer)){
               <div class="row">
                 <div class='col-md-12 col-lg-6'>
                   <label for="Firstname">Firstname:</label>
-                  <input type="text" class="form-control" name="firstname" value="{{ (isset($employer))? $firstname : old('firstname') }}">
+                  <input type="text" class="form-control" name="firstname" value="{{ (isset($employer))? $firstname : old('firstname') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Middlename">Middlename:</label>
-                    <input type="text" class="form-control" name="middlename" value="{{ (isset($employer))? $middlename : old('middlename') }}">
+                    <input type="text" class="form-control" name="middlename" value="{{ (isset($employer))? $middlename : old('middlename') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Lastname">Lastname:</label>
-                    <input type="text" class="form-control" name="lastname" value="{{ (isset($employer))? $lastname : old('lastname') }}">
+                    <input type="text" class="form-control" name="lastname" value="{{ (isset($employer))? $lastname : old('lastname') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Nickname">Nickname:</label>
-                    <input type="text" class="form-control" name="nickname" value="{{ (isset($employer))? $nickname : old('nickname') }}">
+                    <input type="text" class="form-control" name="nickname" value="{{ (isset($employer))? $nickname : old('nickname') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Company">Company/Employer Name:</label>
-                    <input type="text" class="form-control" name="company_name" value="{{ (isset($employer))? $company_name : old('company_name') }}">
+                    <input type="text" class="form-control" name="company_name" value="{{ (isset($employer))? $company_name : old('company_name') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Company Size">Company Size:</label>
-                    <input type="number" class="form-control" name="company_size" value="{{ (isset($employer))? $company_size : old('company_size') }}">
+                    <input type="number" class="form-control" name="company_size" value="{{ (isset($employer))? $company_size : old('company_size') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Contact">Contact Person:</label>
-                    <input type="text" class="form-control" name="contact_person" value="{{ (isset($employer))? $contact_person : old('contact_person') }}">
+                    <input type="text" class="form-control" name="contact_person" value="{{ (isset($employer))? $contact_person : old('contact_person') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Contact">Contact Number/s:</label>
-                    <input type="text" class="form-control" name="contact_number" value="{{ (isset($employer))? $contact_number : old('contact_number') }}">
+                    <input type="text" class="form-control" name="contact_number" value="{{ (isset($employer))? $contact_number : old('contact_number') }}" required>
                 </div>
                
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Username">Link to Username:</label>
-                    <select class="form-control" name="user_id">
+                    <select class="form-control" name="user_id" required>
                         <option value="" selected></option>
                         @foreach ($users as $user)
                             @if(!isset($employer))
@@ -90,7 +90,7 @@ if(!isset($employer)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Status">Status:</label>
-                    <select class="form-control" name="status">
+                    <select class="form-control" name="status" required>
                       <option value="" selected></option>
                       <?php if(!isset($employer)){ ?>
                         <option value="Active" {{ (old('status') == 'Active') ? 'selected' : '' }}>Active</option>

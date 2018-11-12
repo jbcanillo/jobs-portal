@@ -35,40 +35,40 @@ if(!isset($user)){
               <div class="row">
                 <div class='col-md-12 col-lg-6'>  
                   <label for="Username">Username:</label>
-                  <input type="text" class="form-control" name="username" value="{{ (isset($user))? $username : old('username') }}">
+                  <input type="text" class="form-control" name="username" value="{{ (isset($user))? $username : old('username') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Email">Email:</label>
-                    <input type="text" class="form-control" name="email" value="{{ (isset($user))? $email :old('email') }}">
+                    <input type="text" class="form-control" name="email" value="{{ (isset($user))? $email :old('email') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Password">Password:</label>
-                    <input type="password" class="form-control" name="password">
+                    <input type="password" class="form-control" name="password" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="ConfirmPassword">Confirm Password:</label>
-                    <input type="password" class="form-control" name="confirm_password">
+                    <input type="password" class="form-control" name="confirm_password" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Role">Role:</label>
-                    <select class="form-control" name="role">
+                    <select class="form-control" name="role" required>
                         <option value="" selected></option>
                         <?php if(!isset($user)){ ?>
                             <option value="Administrator" {{ (old('role') == 'Administrator') ? 'selected' : '' }}>Administrator</option>
                             <option value="User" {{ (old('role') == 'User') ? 'selected' : '' }}>User</option>
                             <option value="Employer" {{ (old('role') == 'Employer') ? 'selected' : '' }}>Employer</option>
-                            <option value="Job Seeker" {{ (old('role') == 'Job Seeker') ? 'selected' : '' }}>Job Seeker</option>
+                            <option value="Applicant" {{ (old('role') == 'Applicant') ? 'selected' : '' }}>Applicant</option>
                         <?php }else{ ?>
                             <option value="Administrator" {{ ($role == 'Administrator') ? 'selected' : '' }}>Administrator</option>
                             <option value="User" {{ ($role == 'User') ? 'selected' : '' }}>User</option>
                             <option value="Employer" {{ ($role == 'Employer') ? 'selected' : '' }}>Employer</option>
-                            <option value="Job Seeker" {{ ($role == 'Job Seeker') ? 'selected' : '' }}>Job Seeker</option>
+                            <option value="Applicant" {{ ($role == 'Applicant') ? 'selected' : '' }}>Applicant</option>
                         <?php }?>
                     </select>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Status">Status:</label>
-                    <select class="form-control" name="status">
+                    <select class="form-control" name="status" required>
                       <option value="" selected></option>
                       <?php if(!isset($user)){ ?>
                         <option value="Active" {{ (old('status') == 'Active') ? 'selected' : '' }}>Active</option>

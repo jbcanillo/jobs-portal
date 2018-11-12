@@ -94,4 +94,11 @@ Route::get('/applicant/profile', function () {
     return view('applicant/view_profile');
 });
 
+Route::get('/symlink', function () {
+    $storage = App::make('files')->link(storage_path('app/public'), public_path('storage'));
+    if($storage){
+        echo "Public storage link file created.";
+    }
+});
+
 Route::get('test_mod','DashboardController@getUsers');
