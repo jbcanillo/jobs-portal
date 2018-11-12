@@ -52,7 +52,7 @@
                             <div style="overflow-x:auto">
                             <table class="mdl-data-table mdl-js-data-table mdl-data-table-default-non-numeric" cellspacing="0" style="width:100%; text-align:left;">
                                 <th>
-                                    <td colspan="2"><b>Information<b></td>
+                                    <td colspan="2"><b><h5>Information</h5><b></td>
                                 </th>
                                 <tr>
                                     <td><b>Nickname:</b></td><td>{{ $employer_details->nickname }}</td>

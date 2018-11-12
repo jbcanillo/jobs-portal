@@ -37,6 +37,9 @@ class EmailProcessor extends Mailable
             $view = "emails/account_activation_email";
         }elseif($this->action=='Reset Forgotten Password'){
             $view = "emails/forgot_password_email";
+        }elseif($this->action=='Inquiry'){
+            $view = "emails/send_message";
+            $this->from($this->data->email);
         }
         return $this->view($view)->subject('Neway Manpower Job-Portal: '.$this->action);
        

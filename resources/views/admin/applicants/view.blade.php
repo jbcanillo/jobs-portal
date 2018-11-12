@@ -5,6 +5,7 @@
            <center><img src="{{ URL::asset('storage'.substr( $applicant->picture,6)) }}" style="width:200px;height:200px;"></center>
         </div>
         <div class="card-body">
+            <h3>"{{ $applicant->nickname }}"</h3>
             <h4 class="card-title">{{ $applicant->lastname .", ". $applicant->firstname ." ". $applicant->middlename }}</h4>
             <?php
                 $birthdate = new DateTime($applicant->birthdate);

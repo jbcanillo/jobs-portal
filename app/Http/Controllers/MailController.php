@@ -30,6 +30,22 @@ class MailController extends Controller
             }
         }
     }
+
+     /**
+     * Send an e-mail from inquirer to neway.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function sendMessageEmail(Request $request){
+        $validationError = $this->validate($request, ['email' => 'required|email','name' => 'required|string','message' => 'required|string']);
+        if(!$validationError){
+                $email = $request->email;
+                $action = 'Inquiry';
+                Mail::to('inquiry@newaymanpower.com')->send(new EmailProcessor($action,$request));
+                return back()->with('success', 'Your message was succesfully sent.');
+        }
+    }
 }
 
 

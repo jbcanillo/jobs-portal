@@ -199,40 +199,15 @@
         </section><!-- #reviews close -->
 
          <!-- 
-        Call to action start
+        Contact start
         ==================== -->
-        <section class="call-to-action section">
+        <section class="call-to-action section" id="contact">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 wow text-center">
                         <div class="block">
-                            <h2>Subscribe to our mailing list</h2>
-                            <p>Get updates on our job openings, job-fairs, company events, and newsletter.</p>
-                            <div class="col-lg-6 offset-lg-3">
-                                <div class="input-group">
-                                  <input type="text" class="form-control" placeholder="Your Email Address Here">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default btn-subscription" type="button">Subscribe</button>
-                                  </span>
-                                </div><!-- /input-group -->
-                              </div><!-- /.col-lg-6 -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section><!-- #call-to-action close -->
-
-        <!-- 
-        Contact start
-        ==================== -->
-        <section id="contact" class="section contact">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="block">
-                            <div class="heading wow fadeInUp">
-                                <h2>Contact Us</h2>
-                                <ul class="contact-short-info">                                       
+                                <h1>Contact Us</h1>
+                                <ul class="contact-short-info" >                                       
                                     <p>For inquiries, you may email us below or contact us with these numbers:</p>
                                     <li>
                                         <i class="tf-ion-android-phone-portrait"></i>
@@ -248,34 +223,48 @@
                                     </li>
      
                                 </ul>
-                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- #contact close -->
+
+        <!-- 
+        Send us a message start
+        ==================== -->
+        <section id="contact2" class="section contact2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="block">
+                            <div class="col-xs-12 col-sm-12 col-md-6 offset-md-3 wow fadeInUp" data-wow-delay="0.3s">
+                                    <center><h3>Send us a message!</h3></center>   
+                                    <div class="form-group">
+                                        <form action="{{ url('send_message') }}" method="post" enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                            <div class="input-field">
+                                                <input type="text" class="form-control" placeholder="Your Name" name="name" required>
+                                            </div>
+                                            <div class="input-field">
+                                                <input type="email" class="form-control" placeholder="Your Email Address" name="email" required>
+                                            </div>
+                                            <div class="input-field">
+                                                <textarea class="form-control" placeholder="Your Message" rows="3" name="message" required></textarea>
+                                            </div>
+                                            <button class="btn btn-send" type="submit">Send A Message</button>
+                                        </form>
+                                        <div id="success">
+                                            <p>Your message was successfully sent.</p>
+                                        </div>
+                                        <div id="error">
+                                            <p>Your message was not successfully sent.</p>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                     
-                    
-                
-                    <div class="col-xs-12 col-sm-12 col-md-6 offset-md-3 wow fadeInUp" data-wow-delay="0.3s">
-                    	<div class="form-group">
-                    	    <form action="#" method="post" id="contact-form">
-                    	        <div class="input-field">
-                    	            <input type="text" class="form-control" placeholder="Your Name" name="name">
-                    	        </div>
-                    	        <div class="input-field">
-                    	            <input type="email" class="form-control" placeholder="Email Address" name="email">
-                    	        </div>
-                    	        <div class="input-field">
-                    	            <textarea class="form-control" placeholder="Your Message" rows="3" name="message"></textarea>
-                    	        </div>
-                    	        <button class="btn btn-send" type="submit">Send A Message</button>
-                    	    </form>
-                    	    <div id="success">
-                    	        <p>Your Message was sent successfully</p>
-                    	    </div>
-                    	    <div id="error">
-                    	        <p>Your Message was not sent successfully</p>
-                    	    </div>
-                    	</div>
-                    </div>
+                   
                    
                     <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="block">

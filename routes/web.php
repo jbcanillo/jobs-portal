@@ -50,6 +50,7 @@ Route::get('/change_password/{token}','LoginController@updatePassword');
 Route::get('/account_activation/{activation_code}',['uses' => 'SignUpController@activateAccount']);
 
 Route::post('/forgot_password','MailController@sendForgotPasswordEmail');
+Route::post('/send_message','MailController@sendMessageEmail');
 Route::get('/logout','LoginController@logout');
 
 Route::post('/home','LoginController@home');
