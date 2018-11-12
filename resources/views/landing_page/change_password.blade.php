@@ -55,6 +55,7 @@
                                     </div>    
                                 </div>
                                 <button class="btn btn-send" type="submit">Save</button>
+                                <a href='/login' class='pull-left' style="font-weight:bold;color:#FFF">< Back</a>
                             </form>
                     </div>
                 </div>

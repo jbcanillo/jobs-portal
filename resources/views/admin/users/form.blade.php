@@ -43,11 +43,11 @@ if(!isset($user)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Password">Password:</label>
-                    <input type="password" class="form-control" name="password" required>
+                    <input type="password" class="form-control" name="password">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="ConfirmPassword">Confirm Password:</label>
-                    <input type="password" class="form-control" name="confirm_password" required>
+                    <input type="password" class="form-control" name="confirm_password">
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Role">Role:</label>

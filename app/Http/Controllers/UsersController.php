@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Datatables;
 use App\User;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -16,7 +17,11 @@ class UsersController extends Controller
     public function index()
     {
         //
-        return view('admin/users/listview');
+        if(Auth::user()->role=="Administrator"){
+            return view('admin/users/listview');
+        }else{
+            return back();
+        }
     }
   
      /**

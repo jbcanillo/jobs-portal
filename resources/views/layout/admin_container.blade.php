@@ -1,4 +1,4 @@
-@if(Auth::user() && Auth::user()->role=='Administrator')
+@if(Auth::user() && (Auth::user()->role=='Administrator' || Auth::user()->role=='User'))
   <!DOCTYPE html>
   <html lang="{{ app()->getLocale() }}">
   <head>
@@ -58,12 +58,14 @@
                 <p>Dashboard</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'users') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('users') }}">
-                <i class="material-icons">account_circle</i>
-                <p>Users</p>
-              </a>
-            </li>
+            @if(Auth::user()->role=="Administrator")
+              <li class="{{ ($current_route_name == 'users') ? 'nav-item active' : 'nav-item' }}">
+                <a class="nav-link" href="{{ url('users') }}">
+                  <i class="material-icons">account_circle</i>
+                  <p>Users</p>
+                </a>
+              </li>
+            @endif
             <li class="{{ ($current_route_name == 'applicants') ? 'nav-item active' : 'nav-item' }}">
               <a class="nav-link" href="{{ url('applicants') }}">
                 <i class="material-icons">assignment_ind</i>

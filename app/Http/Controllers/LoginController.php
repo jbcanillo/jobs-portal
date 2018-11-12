@@ -43,7 +43,7 @@ class LoginController extends Controller
                     $this->clearLoginAttempts($request);
                     Log::info($user->name." has logged in.");
                 
-                    if($role=='Administrator'){
+                    if($role=='Administrator' || $role=='User'){
                         return redirect('/dashboard');
                     }elseif($role=='Employer'){
                         return redirect('/employer/profile');
