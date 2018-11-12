@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use File;
 use App\Employer;
 use App\User;
 use Auth,DB;
@@ -80,8 +81,11 @@ class EmployersProfileController extends Controller
             $employer = \App\Employer::where('user_id','=',$id)->firstOrFail();
             $this->validate($request, ['picture.*' => 'mimes:jpg,jpeg,png','file' => 'max:10240']); 
             if($request->hasFile('picture')){
-                Storage::delete($employer->picture);
-                $path = $request->file('picture')->store('public/employer_pictures');
+                //Storage::delete($employer->picture);
+                //$path = $request->file('picture')->store('public/employer_pictures');
+                File::delete('storage'.substr($employer->picture,6));
+                $path = 'upload/employer_pictures/'.$request->file('picture')->hashName();
+                Storage::disk('public_uploads')->put('/employer_pictures/', $request->file('picture'));
                 $employer->picture = $path;
             }
             $employer->firstname = ucwords(strip_tags($request->get('firstname')));

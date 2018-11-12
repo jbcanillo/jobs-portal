@@ -21,6 +21,11 @@ class EmployersRequestController extends Controller
         return view('employer/requests/listview');
     }
 
+    private function account_is_active(){
+        $employer_details = \App\Employer::where('user_id','=',Auth::user()->id)->firstOrFail();
+        return ($employer_details->status=="Active")?true:false;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -29,8 +34,12 @@ class EmployersRequestController extends Controller
     public function create()
     {
         //
-        $employers= \App\Employer::where('status', 'active')->get();
-        return view('employer/requests/form',compact('employers'));
+        if($this->account_is_active()==true){
+            $employers= \App\Employer::where('status', 'active')->get();
+            return view('employer/requests/form',compact('employers'));
+        }else{
+            return redirect('employer/requests')->with('error', 'Your account is not yet activated to access this feature.');
+        }
     }
 
     private function validation($inputs,$id=NULL){
@@ -62,7 +71,7 @@ class EmployersRequestController extends Controller
         if(!$validationError){
             $requests = new \App\Requests;
             $company = ucwords(strip_tags($request->get('company')));
-            $employer = \App\Employer::where('company_name','=',$company)->firstOrFail();
+            $employer = \App\Employer::where('user_id','=',Auth::user()->id)->firstOrFail();
             $requests->employer_id = $employer->id;
             $requests->job_title = ucwords(strip_tags($request->get('job_title')));
             $requests->company = $company;
@@ -120,12 +129,16 @@ class EmployersRequestController extends Controller
     public function edit($id)
     {
         //
-        $request = \App\Requests::find($id);
-        $employers= \App\Employer::where('status', 'active')->get();
-        if($request->status=='Open'){
-            return view('employer/requests/form',compact('request','employers'));
+        if($this->account_is_active()==true){
+            $request = \App\Requests::find($id);
+            $employers= \App\Employer::where('status', 'active')->get();
+            if($request->status=='Open'){
+                return view('employer/requests/form',compact('request','employers'));
+            }else{
+                return redirect('employer/requests')->with('error','You cannot edit this job request if the status is no longer "Open".');
+            }
         }else{
-            return redirect('employer/requests')->with('error','You cannot edit this job request if the status is no longer "Open".');
+            return redirect('employer/requests')->with('error', 'Your account is not yet activated to access this feature.');
         }
     }
 
@@ -144,7 +157,7 @@ class EmployersRequestController extends Controller
             if(!$validationError){
                 $requests = \App\Requests::find($id);
                 $company = ucwords(strip_tags($request->get('company')));
-                $employer = \App\Employer::where('company_name','=',$company)->firstOrFail();
+                $employer = \App\Employer::where('user_id','=',Auth::user()->id)->firstOrFail();
                 $requests->employer_id = $employer->id;
                 $requests->job_title = ucwords(strip_tags($request->get('job_title')));
                 $requests->company = $company;
@@ -178,12 +191,16 @@ class EmployersRequestController extends Controller
     public function destroy($id)
     {
         //
-        $requests = \App\Requests::find($id);
-        if($requests->status=='Open'){
-            $requests->delete();
-            return redirect('employer/requests')->with('success','Request ID'.$id.' has been deleted.');
+        if($this->account_is_active()==true){
+            $requests = \App\Requests::find($id);
+            if($requests->status=='Open'){
+                $requests->delete();
+                return redirect('employer/requests')->with('success','Request ID'.$id.' has been deleted.');
+            }else{
+                return redirect('employer/requests')->with('error','You cannot delete this job request if the status is no longer "Open".');
+            }
         }else{
-            return redirect('employer/requests')->with('error','You cannot delete this job request if the status is no longer "Open".');
+            return redirect('employer/requests')->with('error', 'Your account is not yet activated to access this feature.');
         }
     }
     

@@ -33,8 +33,12 @@ $applicant = '<div class="row item-row-applicant command-row-applicant card-body
                             <label>Status</label>
                             <select id="applicant_status[]" name="applicant_status[]" class="form-control" required>
                                 <option value=""></option>
+                                <option value="For Pooling">For Pooling</option>
                                 <option value="For Interview">For Interview</option>
                                 <option value="For Assestment">For Assestment</option>
+                                <option value="Reserved">Reserved</option>
+                                <option value="Cancelled">Cancelled</option>
+                                <option value="Rejected">Rejected</option>
                                 <option value="Processing Requirements">Processing Requirements</option>
                                 <option value="Hired">Hired</option>
                             </select>
@@ -96,8 +100,12 @@ if(isset($request)){
                                 <label>Status</label>
                                 <select id="applicant_status[]" name="applicant_status[]" class="form-control" required>
                                     <option value="'.$row->status.'">'.$row->status.'</option>
+                                    <option value="For Pooling">For Pooling</option>
                                     <option value="For Interview">For Interview</option>
                                     <option value="For Assestment">For Assestment</option>
+                                    <option value="Reserved">Reserved</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                    <option value="Rejected">Rejected</option>
                                     <option value="Processing Requirements">Processing Requirements</option>
                                     <option value="Hired">Hired</option>
                                 </select>

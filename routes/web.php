@@ -12,17 +12,7 @@
 */
 
 Route::get('/', function () {
-    if(Auth::user()){
-        if(Auth::user()->role=='Administrator'){
-            return redirect('/dashboard');
-        }elseif(Auth::user()->role=='Employer'){
-            return redirect('employer/profile');
-        }elseif(Auth::user()->role=='Applicant'){
-            return redirect('applicant/profile');
-        }
-    }else{
-        return view('landing_page/index');
-    }
+    return view('landing_page/index');
 });
 
 Route::get('/login', function () {
@@ -90,9 +80,9 @@ Route::resource('/employer/requests','EmployersRequestController');
 Route::get('/employer/requests/delete/{id}',['uses' =>'EmployersRequestController@destroy']);
 Route::get('/employer/requests/show/{id}',['uses' =>'EmployersRequestController@show']);
 
-Route::get('/applicant/profile', function () {
-    return view('applicant/view_profile');
-});
+Route::resource('/applicant/profile','ApplicantsProfileController');
+Route::get('/applicant/requests/show/{id}',['uses' =>'ApplicantsProfileController@show']);
+
 
 Route::get('/symlink', function () {
     $storage = App::make('files')->link(storage_path('app/public'), public_path('storage'));

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use File;
 use Datatables;
 use App\Applicant;
 use App\DesiredJobs;
@@ -82,12 +83,16 @@ class ApplicantsController extends Controller
             $applicant->contact_number = strip_tags($request->get('contact'));
             $this->validate($request, ['picture.*' => 'mimes:jpg,jpeg,png','file' => 'max:10240']); 
             if($request->hasFile('picture')){
-                $path = $request->file('picture')->store('public/applicant_pictures');
+                //$path = $request->file('picture')->store('upload/applicant_pictures');
+                $path = 'upload/applicant_pictures/'.$request->file('picture')->hashName();
+                Storage::disk('public_uploads')->put('/applicant_pictures/', $request->file('picture'));
                 $applicant->picture = $path;
             }
             $this->validate($request, ['resume_file.*' => 'mimes:doc,pdf,docx,jpg,jpeg,zip','file' => 'max:10240']);
             if( $request->hasFile('resume_file')){
-                $path = $request->file('resume_file')->store('public/resumes');
+                //$path = $request->file('resume_file')->store('public/resumes');
+                $path = 'upload/applicant_resumes/'.$request->file('resume_file')->hashName();
+                Storage::disk('public_uploads')->put('/applicant_resumes/', $request->file('resume_file'));
                 $applicant->resume_filepath = $path;
             }
             $applicant->resume_public = $request->get('resume_public');
@@ -274,8 +279,10 @@ class ApplicantsController extends Controller
                     $details->document_type = $request->government_documents_type[$key];
                     $this->validate($request, ['government_documents_file.*' => 'mimes:doc,pdf,docx,jpg,jpeg,zip','file' => 'max:50000']); 
                     if($request->hasFile('government_documents_file')){
-                        $file_upload = $request->file('government_documents_file')[$key];
-                        $path = $file_upload->store('public/government_documents');
+                        //$file_upload = $request->file('government_documents_file')[$key];
+                        //$path = $file_upload->store('public/government_documents');
+                        $path = 'upload/applicant_government_docs/'.$request->file('government_documents_file')[$key]->hashName();
+                        Storage::disk('public_uploads')->put('/applicant_government_docs/', $request->file('government_documents_file')[$key]);
                         $details->document_file = $path;
                     }
                     $details->status = $request->government_documents_status[$key];
@@ -290,8 +297,10 @@ class ApplicantsController extends Controller
                     $details->applicant_id = $last_saved_id;
                     $this->validate($request, ['upload_video_file.*' => 'mimes:mp4,avi,mov','file' => 'max:50000']); 
                     if($request->hasFile('upload_video_file')){
-                        $file_upload = $request->file('upload_video_file')[$key];
-                        $path = $file_upload->store('public/video_intro');
+                        //$file_upload = $request->file('upload_video_file')[$key];
+                        //$path = $file_upload->store('public/video_intro');
+                        $path = 'upload/applicant_video_intro/'.$request->file('upload_video_file')[$key]->hashName();
+                        Storage::disk('public_uploads')->put('/applicant_video_intro/', $request->file('upload_video_file')[$key]);
                         $details->video_file = $path;
                     }
                     $details->status = $request->upload_video_file_status[$key];
@@ -404,14 +413,20 @@ class ApplicantsController extends Controller
             $applicant->contact_number = strip_tags($request->get('contact'));
             $this->validate($request, ['picture.*' => 'mimes:jpg,jpeg,png','file' => 'max:10240']); 
             if($request->hasFile('picture')){
-                Storage::delete($applicant->picture);
-                $path = $request->file('picture')->store('public/applicant_pictures');
+                //Storage::delete($applicant->picture);
+                //$path = $request->file('picture')->store('upload/applicant_pictures');
+                File::delete('storage'.substr($applicant->picture,6));
+                $path = 'upload/applicant_pictures/'.$request->file('picture')->hashName();
+                Storage::disk('public_uploads')->put('/applicant_pictures/', $request->file('picture'));
                 $applicant->picture = $path;
             }
             $this->validate($request, ['resume_file.*' => 'mimes:doc,pdf,docx,jpg,jpeg,zip','file' => 'max:10240']); 
             if( $request->hasFile('resume_file')){
-                Storage::delete($applicant->resume_filepath);
-                $path = $request->file('resume_file')->store('public/resumes');
+                //Storage::delete($applicant->resume_filepath);
+                //$path = $request->file('resume_file')->store('public/resumes');
+                File::delete('storage'.substr($applicant->resume_filepath,6));
+                $path = 'upload/applicant_resumes/'.$request->file('resume_file')->hashName();
+                Storage::disk('public_uploads')->put('/applicant_resumes/', $request->file('resume_file'));
                 $applicant->resume_filepath = $path;
             }
             $applicant->resume_public = $request->get('resume_public');
@@ -611,10 +626,13 @@ class ApplicantsController extends Controller
                     $this->validate($request, ['government_documents_file.*' => 'mimes:doc,pdf,docx,jpg,jpeg,zip','file' => 'max:50000']); 
                     if(isset($request->file('government_documents_file')[$key])){
                         if(isset($request->government_documents_file_temp[$key])){
-                            unlink(storage_path('app/'.$request->government_documents_file_temp[$key]));
+                            //unlink(storage_path('app/'.$request->government_documents_file_temp[$key]));
+                            File::delete('storage'.substr($request->government_documents_file_temp[$key],6));
                         }
-                        $file_upload = $request->file('government_documents_file')[$key];
-                        $path = $file_upload->store('public/government_documents');
+                        //$file_upload = $request->file('government_documents_file')[$key];
+                        //$path = $file_upload->store('public/government_documents');
+                        $path = 'upload/applicant_government_docs/'.$request->file('government_documents_file')[$key]->hashName();
+                        Storage::disk('public_uploads')->put('/applicant_government_docs/', $request->file('government_documents_file')[$key]);
                         $details->document_file = $path;
                     }else{
                         if(isset($request->government_documents_file_temp[$key])){
@@ -638,10 +656,13 @@ class ApplicantsController extends Controller
                     $this->validate($request, ['upload_video_file.*' => 'mimes:mp4,avi,mov','file' => 'max:50000']);
                     if(isset($request->file('upload_video_file')[$key])){
                         if(isset($request->upload_video_file_temp[$key])){
-                            unlink(storage_path('app/'.$request->upload_video_file_temp[$key]));
+                            //unlink(storage_path('app/'.$request->upload_video_file_temp[$key]));
+                            File::delete('storage'.substr($request->upload_video_file_temp[$key],6));
                         }
-                        $file_upload = $request->file('upload_video_file')[$key];
-                        $path = $file_upload->store('public/video_intro');
+                        //$file_upload = $request->file('upload_video_file')[$key];
+                        //$path = $file_upload->store('public/video_intro');
+                        $path = 'upload/applicant_video_intro/'.$request->file('upload_video_file')[$key]->hashName();
+                        Storage::disk('public_uploads')->put('/applicant_video_intro/', $request->file('upload_video_file')[$key]);
                         $details->video_file = $path;
                     }else{
                         if(isset($request->upload_video_file_temp[$key])){
@@ -669,7 +690,16 @@ class ApplicantsController extends Controller
     {
         //
         $applicant = \App\Applicant::find($id);
-        Storage::delete($applicant->resume_filepath);
+        File::delete('storage'.substr($applicant->picture,6));
+        File::delete('storage'.substr($applicant->resume_filepath,6));
+        $gov_docs = \App\GovernmentDocuments::where('applicant_id',$id)->get();
+        foreach($gov_docs as $doc){
+            File::delete('storage'.substr($doc->document_file,6));
+        }
+        $vid_intro = \App\VideoIntro::where('applicant_id',$id)->get();
+        foreach($vid_intro as $vid){
+            File::delete('storage'.substr($vid->video_file,6));
+        }
         $applicant->delete();
         \App\DesiredJobs::where('applicant_id',$id)->delete();
         \App\WorkExperience::where('applicant_id',$id)->delete();
@@ -685,6 +715,7 @@ class ApplicantsController extends Controller
         \App\LanguageSpoken::where('applicant_id',$id)->delete();
         \App\GovernmentDocuments::where('applicant_id',$id)->delete();
         \App\VideoIntro::where('applicant_id',$id)->delete();
+        
         return redirect('applicants')->with('success','Applicant ID'.$id.' has been deleted.');
     }
 }

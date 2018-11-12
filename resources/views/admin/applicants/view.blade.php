@@ -56,17 +56,21 @@
                             <th>Type</th>
                             <th>Salary</th>
                             <th>Relocation?</th>
-                            <?php 
-                                $ctr=1;
-                                foreach($desired_jobs_details as $row){
-                                    echo "<tr>
-                                            <td>".$ctr."</td>
-                                            <td>".$row->title."</td>
-                                            <td>".$row->type."</td>
-                                            <td>".$row->salary."</td>
-                                            <td>".$row->relocation."</td>
-                                        </tr>";
-                                    $ctr++;
+                            <?php
+                                if(count($desired_jobs_details)<>0){
+                                    $ctr=1;
+                                    foreach($desired_jobs_details as $row){
+                                        echo "<tr>
+                                                <td>".$ctr."</td>
+                                                <td>".$row->title."</td>
+                                                <td>".$row->type."</td>
+                                                <td>".$row->salary."</td>
+                                                <td>".$row->relocation."</td>
+                                            </tr>";
+                                        $ctr++;
+                                    }
+                                }else{
+                                    echo "<tr><td colspan='5'><center>No data available.</center></td></tr>";
                                 }
                             ?>
                         </table>
@@ -83,20 +87,24 @@
                             <th>Date Started</th>
                             <th>Date Ended</th>
                             <th>Description</th>
-                            <?php 
-                                $ctr=1;
-                                foreach($work_experience_details as $row){
-                                    echo "<tr>
-                                            <td>".$ctr."</td>
-                                            <td>".$row->job_title."</td>
-                                            <td>".$row->company."</td>
-                                            <td>".$row->country."</td>
-                                            <td>".$row->city."</td>
-                                            <td>".$row->start."</td>
-                                            <td>".$row->end."</td>
-                                            <td>".$row->description."</td>
-                                        </tr>";
-                                    $ctr++;
+                            <?php
+                                if(count($work_experience_details)<>0){
+                                    $ctr=1;
+                                    foreach($work_experience_details as $row){
+                                        echo "<tr>
+                                                <td>".$ctr."</td>
+                                                <td>".$row->job_title."</td>
+                                                <td>".$row->company."</td>
+                                                <td>".$row->country."</td>
+                                                <td>".$row->city."</td>
+                                                <td>".$row->start."</td>
+                                                <td>".$row->end."</td>
+                                                <td>".$row->description."</td>
+                                            </tr>";
+                                        $ctr++;
+                                    }
+                                }else{
+                                    echo "<tr><td colspan='8'><center>No data available.</center></td></tr>";
                                 }
                             ?>
                         </table>
@@ -113,20 +121,24 @@
                             <th>City</th>
                             <th>Date Started</th>
                             <th>Date Ended</th>
-                            <?php 
-                                $ctr=1;
-                                foreach($education_background_details as $row){
-                                    echo "<tr>
-                                            <td>".$ctr."</td>
-                                            <td>".$row->degree."</td>
-                                            <td>".$row->school."</td>
-                                            <td>".$row->field_of_study."</td>
-                                            <td>".$row->country."</td>
-                                            <td>".$row->city."</td>
-                                            <td>".$row->start."</td>
-                                            <td>".$row->end."</td>
-                                        </tr>";
-                                    $ctr++;
+                            <?php
+                                if(count($education_background_details)<>0){
+                                    $ctr=1;
+                                    foreach($education_background_details as $row){
+                                        echo "<tr>
+                                                <td>".$ctr."</td>
+                                                <td>".$row->degree."</td>
+                                                <td>".$row->school."</td>
+                                                <td>".$row->field_of_study."</td>
+                                                <td>".$row->country."</td>
+                                                <td>".$row->city."</td>
+                                                <td>".$row->start."</td>
+                                                <td>".$row->end."</td>
+                                            </tr>";
+                                        $ctr++;
+                                    }
+                                }else{
+                                    echo "<tr><td colspan='8'><center>No data available.</center></td></tr>";
                                 }
                             ?>
                         </table>
@@ -138,15 +150,19 @@
                             <th>#</th>
                             <th>Skill</th>
                             <th>Years of Experience</th>
-                            <?php 
-                                $ctr=1;
-                                foreach($skills_details as $row){
-                                    echo "<tr>
-                                            <td>".$ctr."</td>
-                                            <td>".$row->skill."</td>
-                                            <td>".$row->years."</td>
-                                        </tr>";
-                                    $ctr++;
+                            <?php
+                                if(count($skills_details)<>0){
+                                    $ctr=1;
+                                    foreach($skills_details as $row){
+                                        echo "<tr>
+                                                <td>".$ctr."</td>
+                                                <td>".$row->skill."</td>
+                                                <td>".$row->years."</td>
+                                            </tr>";
+                                        $ctr++;
+                                    }
+                                }else{
+                                    echo "<tr><td colspan='3'><center>No data available.</center></td></tr>";
                                 }
                             ?>
                         </table>
@@ -194,17 +210,21 @@
                                 <th>Start</th>
                                 <th>End</th>
                                 <th>Description</th>
-                                <?php 
-                                    $ctr=1;
-                                    foreach($certifications_details as $row){
-                                        echo "<tr>
-                                                <td>".$ctr."</td>
-                                                <td>".$row->title."</td>
-                                                <td>".$row->start."</td>
-                                                <td>".$row->end."</td>
-                                                <td>".$row->description."</td>
-                                            </tr>";
-                                        $ctr++;
+                                <?php
+                                    if(count($certifications_details)<>0){
+                                        $ctr=1;
+                                        foreach($certifications_details as $row){
+                                            echo "<tr>
+                                                    <td>".$ctr."</td>
+                                                    <td>".$row->title."</td>
+                                                    <td>".$row->start."</td>
+                                                    <td>".$row->end."</td>
+                                                    <td>".$row->description."</td>
+                                                </tr>";
+                                            $ctr++;
+                                        }
+                                    }else{
+                                        echo "<tr><td colspan='5'><center>No data available.</center></td></tr>";
                                     }
                                 ?>
                             </table>
@@ -219,14 +239,18 @@
                                 <th>Social Media</th>
                                 <th>Link</th>
                                 <?php 
-                                    $ctr=1;
-                                    foreach($social_media_details as $row){
-                                        echo "<tr>
-                                                <td>".$ctr."</td>
-                                                <td>".$row->media."</td>
-                                                <td>".$row->link."</a></td>
-                                            </tr>";
-                                        $ctr++;
+                                    if(count($social_media_details)<>0){
+                                        $ctr=1;
+                                        foreach($social_media_details as $row){
+                                            echo "<tr>
+                                                    <td>".$ctr."</td>
+                                                    <td>".$row->media."</td>
+                                                    <td>".$row->link."</a></td>
+                                                </tr>";
+                                            $ctr++;
+                                        }
+                                    }else{
+                                        echo "<tr><td colspan='3'><center>No data available.</center></td></tr>";
                                     }
                                 ?>
                             </table>
@@ -244,19 +268,23 @@
                                 <th>Date Started</th>
                                 <th>Date Ended</th>
                                 <th>Description</th>
-                                <?php 
-                                    $ctr=1;
-                                    foreach($military_service_details as $row){
-                                        echo "<tr>
-                                                <td>".$ctr."</td>
-                                                <td>".$row->country."</td>
-                                                <td>".$row->branch."</td>
-                                                <td>".$row->rank."</td>
-                                                <td>".$row->start."</td>
-                                                <td>".$row->end."</td>
-                                                <td>".$row->description."</td>
-                                            </tr>";
-                                        $ctr++;
+                                <?php
+                                    if(count($military_service_details)<>0){
+                                        $ctr=1;
+                                        foreach($military_service_details as $row){
+                                            echo "<tr>
+                                                    <td>".$ctr."</td>
+                                                    <td>".$row->country."</td>
+                                                    <td>".$row->branch."</td>
+                                                    <td>".$row->rank."</td>
+                                                    <td>".$row->start."</td>
+                                                    <td>".$row->end."</td>
+                                                    <td>".$row->description."</td>
+                                                </tr>";
+                                            $ctr++;
+                                        }
+                                    }else{
+                                        echo "<tr><td colspan='7'><center>No data available.</center></td></tr>";
                                     }
                                 ?>
                             </table>
@@ -311,15 +339,19 @@
                                 <th>Date Awarded</th>
                                 <th>Description</th>
                                 <?php 
-                                    $ctr=1;
-                                    foreach($awards_details as $row){
-                                        echo "<tr>
-                                                <td>".$ctr."</td>
-                                                <td>".$row->title."</td>
-                                                <td>".$row->date_awarded."</td>
-                                                <td>".$row->description."</td>
-                                            </tr>";
-                                        $ctr++;
+                                    if(count($awards_details)<>0){
+                                        $ctr=1;
+                                        foreach($awards_details as $row){
+                                            echo "<tr>
+                                                    <td>".$ctr."</td>
+                                                    <td>".$row->title."</td>
+                                                    <td>".$row->date_awarded."</td>
+                                                    <td>".$row->description."</td>
+                                                </tr>";
+                                            $ctr++;
+                                        }
+                                    }else{
+                                        echo "<tr><td colspan='4'><center>No data available.</center></td></tr>";
                                     }
                                 ?>
                             </table>
@@ -336,16 +368,20 @@
                                 <th>Date Ended</th>
                                 <th>Description</th>
                                 <?php 
-                                    $ctr=1;
-                                    foreach($organizations_details as $row){
-                                        echo "<tr>
-                                                <td>".$ctr."</td>
-                                                <td>".$row->title."</td>
-                                                <td>".$row->start."</td>
-                                                <td>".$row->end."</td>
-                                                <td>".$row->description."</td>
-                                            </tr>";
-                                        $ctr++;
+                                    if(count($organizations_details)<>0){
+                                        $ctr=1;
+                                        foreach($organizations_details as $row){
+                                            echo "<tr>
+                                                    <td>".$ctr."</td>
+                                                    <td>".$row->title."</td>
+                                                    <td>".$row->start."</td>
+                                                    <td>".$row->end."</td>
+                                                    <td>".$row->description."</td>
+                                                </tr>";
+                                            $ctr++;
+                                        }
+                                    }else{
+                                        echo "<tr><td colspan='5'><center>No data available.</center></td></tr>";
                                     }
                                 ?>
                             </table>
@@ -362,18 +398,22 @@
                                 <th>URL</th>
                                 <th>Date Published</th>
                                 <th>Description</th>
-                                <?php 
-                                    $ctr=1;
-                                    foreach($patents_details as $row){
-                                        echo "<tr>
-                                                <td>".$ctr."</td>
-                                                <td>".$row->title."</td>
-                                                <td>".$row->patent_number."</td>
-                                                <td>".$row->url."</a></td>
-                                                <td>".$row->date_published."</td>
-                                                <td>".$row->description."</td>
-                                            </tr>";
-                                        $ctr++;
+                                <?php
+                                    if(count($patents_details)<>0){ 
+                                        $ctr=1;
+                                        foreach($patents_details as $row){
+                                            echo "<tr>
+                                                    <td>".$ctr."</td>
+                                                    <td>".$row->title."</td>
+                                                    <td>".$row->patent_number."</td>
+                                                    <td>".$row->url."</a></td>
+                                                    <td>".$row->date_published."</td>
+                                                    <td>".$row->description."</td>
+                                                </tr>";
+                                            $ctr++;
+                                        }
+                                    }else{
+                                        echo "<tr><td colspan='6'><center>No data available.</center></td></tr>";
                                     }
                                 ?>
                             </table>
@@ -390,16 +430,20 @@
                                 <th>Date Published</th>
                                 <th>Description</th>
                                 <?php 
-                                    $ctr=1;
-                                    foreach($publications_details as $row){
-                                        echo "<tr>
-                                                <td>".$ctr."</td>
-                                                <td>".$row->title."</td>
-                                                <td>".$row->url."</a></td>
-                                                <td>".$row->date_published."</td>
-                                                <td>".$row->description."</td>
-                                            </tr>";
-                                        $ctr++;
+                                    if(count($publications_details)<>0){
+                                        $ctr=1;
+                                        foreach($publications_details as $row){
+                                            echo "<tr>
+                                                    <td>".$ctr."</td>
+                                                    <td>".$row->title."</td>
+                                                    <td>".$row->url."</a></td>
+                                                    <td>".$row->date_published."</td>
+                                                    <td>".$row->description."</td>
+                                                </tr>";
+                                            $ctr++;
+                                        }
+                                    }else{
+                                        echo "<tr><td colspan='5'><center>No data available.</center></td></tr>";
                                     }
                                 ?>
                             </table>
@@ -446,15 +490,19 @@
                                 <th>#</th>
                                 <th>Language</th>
                                 <th>Fluency (Rating 1-10)</th>
-                                <?php 
-                                    $ctr=1;
-                                    foreach($language_details as $row){
-                                        echo "<tr>
-                                                <td>".$ctr."</td>
-                                                <td>".$row->language."</td>
-                                                <td>".$row->fluency."</td>
-                                            </tr>";
-                                        $ctr++;
+                                <?php
+                                    if(count($language_details)<>0){
+                                        $ctr=1;
+                                        foreach($language_details as $row){
+                                            echo "<tr>
+                                                    <td>".$ctr."</td>
+                                                    <td>".$row->language."</td>
+                                                    <td>".$row->fluency."</td>
+                                                </tr>";
+                                            $ctr++;
+                                        }
+                                    }else{
+                                        echo "<tr><td colspan='3'><center>No data available.</center></td></tr>";
                                     }
                                 ?>
                             </table>
@@ -469,14 +517,18 @@
                                 <th>Document Type</th>
                                 <th>Document File</th>
                                 <?php 
-                                    $ctr=1;
-                                    foreach($government_documents_details as $row){
-                                        echo "<tr>
-                                                <td>".$ctr."</td>
-                                                <td>".$row->document_type."</td>
-                                                <td><a href='".URL::asset('storage'.substr($row->document_file,6))."' class='btn btn-default btn-round btn-sm'  download='government_doc'>Download</a></td>
-                                            </tr>";
-                                        $ctr++;
+                                    if(count($government_documents_details)<>0){
+                                        $ctr=1;
+                                        foreach($government_documents_details as $row){
+                                            echo "<tr>
+                                                    <td>".$ctr."</td>
+                                                    <td>".$row->document_type."</td>
+                                                    <td><a href='".URL::asset('storage'.substr($row->document_file,6))."' class='btn btn-default btn-round btn-sm'  download='government_doc'>Download</a></td>
+                                                </tr>";
+                                            $ctr++;
+                                        }
+                                    }else{
+                                        echo "<tr><td colspan='3'><center>No file available.</center></td></tr>";
                                     }
                                 ?>
                             </table>
@@ -487,15 +539,19 @@
                     <div class='panel-body item-row-container-upload-video'>
                         <div style="overflow-x:auto;">
                             <div style="width:100%">
-                                <?php 
-                                    foreach($video_intro_details as $row){
-                                        echo "<center>
-                                                <video width='420' height='340' controls>
-                                                    <source src=".URL::asset('storage'.substr($row->video_file,6))." type='video/mp4'>
-                                                    Your browser does not support the video tag.
-                                                </video>
-                                               </center>
-                                               <br><br>";
+                                <?php
+                                    if(count($video_intro_details)<>0){ 
+                                        foreach($video_intro_details as $row){
+                                            echo "<center>
+                                                    <video width='420' height='340' controls>
+                                                        <source src=".URL::asset('storage'.substr($row->video_file,6))." type='video/mp4'>
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </center>
+                                                <br><br>";
+                                        }
+                                    }else{
+                                        echo "<center><br> No video available. <br></center>";
                                     }
                                 ?>
                             </div>

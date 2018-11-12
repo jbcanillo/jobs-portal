@@ -17,6 +17,11 @@
                                 <strong>{{ \Session::get('success') }}</strong>
                             </div><br />
                         @endif
+                        @if ($employer_details->status=='Inactive')
+                            <div class="alert alert-danger alert-block">
+                                <center><i class="material-icons" style="color:white">warning</i> <strong> You're account is still inactive. Kindly complete your information to activate your account.</strong></center>
+                            </div><br />
+                        @endif 
                     </div>
                 </div>
                 <div class="row">
@@ -49,6 +54,9 @@
                                 <th>
                                     <td colspan="2"><b>Information<b></td>
                                 </th>
+                                <tr>
+                                    <td><b>Nickname:</b></td><td>{{ $employer_details->nickname }}</td>
+                                </tr>
                                 <tr>
                                     <td><b>Firstname:</b></td><td>{{ $employer_details->firstname }}</td>
                                 </tr>

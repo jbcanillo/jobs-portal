@@ -107,7 +107,7 @@ if(isset($request)){
                                             <td><b>Status</b></td>
                                             <td><b>Info</b></td>
                                             <?php
-                                                if(isset($request_assignments)){
+                                                if(count($request_assignments)<>0){
                                                     $ctr=1;
                                                     foreach($request_assignments as $row){
 
@@ -125,6 +125,8 @@ if(isset($request)){
                                                         echo "</tr>";
                                                         $ctr++;
                                                     }
+                                                }else{
+                                                    echo "<tr><td colspan='5'><center>No applicants.</center></td></tr>";
                                                 }
                                             ?>
                                         </table>

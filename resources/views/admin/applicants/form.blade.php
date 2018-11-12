@@ -975,15 +975,17 @@ if(!isset($applicant)){
                     </select>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Username">Link to Username:</label>
+                    <label for="Username">Link to User ID:</label>
                     <select class="form-control" name="user_id" required>
                         <option value="" selected></option>
                         @foreach ($users as $user)
-                            @if(!isset($applicant))
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                            @else
-                                <option value="{{ $user->id }}" {{ ($user_id == $user->id) ? 'selected' : '' }}>{{ $user->name }}</option>
-                            @endif
+                            @if($user->role=='Applicant')
+                                @if(!isset($applicant))
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @else
+                                    <option value="{{ $user->id }}" {{ ($user_id == $user->id) ? 'selected' : '' }}>{{ $user->name }}</option>
+                                @endif
+                            @endif   
                         @endforeach
                     </select>
                 </div>

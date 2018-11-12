@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Datatables;
+use File;
 use App\Employer;
 
 class EmployersController extends Controller
@@ -146,6 +147,7 @@ class EmployersController extends Controller
     {
         //
         $employer = \App\Employer::find($id);
+        File::delete('storage'.substr($employer->picture,6));
         $employer->delete();
         return redirect('employers')->with('success','Employer ID'.$id.' has been deleted.');
     }

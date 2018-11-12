@@ -230,6 +230,7 @@ class RequestsController extends Controller
                             ->join('applicants','applicants.id','=','applicant_desired_jobs.applicant_id')
                             ->select('applicants.id','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate')
                             ->where('applicant_desired_jobs.title','like','%'. $request->job_title .'%')
+                            ->where('applicants.status','=','Active')
                             ->where('applicant_desired_jobs.status','=','Active')
                             ->get();
 

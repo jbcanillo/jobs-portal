@@ -102,14 +102,14 @@
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
           <div class="container-fluid">
             <div class="navbar-wrapper">
-            <a class="navbar-brand"><h5>Welcome {{ Auth::user()->name }}</h5> [ User-level: {{ Auth::user()->role }}, Last log-in: {{ date('j F Y H:m A',strtotime(Auth::user()->last_login)) }} ]</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+                <span class="navbar-toggler-icon icon-bar"></span>
+              </button>
+              <a class="navbar-brand"><p><h5>Welcome {{ Auth::user()->name }}</h5> [ Access-level: {{ Auth::user()->role }}, Last log-in: {{ date('j F Y H:m A',strtotime(Auth::user()->last_login)) }} ]</a>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="navbar-toggler-icon icon-bar"></span>
-              <span class="navbar-toggler-icon icon-bar"></span>
-              <span class="navbar-toggler-icon icon-bar"></span>
-            </button>
             <div class="collapse navbar-collapse justify-content-end">
               <ul class="navbar-nav">
                 <a class="dropdown-item" href="{{ url('change_password/'.Auth::user()->remember_token) }}"><i class="material-icons">https</i>&nbspChange Password</a> 
