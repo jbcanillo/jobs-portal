@@ -58,10 +58,16 @@
                 <p>Profile</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'requests' || $current_route_name =='') ? 'nav-item active' : 'nav-item' }}">
+            <li class="{{ ($current_route_name == 'requests' || $current_route_name =='' ) ? 'nav-item active' : 'nav-item' }}">
               <a class="nav-link" href="{{ url('employer/requests') }}">
                 <i class="material-icons">assignment</i>
                 <p>Post Job Requests</p>
+              </a>
+            </li>
+            <li class="{{ ($current_route_name == 'search' ) ? 'nav-item active' : 'nav-item' }}">
+              <a class="nav-link" href="{{ url('employer/search') }}">
+                <i class="material-icons">search</i>
+                <p>Search Applicants</p>
               </a>
             </li>
             <li class="nav-item ">

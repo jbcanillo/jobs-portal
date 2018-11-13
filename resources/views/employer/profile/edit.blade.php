@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header card-header-info">
-                <h4 class="card-title">Edit Profile</h4>
+                <h4 class="card-title"><i class="material-icons">edit</i> Edit Profile</h4>
                 <p class="card-category">Please complete your profile to keep your account activated.</p>
             </div>
             <div class="card-body">

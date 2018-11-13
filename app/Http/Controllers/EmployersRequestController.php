@@ -35,8 +35,8 @@ class EmployersRequestController extends Controller
     {
         //
         if($this->account_is_active()==true){
-            $employers= \App\Employer::where('status', 'active')->get();
-            return view('employer/requests/form',compact('employers'));
+            $employer = \App\Employer::where('user_id','=',Auth::user()->id)->get();
+            return view('employer/requests/form',compact('employer'));
         }else{
             return redirect('employer/requests')->with('error', 'Your account is not yet activated to access this feature.');
         }
@@ -103,20 +103,26 @@ class EmployersRequestController extends Controller
     public function show($id)
     {
         //
+        $employer = \App\Employer::where('user_id','=',Auth::user()->id)->get();
         if(!is_numeric($id)){
-            $employer = \App\Employer::where('user_id','=',Auth::user()->id)->get();
             $requests = \App\Requests::where('employer_id','=',$employer[0]->id)->get();
             return Datatables::of($requests)->make(true);
         }else{
-            $request= \App\Requests::find($id);
-
+            //$request= \App\Requests::find($id);
+             $request= DB::table('requests')
+                        ->where('id','=',$id)
+                        ->where('employer_id','=',$employer[0]->id)
+                        ->get();
              $request_assignments = DB::table('request_assignments')
                             ->join('applicants','applicants.id','=','request_assignments.applicant_id')
                             ->where('request_assignments.request_id','=',$id)
-                            ->select('request_assignments.*','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate')
+                            ->select('request_assignments.*','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate','applicants.years_of_experience')
                             ->get();
-                                               
-            return view('employer/requests/view',compact('request','request_assignments'));
+            if(count($request)==1){
+                return view('employer/requests/view',compact('request','request_assignments'));
+            }else{
+                return redirect('employer/requests/');
+            }
         }
     }
 
@@ -130,12 +136,20 @@ class EmployersRequestController extends Controller
     {
         //
         if($this->account_is_active()==true){
-            $request = \App\Requests::find($id);
-            $employers= \App\Employer::where('status', 'active')->get();
-            if($request->status=='Open'){
-                return view('employer/requests/form',compact('request','employers'));
+            $employer = \App\Employer::where('user_id','=',Auth::user()->id)->get();
+            //$request = \App\Requests::find($id);
+            $request= DB::table('requests')
+                    ->where('id','=',$id)
+                    ->where('employer_id','=',$employer[0]->id)
+                    ->get();
+            if(count($request)==1){
+                if($request[0]->status=='Open'){
+                    return view('employer/requests/form',compact('request','employer'));
+                }else{
+                    return redirect('employer/requests')->with('error','You cannot edit this job request if the status is no longer "Open".');
+                }
             }else{
-                return redirect('employer/requests')->with('error','You cannot edit this job request if the status is no longer "Open".');
+                return redirect('employer/requests/');
             }
         }else{
             return redirect('employer/requests')->with('error', 'Your account is not yet activated to access this feature.');

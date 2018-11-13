@@ -1,9 +1,18 @@
 <?php
 
+$jobs_option = "";
+foreach($jobs as $job){
+    $jobs_option .= '<option value="'.$job->job_title.'">'.$job->job_title.'</option>';
+}
+
+
 $desired_jobs = '<div class="row item-row-desired-jobs command-row-desired-jobs card-body">
                         <div class="col-md-4 col-sm-2 col-xs-12">
                             <label>Title</label>
-                            <input type="text" id="desired_jobs_title[]" name="desired_jobs_title[]" class="form-control" required>
+                            <select id="desired_jobs_title[]" name="desired_jobs_title[]" class="form-control" required>
+                                <option value=""></option>
+                                '.$jobs_option.'
+                            </select>
                         </div>
                         <div class="col-md-2 col-sm-5 col-xs-12">
                             <label>Type</label>
@@ -435,6 +444,8 @@ if(!isset($applicant)){
     $nickname = $applicant->nickname;
     $gender = $applicant->gender;
     $birthdate = $applicant->birthdate;
+    $highest_educational_attainment = $applicant->highest_educational_attainment;
+    $years_of_experience = $applicant->years_of_experience;
     $contact = $applicant->contact_number;
     $picture = $applicant->picture ;
     $resume_file = $applicant->resume_filepath;
@@ -447,10 +458,14 @@ if(!isset($applicant)){
     $button = "Update";
 
     foreach($desired_jobs_details as $row){
+
         $desired_jobs .= '<div class="row item-row-desired-jobs command-row-desired-jobs card-body">
                         <div class="col-md-4 col-sm-2 col-xs-12">
                             <label>Title</label>
-                            <input type="text" id="desired_jobs_title[]" name="desired_jobs_title[]" class="form-control" value="'.$row->title.'" required>
+                            <select id="desired_jobs_title[]" name="desired_jobs_title[]" class="form-control" required>
+                                <option value="'.$row->title.'">'.$row->title.'</option>
+                                '.$jobs_option.'
+                            </select>
                         </div>
                         <div class="col-md-2 col-sm-5 col-xs-12">
                             <label>Type</label>
@@ -899,17 +914,24 @@ if(!isset($applicant)){
                     <div class='col-md-12 col-lg-12'>
                         <div class="card card-profile">
                             <div class="card-avatar">
-                                <center><img src="{{ URL::asset('storage'.substr($picture,6)) }}" style="width:200px;height:200px;"></center>
+                                <center><img src="{{ URL::asset('storage'.substr($picture,6)) }}" width='200px' height='200px'></center>
                             </div>
                             <div class="card-body">
                                 
                             </div>
                         </div>
                     </div>
-                <?php }else{ ?>
+                <?php }else{ ?><br><br>
                     <div class='col-md-12 col-lg-12'>
-                            <center><img src="{{ asset('img/no_pic.png') }}" style="width:200px;height:200px;"></center><br><hr>
+                        <div class="card card-profile">
+                            <div class="card-avatar">
+                                <center><img src="{{ asset('img/no_pic.png') }}" width='200px' height='200px'></center><br><hr>
+                            </div>
+                            <div class="card-body">
+                                
+                            </div>
                         </div>
+                    </div>
                 <?php } ?>
             <?php } ?>
                 {{ csrf_field() }}
@@ -946,6 +968,31 @@ if(!isset($applicant)){
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Birthdate">Birthdate:</label>
                     <input type="date" class="form-control" name="birthdate" value="{{ (isset($applicant))? $birthdate : old('birthdate') }}" required>
+                </div>
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="Education">Highest Educational Attainment:</label>
+                    <select class="form-control" name="highest_educational_attainment" required>
+                        <option value="" selected></option>
+                        <?php if(!isset($applicant)){ ?>
+                            <option value="Gradeschool" {{ (old('highest_educational_attainment') == "Gradeschool") ? 'selected' : '' }}>Gradeschool</option>
+                            <option value="Highschool" {{ (old('highest_educational_attainment') == "Highschool" ) ? 'selected' : '' }}>Highschool</option>
+                            <option value="Vocational" {{ (old('highest_educational_attainment') == "Vocational") ? 'selected' : '' }}>Vocational</option>
+                            <option value="College" {{ (old('highest_educational_attainment') == "College") ? 'selected' : '' }}>College</option>
+                            <option value="Masteral" {{ (old('highest_educational_attainment') == "Masteral") ? 'selected' : '' }}>Masteral</option>
+                            <option value="Doctoral" {{ (old('highest_educational_attainment') == "Doctoral") ? 'selected' : '' }}>Doctoral</option>
+                        <?php }else{ ?>
+                            <option value="Gradeschool" {{ ($highest_educational_attainment == "Gradeschool") ? 'selected' : '' }}>Gradeschool</option>
+                            <option value="Highschool" {{ ($highest_educational_attainment == "Highschool" ) ? 'selected' : '' }}>Highschool</option>
+                            <option value="Vocational" {{ ($highest_educational_attainment == "Vocational") ? 'selected' : '' }}>Vocational</option>
+                            <option value="College" {{ ($highest_educational_attainment == "College") ? 'selected' : '' }}>College</option>
+                            <option value="Masteral" {{ ($highest_educational_attainment == "Masteral") ? 'selected' : '' }}>Masteral</option>
+                            <option value="Doctoral" {{ ($highest_educational_attainment == "Doctoral") ? 'selected' : '' }}>Doctoral</option>
+                        <?php }?>
+                    </select>
+                </div>
+                <div class='col-md-12 col-lg-6'>  
+                    <label for="Experience">Years of Work Experience:</label>
+                    <input type="number" class="form-control" name="years_of_experience" value="{{ (isset($years_of_experience))? $years_of_experience : old('years_of_experience') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Picture">Picture:</label>

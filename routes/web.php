@@ -84,6 +84,7 @@ Route::get('/employer/requests/show/{id}',['uses' =>'EmployersRequestController@
 Route::resource('/applicant/profile','ApplicantsProfileController');
 Route::get('/applicant/requests/show/{id}',['uses' =>'ApplicantsProfileController@show']);
 
+Route::resource('/employer/search','EmployersSearchController');
 
 Route::get('/symlink', function () {
     $storage = App::make('files')->link(storage_path('app/public'), public_path('storage'));
@@ -92,4 +93,8 @@ Route::get('/symlink', function () {
     }
 });
 
-Route::get('test_mod','DashboardController@getUsers');
+Route::get('/test_controller','DashboardController@getUsers');
+
+Route::get('/test_function', function () {
+   
+});

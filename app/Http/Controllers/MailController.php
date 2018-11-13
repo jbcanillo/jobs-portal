@@ -43,7 +43,7 @@ class MailController extends Controller
                 $email = $request->email;
                 $action = 'Inquiry';
                 Mail::to('inquiry@newaymanpower.com')->send(new EmailProcessor($action,$request));
-                return back()->with('success', 'Your message was succesfully sent.');
+                return redirect('/#contact')->with('success', 'Your message was succesfully sent.');
         }
     }
 }

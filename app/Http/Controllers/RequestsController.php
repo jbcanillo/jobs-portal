@@ -223,12 +223,12 @@ class RequestsController extends Controller
         $request_assignments = DB::table('request_assignments')
                             ->join('applicants','applicants.id','=','request_assignments.applicant_id')
                             ->where('request_assignments.request_id','=',$id)
-                            ->select('request_assignments.*','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate')
+                            ->select('request_assignments.*','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate','applicants.years_of_experience')
                             ->get();
 
         $applicant_names = DB::table('applicant_desired_jobs')
                             ->join('applicants','applicants.id','=','applicant_desired_jobs.applicant_id')
-                            ->select('applicants.id','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate')
+                            ->select('applicants.id','applicants.lastname','applicants.middlename','applicants.firstname','applicants.gender','applicants.birthdate','applicants.years_of_experience')
                             ->where('applicant_desired_jobs.title','like','%'. $request->job_title .'%')
                             ->where('applicants.status','=','Active')
                             ->where('applicant_desired_jobs.status','=','Active')

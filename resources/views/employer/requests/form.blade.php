@@ -3,37 +3,27 @@ if(!isset($request)){
     $method = "Add Job Request";
     $button = "Submit";
 }else{
-    $job_title = $request->job_title;
-    $company = $request->company;
-    $location = $request->location;
-    $years_of_experience = $request->years_of_experience;
-    $education_level = $request->education_level;
-    $age = $request->age;
-    $gender = $request->gender;
-    $type = $request->type;
-    $minimum_salary = $request->minimum_salary;
-    $maximum_salary = $request->maximum_salary;
-    $language = $request->language;
-    $license = $request->license;
-    $number_of_applicants = $request->number_of_applicants;
-    $description = $request->description;
-    $status = $request->status;
-    $created_at = $request->created_at;
-    $updated_at = $request->updated_at;
-    $status = $request->status;
+    $request_id = $request[0]->id;
+    $job_title = $request[0]->job_title;
+    $company = $request[0]->company;
+    $location = $request[0]->location;
+    $years_of_experience = $request[0]->years_of_experience;
+    $education_level = $request[0]->education_level;
+    $age = $request[0]->age;
+    $gender = $request[0]->gender;
+    $type = $request[0]->type;
+    $minimum_salary = $request[0]->minimum_salary;
+    $maximum_salary = $request[0]->maximum_salary;
+    $language = $request[0]->language;
+    $license = $request[0]->license;
+    $number_of_applicants = $request[0]->number_of_applicants;
+    $description = $request[0]->description;
+    $status = $request[0]->status;
+    $created_at = $request[0]->created_at;
+    $updated_at = $request[0]->updated_at;
+    $status = $request[0]->status;
     $method = "Edit Job Request";
     $button = "Update";
-}
-$company_options = "";
-if(isset($employers)){
-    foreach($employers as $e){
-        if(isset($request)){
-            $selected = ($e->company_name==$request->company)? 'selected' : '';
-        }else{
-            $selected = '';
-        }
-        $company_options .= "<option value='".$e->company_name."' ".$selected.">".$e->company_name."</option>";
-    }
 }
 
 ?>
@@ -54,7 +44,7 @@ if(isset($employers)){
             <?php if(!isset($request)){ ?>
                 <form method="post" action="{{ action('EmployersRequestController@store') }}" enctype="multipart/form-data">
             <?php }else{ ?>
-                <form method="post" action="{{ action('EmployersRequestController@update',$request->id) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ action('EmployersRequestController@update',$request_id) }}" enctype="multipart/form-data">
                 <input name="_method" type="hidden" value="PATCH">
             <?php } ?>
                 {{ csrf_field() }}
@@ -65,10 +55,7 @@ if(isset($employers)){
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Company">Company:</label>
-                    <select class="form-control" name="company">
-                        <option value=''></option>
-                        <?php echo $company_options;?>
-                    </select>
+                    <input type="text" class="form-control" name="company" value="{{ $employer[0]->company_name }}" readonly>
                 </div>
                 <div class='col-md-12 col-lg-12'>  
                     <label for="Description">Job Description:</label>
@@ -79,12 +66,29 @@ if(isset($employers)){
                     <input type="text" class="form-control" name="location" value="{{ (isset($request))? $location : old('location') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Years">Years of Experience:</label>
+                    <label for="Years">Years of Work Experience:</label>
                     <input type="number" class="form-control" name="years_of_experience" value="{{ (isset($request))? $years_of_experience : old('years_of_experience') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Education">Education Level:</label>
-                    <input type="text" class="form-control" name="education_level" value="{{ (isset($request))? $education_level : old('education_level') }}" required>
+                    <select class="form-control" name="education_level" required>
+                        <option value="" selected></option>
+                        <?php if(!isset($request)){ ?>
+                            <option value="Gradeschool" {{ (old('education_level') == "Gradeschool") ? 'selected' : '' }}>Gradeschool</option>
+                            <option value="Highschool" {{ (old('education_level') == "Highschool" ) ? 'selected' : '' }}>Highschool</option>
+                            <option value="Vocational" {{ (old('education_level') == "Vocational") ? 'selected' : '' }}>Vocational</option>
+                            <option value="College" {{ (old('education_level') == "College") ? 'selected' : '' }}>College</option>
+                            <option value="Masteral" {{ (old('education_level') == "Masteral") ? 'selected' : '' }}>Masteral</option>
+                            <option value="Doctoral" {{ (old('education_level') == "Doctoral") ? 'selected' : '' }}>Doctoral</option>
+                        <?php }else{ ?>
+                            <option value="Gradeschool" {{ ($education_level == "Gradeschool") ? 'selected' : '' }}>Gradeschool</option>
+                            <option value="Highschool" {{ ($education_level == "Highschool" ) ? 'selected' : '' }}>Highschool</option>
+                            <option value="Vocational" {{ ($education_level == "Vocational") ? 'selected' : '' }}>Vocational</option>
+                            <option value="College" {{ ($education_level == "College") ? 'selected' : '' }}>College</option>
+                            <option value="Masteral" {{ ($education_level == "Masteral") ? 'selected' : '' }}>Masteral</option>
+                            <option value="Doctoral" {{ ($education_level == "Doctoral") ? 'selected' : '' }}>Doctoral</option>
+                        <?php }?>
+                    </select>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Age">Minimum Age:</label>

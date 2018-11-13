@@ -108,37 +108,37 @@
                     </div>
                     <div class="col-sm-6 col-md-4 wow fadeInLeft">
                         <div class="block">
-                            <i class="tf-document3"></i>   
+                            <i class="tf-document3" style="font-size:150px"></i>   
                             <h3>Step 1</h3>
                             <p>Sign-Up!</p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-4 wow fadeInLeft">
                         <div class="block">
-                            <i class="tf-magnifying-glass"></i>   
+                            <i class="tf-magnifying-glass" style="font-size:150px"></i>   
                             <h3>Step 2</h3>
                             <p>Get evaluated on-site or online.</p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-4 wow fadeInLeft">
                         <div class="block">
-                            <i class="tf-puzzle"></i>   
+                            <i class="tf-tools" style="font-size:150px"></i>   
                             <h3>Step 3</h3>
-                            <p>Get trainings.</p>
+                            <p>Attend trainings.</p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6 wow fadeInLeft">
                         <div class="block pull-center">
-                            <i class="tf-ion-ios-people-outline"></i>   
+                            <i class="tf-ion-ios-people-outline" style="font-size:150px"></i>   
                             <h3>Step 4</h3>
                             <p>Get endorse.</p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6 wow fadeInLeft">
                         <div class="block pull-center">
-                            <i class="tf-trophy6"></i>   
+                            <i class="tf-flag2" style="font-size:150px"></i>   
                             <h3>Step 5</h3>
-                            <p>Get Hired!</p>
+                            <p>Be Hired!</p>
                         </div>
                     </div>
                     
@@ -154,21 +154,31 @@
                     <div class="row">
                         <div class="heading wow fadeInUp">
                             <h2>Screening & Training</h2>
-                            <p>We prepare you to succeed.</p>
+                            <p>Standard Verification Process</p>
                         </div>
                         <div class="col-sm-12 col-md-4 wow fadeInRight">
                             <div class="block">
-                                 <center><img src="{{ asset('template/landing_page/images/training/screening.png') }}" alt=""><h3>Job screening</h3></center>
+                                 <center><img src="{{ asset('template/landing_page/images/screening/screening.png') }}" alt=""><h3>Medical & Psychological Screening</h3></center>
                             </div>
                         </div>
-                        <div class="col-sm-4 col-md-4 wow fadeInRight">
+                        <div class="col-sm-12 col-md-4 wow fadeInRight">
                             <div class="block">
-                                <center><img src="{{ asset('template/landing_page/images/training/training.png') }}" alt=""><h3>Attend training and seminars</h3></center>
+                                <center><img src="{{ asset('template/landing_page/images/screening/documentation.png') }}" alt=""><h3>Genuine Documentation</h3></center>
                             </div>
                         </div>
-                        <div class="col-sm-4 col-md-4 wow fadeInRight">
+                        <div class="col-sm-12 col-md-4 wow fadeInRight">
                             <div class="block">
-                                <center><img src="{{ asset('template/landing_page/images/training/qualified.png') }}" alt=""><h3>Be qualified</h3></center>
+                                <center><img src="{{ asset('template/landing_page/images/screening/training.png') }}" alt=""><h3>Experience & Education</h3></center>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 wow fadeInRight">
+                            <div class="block">
+                                <center><img src="{{ asset('template/landing_page/images/screening/background_check.png') }}" alt=""><h3>Background Check</h3></center>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 wow fadeInRight">
+                            <div class="block">
+                                <center><img src="{{ asset('template/landing_page/images/screening/qualified.png') }}" alt=""><h3>Training</h3></center>
                             </div>
                         </div>
                     </div>
@@ -185,7 +195,7 @@
                     
                     <div class="about-slider">
                             <div class="message">
-                                    <center><h3>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla-mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in"</h3></center>
+                                <center><h3>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla-mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in"</h3></center>
                             </div>
                             <div class="message">
                                  <center><h3>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla-mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla-mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in"</h3></center>
@@ -238,6 +248,12 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="block">
                             <div class="col-xs-12 col-sm-12 col-md-6 offset-md-3 wow fadeInUp" data-wow-delay="0.3s">
+                                    @if (\Session::has('success'))
+                                        <div class="alert alert-success alert-block">
+                                            <button type="button" class="close" data-dismiss="alert">×</button>	
+                                            <strong>{{ \Session::get('success') }}</strong>
+                                        </div><br />
+                                    @endif 
                                     <center><h3>Send us a message!</h3></center>   
                                     <div class="form-group">
                                         <form action="{{ url('send_message') }}" method="post" enctype="multipart/form-data">
@@ -251,14 +267,8 @@
                                             <div class="input-field">
                                                 <textarea class="form-control" placeholder="Your Message" rows="3" name="message" required></textarea>
                                             </div>
-                                            <button class="btn btn-send" type="submit">Send A Message</button>
+                                            <button class="btn btn-send" type="submit">Submit</button>
                                         </form>
-                                        <div id="success">
-                                            <p>Your message was successfully sent.</p>
-                                        </div>
-                                        <div id="error">
-                                            <p>Your message was not successfully sent.</p>
-                                        </div>
                                     </div>
                                 </div>
                         </div>

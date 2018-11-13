@@ -7,7 +7,7 @@ foreach($applicant_names as $row){
     $interval = $now->diff($birthdate);
     $applicant_age = $interval->y;
 
-    $applicant_name .= '<option value="'.$row->id.'">'.$row->lastname.', '.$row->firstname.' '.$row->middlename.' ( '.$row->gender.', '.$applicant_age.' years old )</option>';
+    $applicant_name .= '<option value="'.$row->id.'">'.$row->lastname.', '.$row->firstname.' '.$row->middlename.' ( '.$row->gender.', '.$applicant_age.' years old' .', '. $row->years_of_experience . ' year(s) of experience)</option>';
 }
 
 $applicant = '<div class="row item-row-applicant command-row-applicant card-body">
@@ -81,7 +81,7 @@ if(isset($request)){
                             <div class="col-md-11 col-sm-12 col-xs-12">
                             <label>Applicant Name</label>
                                 <select id="applicant_id[]" name="applicant_id[]" class="form-control applicant" required>
-                                    <option value="'.$row->applicant_id.'" selected>'.$row->lastname.', '.$row->firstname.' '.$row->middlename.' ( '.$row->gender.', '.$applicant_age.' years old )</option>
+                                    <option value="'.$row->applicant_id.'" selected>'.$row->lastname.', '.$row->firstname.' '.$row->middlename.' ( '.$row->gender.', '.$applicant_age.' years old'.', '. $row->years_of_experience . ' year(s) of experience )</option>
                                     '.$applicant_name.'
                                 </select>
                                 <a class="btn btn-warning btn-sm" onclick="viewRecord(\'/applicants/show/\','.$row->applicant_id.');" href="#" style="color:white;left:700px;bottom:43px"><i class="material-icons">search</i></a>

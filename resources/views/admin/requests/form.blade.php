@@ -55,7 +55,7 @@ if(isset($employers)){
                 <form method="post" action="{{ action('RequestsController@store') }}" enctype="multipart/form-data">
             <?php }else{ ?>
                 <form method="post" action="{{ action('RequestsController@update',$request->id) }}" enctype="multipart/form-data">
-                <!--<input name="_method" type="hidden" value="PATCH">-->
+                <input name="_method" type="hidden" value="PATCH">
             <?php } ?>
                 {{ csrf_field() }}
               <div class="row">
@@ -79,12 +79,29 @@ if(isset($employers)){
                     <input type="text" class="form-control" name="location" value="{{ (isset($request))? $location : old('location') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Years">Years of Experience:</label>
+                    <label for="Years">Years of Work Experience:</label>
                     <input type="number" class="form-control" name="years_of_experience" value="{{ (isset($request))? $years_of_experience : old('years_of_experience') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Education">Education Level:</label>
-                    <input type="text" class="form-control" name="education_level" value="{{ (isset($request))? $education_level : old('education_level') }}" required>
+                    <select class="form-control" name="education_level" required>
+                        <option value="" selected></option>
+                        <?php if(!isset($request)){ ?>
+                            <option value="Gradeschool" {{ (old('education_level') == "Gradeschool") ? 'selected' : '' }}>Gradeschool</option>
+                            <option value="Highschool" {{ (old('education_level') == "Highschool" ) ? 'selected' : '' }}>Highschool</option>
+                            <option value="Vocational" {{ (old('education_level') == "Vocational") ? 'selected' : '' }}>Vocational</option>
+                            <option value="College" {{ (old('education_level') == "College") ? 'selected' : '' }}>College</option>
+                            <option value="Masteral" {{ (old('education_level') == "Masteral") ? 'selected' : '' }}>Masteral</option>
+                            <option value="Doctoral" {{ (old('education_level') == "Doctoral") ? 'selected' : '' }}>Doctoral</option>
+                        <?php }else{ ?>
+                            <option value="Gradeschool" {{ ($education_level == "Gradeschool") ? 'selected' : '' }}>Gradeschool</option>
+                            <option value="Highschool" {{ ($education_level == "Highschool" ) ? 'selected' : '' }}>Highschool</option>
+                            <option value="Vocational" {{ ($education_level == "Vocational") ? 'selected' : '' }}>Vocational</option>
+                            <option value="College" {{ ($education_level == "College") ? 'selected' : '' }}>College</option>
+                            <option value="Masteral" {{ ($education_level == "Masteral") ? 'selected' : '' }}>Masteral</option>
+                            <option value="Doctoral" {{ ($education_level == "Doctoral") ? 'selected' : '' }}>Doctoral</option>
+                        <?php }?>
+                    </select>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Age">Minimum Age:</label>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use DB;
 use File;
 use Datatables;
 use App\Applicant;
@@ -44,7 +45,11 @@ class ApplicantsController extends Controller
     {
         //
         $users= \App\User::all();
-        return view('admin/applicants/form',compact('users'));
+        $jobs = DB::table('requests')
+                    ->select('requests.job_title')
+                    ->groupBy('job_title')
+                    ->get();
+        return view('admin/applicants/form',compact('users','jobs'));
     }
 
     private function validation($inputs,$id=NULL){
@@ -54,6 +59,8 @@ class ApplicantsController extends Controller
             'lastname' => 'required|string',
             'gender' => 'required|string',
             'birthdate' => 'required|date',
+            'highest_educational_attainment' => 'required|string',
+            'years_of_experience' => 'required|integer',
             'contact' => 'required|string',
             'resume_public' => 'required',
             'user_id' => 'required|integer|unique:applicants,user_id,'.$id,
@@ -80,6 +87,8 @@ class ApplicantsController extends Controller
             $applicant->nickname = ucwords(strip_tags($request->get('nickname')));
             $applicant->gender = ucwords(strip_tags($request->get('gender')));
             $applicant->birthdate = ucwords(strip_tags($request->get('birthdate')));
+            $applicant->highest_educational_attainment = ucwords(strip_tags($request->get('highest_educational_attainment')));
+            $applicant->years_of_experience = strip_tags($request->get('years_of_experience'));
             $applicant->contact_number = strip_tags($request->get('contact'));
             $this->validate($request, ['picture.*' => 'mimes:jpg,jpeg,png','file' => 'max:10240']); 
             if($request->hasFile('picture')){
@@ -357,6 +366,10 @@ class ApplicantsController extends Controller
         //
         $applicant = \App\Applicant::find($id);
         $users= \App\User::all();
+        $jobs = DB::table('requests')
+                ->select('requests.job_title')
+                ->groupBy('job_title')
+                ->get();
 
         $desired_jobs_details = \App\DesiredJobs::where('applicant_id',$id)->get();
         $work_experience_details = \App\WorkExperience::where('applicant_id',$id)->get();
@@ -375,6 +388,7 @@ class ApplicantsController extends Controller
 
         return view('admin/applicants/form',compact('applicant',
                                                     'users',
+                                                    'jobs',
                                                     'desired_jobs_details',
                                                     'work_experience_details',
                                                     'education_background_details',
@@ -410,6 +424,8 @@ class ApplicantsController extends Controller
             $applicant->nickname = ucwords(strip_tags($request->get('nickname')));
             $applicant->gender = ucwords(strip_tags($request->get('gender')));
             $applicant->birthdate = ucwords(strip_tags($request->get('birthdate')));
+            $applicant->highest_educational_attainment = ucwords(strip_tags($request->get('highest_educational_attainment')));
+            $applicant->years_of_experience = strip_tags($request->get('years_of_experience'));
             $applicant->contact_number = strip_tags($request->get('contact'));
             $this->validate($request, ['picture.*' => 'mimes:jpg,jpeg,png','file' => 'max:10240']); 
             if($request->hasFile('picture')){

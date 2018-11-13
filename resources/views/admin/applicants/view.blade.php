@@ -2,7 +2,11 @@
     <br><br>
     <div class="card card-profile" style="background-color: white;">
         <div class="card-avatar">
-           <center><img src="{{ URL::asset('storage'.substr( $applicant->picture,6)) }}" style="width:200px;height:200px;"></center>
+            <?php if(isset($applicant->picture)){ ?>
+                <center><img src="{{ URL::asset('storage'.substr( $applicant->picture,6)) }}" width="200px" height="200px"></center>
+            <?php }else{ ?>
+                <center><img src="{{ asset('img/no_pic.png') }}" width='200px' height='200px'></center><br><hr>
+            <?php } ?>
         </div>
         <div class="card-body">
             <h3>"{{ $applicant->nickname }}"</h3>
@@ -15,10 +19,13 @@
                 echo $applicant->gender . " - " . $applicant_age . " years old<br>";
                 echo "Birth Date: ".$applicant->birthdate."<br>";
                 echo "Contact No.(s): ".$applicant->contact_number."<br>";
-               
+                echo "Highest Educational Attainment: ".$applicant->highest_educational_attainment."<br>";
+                echo "Work Experience: ".$applicant->years_of_experience." year(s)<br>";
             ?>
             @if($applicant->resume_public || Auth::user()->role=="Administrator")
-                <a href="{{ URL::asset('storage'.substr($applicant->resume_filepath,6)) }}" class="btn btn-success btn-round"  download="{{ strtolower($applicant->lastname ."_". $applicant->firstname ."_". $applicant->middlename."_"."resume") }}">Download Resume</a>
+                @if(isset($applicant->resume_filepath))
+                    <a href="{{ URL::asset('storage'.substr($applicant->resume_filepath,6)) }}" class="btn btn-success btn-round"  download="{{ strtolower($applicant->lastname ."_". $applicant->firstname ."_". $applicant->middlename."_"."resume") }}">Download Resume</a>
+                @endif
             @endif
         </div>
     </div>

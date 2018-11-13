@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\User;
 use Validator,Auth,Cookie;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Log;
 
 
 class LoginController extends Controller
@@ -41,7 +40,6 @@ class LoginController extends Controller
                     $user->save();
 
                     $this->clearLoginAttempts($request);
-                    Log::info($user->name." has logged in.");
                 
                     if($role=='Administrator' || $role=='User'){
                         return redirect('/dashboard');

@@ -1,24 +1,24 @@
 <?php
 if(isset($request)){
     $applicant = "";
-    $job_title = $request->job_title;
-    $company = $request->company;
-    $location = $request->location;
-    $years_of_experience = $request->years_of_experience;
-    $education_level = $request->education_level;
-    $age = $request->age;
-    $gender = $request->gender;
-    $type = $request->type;
-    $minimum_salary = $request->minimum_salary;
-    $maximum_salary = $request->maximum_salary;
-    $language = $request->language;
-    $license = $request->license;
-    $number_of_applicants = $request->number_of_applicants;
-    $description = $request->description;
-    $status = $request->status;
-    $created_at = $request->created_at;
-    $updated_at = $request->updated_at;
-    $status = $request->status;
+    $job_title = $request[0]->job_title;
+    $company = $request[0]->company;
+    $location = $request[0]->location;
+    $years_of_experience = $request[0]->years_of_experience;
+    $education_level = $request[0]->education_level;
+    $age = $request[0]->age;
+    $gender = $request[0]->gender;
+    $type = $request[0]->type;
+    $minimum_salary = $request[0]->minimum_salary;
+    $maximum_salary = $request[0]->maximum_salary;
+    $language = $request[0]->language;
+    $license = $request[0]->license;
+    $number_of_applicants = $request[0]->number_of_applicants;
+    $description = $request[0]->description;
+    $status = $request[0]->status;
+    $created_at = $request[0]->created_at;
+    $updated_at = $request[0]->updated_at;
+    $status = $request[0]->status;
 }
 ?>
 @extends('layout/employer_container')
@@ -46,7 +46,7 @@ if(isset($request)){
                     <input type="text" class="form-control" name="location" value="{{ $location }}" readonly>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Years">Years of Experience:</label>
+                    <label for="Years">Years of Work Experience:</label>
                     <input type="number" class="form-control" name="years_of_experience" value="{{ $years_of_experience }}" readonly>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
@@ -118,7 +118,7 @@ if(isset($request)){
 
                                                         echo "<tr>";
                                                             echo "<td>".$ctr."</td>";
-                                                            echo "<td>".$row->lastname.", ".$row->firstname." ".$row->middlename." ( ".$row->gender.", ".$applicant_age." years old )</td>";
+                                                            echo "<td>".$row->lastname.", ".$row->firstname." ".$row->middlename." ( ".$row->gender.", ".$applicant_age." years old".", ". $row->years_of_experience . " year(s) of experience )</td>";
                                                             echo "<td>".$row->remarks."</td>";
                                                             echo "<td>".$row->status."</td>";
                                                             echo "<td><a class='btn btn-warning btn-sm' onclick='viewRecord(\"/applicants/show/\",".$row->applicant_id.");' href='#' style='color:white;'><i class='material-icons'>search</i></a></td>";

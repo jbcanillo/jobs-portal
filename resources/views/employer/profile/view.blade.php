@@ -2,11 +2,7 @@
 @section('content')
         <div class="card">
             <div class="card-header card-header-info">
-                <h4 class="card-title"><i class="material-icons">account_circle</i> Profile
-                    <span class="pull-right">
-                        <a href="/employer/profile/0/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a>
-                        </span>
-                </h4>
+                <h4 class="card-title"><i class="material-icons">account_circle</i> Profile</h4>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -27,15 +23,19 @@
                 <div class="row">
                     <div class="col-md-4">
                         <br><br><br><br><br><br>
-                        <div class="card card-profile" style="background-color: azure;">
+                        <div class="card card-profile" style="background-color: lavender;">
                             <div class="card-avatar">
-                                <center><img src="{{ URL::asset('storage'.substr($employer_details->picture,6)) }}" style="width:200px;height:200px;"></center>
+                                <?php if(isset($employer_details->picture)){ ?>
+                                    <center><img src="{{ URL::asset('storage'.substr($employer_details->picture,6)) }}" width="200px" height="200px"></center>
+                                <?php }else{ ?>   
+                                    <center><img src="{{ asset('img/no_pic.png') }}" width='200px' height='200px'></center>
+                                <?php } ?>  
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title">{{ $employer_details->company_name }}</h4>
-                                <label>How did you know us?</label>
+                                <label>About Us</label>
                                 <p class="card-description">
-                                    {{ $employer_details->how }}
+                                    {{ $employer_details->about_me }}
                                 </p>
                                 <?php
                                     if($employer_details->status=='Active'){
@@ -51,9 +51,10 @@
                         <div class="card">
                             <div style="overflow-x:auto">
                             <table class="mdl-data-table mdl-js-data-table mdl-data-table-default-non-numeric" cellspacing="0" style="width:100%; text-align:left;">
-                                <th>
-                                    <td colspan="2"><b><h5>Information</h5><b></td>
-                                </th>
+                                <tr>
+                                    <td><b><h5>Employer Information</h5><b></td>
+                                    <td style="text-align:right"><a href="/employer/profile/0/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a></td>
+                                </tr>
                                 <tr>
                                     <td><b>Nickname:</b></td><td>{{ $employer_details->nickname }}</td>
                                 </tr>
@@ -88,7 +89,7 @@
                                     <td><b>Contact Number:</b></td><td>{{ $employer_details->contact_number }}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>About our company:</b></td><td>{{ $employer_details->about_me }}</td>
+                                    <td><b>How did you know us?</b></td><td>{{ $employer_details->how }}</td>
                                 </tr>
                             </table>
                             </div>
