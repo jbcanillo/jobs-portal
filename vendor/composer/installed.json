@@ -1,5 +1,46 @@
 [
     {
+        "name": "aginev/activity-log",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/aginev/activity-log.git",
+            "reference": "2745b12865366f5831358ce7be3eedf8c473d677"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/aginev/activity-log/zipball/2745b12865366f5831358ce7be3eedf8c473d677",
+            "reference": "2745b12865366f5831358ce7be3eedf8c473d677",
+            "shasum": ""
+        },
+        "time": "2016-02-05T10:09:25+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Aginev\\ActivityLog\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Atanas Ginev",
+                "email": "naskospam@gmail.com"
+            }
+        ],
+        "description": "Track user activities in Laravel 5 applications",
+        "homepage": "http://aginev.com",
+        "keywords": [
+            "Laravel 5 activity log",
+            "activity log",
+            "track user activity for Laravel 5"
+        ]
+    },
+    {
         "name": "dnoegel/php-xdg-base-dir",
         "version": "0.1",
         "version_normalized": "0.1.0.0",

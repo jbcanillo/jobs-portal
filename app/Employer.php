@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Employer extends Model
 {
     //
+    use \Aginev\ActivityLog\Traits\ObservableModel;
 }

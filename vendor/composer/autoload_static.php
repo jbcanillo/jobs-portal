@@ -124,6 +124,7 @@ class ComposerStaticInitcb92be78d81ce7a7497bfeda08efdd6d
         'A' => 
         array (
             'App\\' => 4,
+            'Aginev\\ActivityLog\\' => 19,
         ),
     );
 
@@ -322,6 +323,10 @@ class ComposerStaticInitcb92be78d81ce7a7497bfeda08efdd6d
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'Aginev\\ActivityLog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/aginev/activity-log/src',
+        ),
     );
 
     public static $fallbackDirsPsr4 = array (
@@ -390,6 +395,16 @@ class ComposerStaticInitcb92be78d81ce7a7497bfeda08efdd6d
     );
 
     public static $classMap = array (
+        'Aginev\\ActivityLog\\ActivityLogFacade' => __DIR__ . '/..' . '/aginev/activity-log/src/ActivityLogFacade.php',
+        'Aginev\\ActivityLog\\ActivityLogServiceProvider' => __DIR__ . '/..' . '/aginev/activity-log/src/ActivityLogServiceProvider.php',
+        'Aginev\\ActivityLog\\Commands\\ActivityLogClean' => __DIR__ . '/..' . '/aginev/activity-log/src/Commands/ActivityLogClean.php',
+        'Aginev\\ActivityLog\\Exceptions\\ActivityLogException' => __DIR__ . '/..' . '/aginev/activity-log/src/Exceptions/ActivityLogException.php',
+        'Aginev\\ActivityLog\\Handlers\\ActivityLogInterface' => __DIR__ . '/..' . '/aginev/activity-log/src/Handlers/ActivityLogInterface.php',
+        'Aginev\\ActivityLog\\Handlers\\EloquentHandler' => __DIR__ . '/..' . '/aginev/activity-log/src/Handlers/EloquentHandler.php',
+        'Aginev\\ActivityLog\\Handlers\\HandlerAbstract' => __DIR__ . '/..' . '/aginev/activity-log/src/Handlers/HandlerAbstract.php',
+        'Aginev\\ActivityLog\\Handlers\\LogHandler' => __DIR__ . '/..' . '/aginev/activity-log/src/Handlers/LogHandler.php',
+        'Aginev\\ActivityLog\\Models\\UserActivity' => __DIR__ . '/..' . '/aginev/activity-log/src/Models/UserActivity.php',
+        'Aginev\\ActivityLog\\Traits\\ObservableModel' => __DIR__ . '/..' . '/aginev/activity-log/src/Traits/ObservableModel.php',
         'App\\Applicant' => __DIR__ . '/../..' . '/app/Applicant.php',
         'App\\Awards' => __DIR__ . '/../..' . '/app/Awards.php',
         'App\\Certifications' => __DIR__ . '/../..' . '/app/Certifications.php',
@@ -400,6 +415,7 @@ class ComposerStaticInitcb92be78d81ce7a7497bfeda08efdd6d
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\GovernmentDocuments' => __DIR__ . '/../..' . '/app/GovernmentDocuments.php',
         'App\\Http\\Controllers\\ApplicantsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApplicantsController.php',
+        'App\\Http\\Controllers\\ApplicantsProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApplicantsProfileController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -407,7 +423,9 @@ class ComposerStaticInitcb92be78d81ce7a7497bfeda08efdd6d
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\EmployersController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployersController.php',
-        'App\\Http\\Controllers\\JobsController' => __DIR__ . '/../..' . '/app/Http/Controllers/JobsController.php',
+        'App\\Http\\Controllers\\EmployersProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployersProfileController.php',
+        'App\\Http\\Controllers\\EmployersRequestController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployersRequestController.php',
+        'App\\Http\\Controllers\\EmployersSearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployersSearchController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\MailController' => __DIR__ . '/../..' . '/app/Http/Controllers/MailController.php',
         'App\\Http\\Controllers\\RequestsController' => __DIR__ . '/../..' . '/app/Http/Controllers/RequestsController.php',

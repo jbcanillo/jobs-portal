@@ -184,6 +184,10 @@ return [
          * 3rd Party Service Provider for Social Media Login...
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
+        /*
+         * 3rd Party Service Provider for Activity Logger...
+         */
+        Aginev\ActivityLog\ActivityLogServiceProvider::class,
     ],
 
     /*

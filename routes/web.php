@@ -85,6 +85,10 @@ Route::resource('/employer/search_applicants','EmployersSearchController');
 
 Route::resource('/applicant/profile','ApplicantsProfileController');
 
+Route::resource('/activity_logs','ActivityLogsController');
+Route::get('/activity_logs/show/{id}',['uses' =>'ActivityLogsController@show']);
+Route::get('/activity_logs/delete/{id}',['uses' =>'ActivityLogsController@destroy']);
+
 Route::get('/symlink', function () {
     $storage = App::make('files')->link(storage_path('app/public'), public_path('storage'));
     if($storage){

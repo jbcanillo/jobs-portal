@@ -54,5 +54,6 @@ return array(
     'Cron\\' => array($vendorDir . '/mtdowling/cron-expression/src/Cron'),
     'Collective\\Html\\' => array($vendorDir . '/laravelcollective/html/src'),
     'App\\' => array($baseDir . '/app'),
+    'Aginev\\ActivityLog\\' => array($vendorDir . '/aginev/activity-log/src'),
     '' => array($vendorDir . '/nesbot/carbon/src'),
 );
