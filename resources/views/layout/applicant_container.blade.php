@@ -1,4 +1,4 @@
-@if(Auth::user() && (Auth::user()->role=='Administrator' || Auth::user()->role=='User'))
+@if(Auth::user() && Auth::user()->role=='Applicant')
   <!DOCTYPE html>
   <html lang="{{ app()->getLocale() }}">
   <head>
@@ -52,50 +52,24 @@
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
-            <li class="{{ ($current_route_name == 'dashboard' || $current_route_name == '' ) ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('dashboard') }}">
-                <i class="material-icons">dashboard</i>
-                <p>Dashboard</p>
+            <li class="{{ ($current_route_name == 'profile') ? 'nav-item active' : 'nav-item' }}">
+              <a class="nav-link" href="{{ url('applicant/profile') }}">
+                <i class="material-icons">account_circle</i>
+                <p>Profile</p>
               </a>
             </li>
-            @if(Auth::user()->role=="Administrator")
-              <li class="{{ ($current_route_name == 'activity_logs') ? 'nav-item active' : 'nav-item' }}">
-                <a class="nav-link" href="{{ url('activity_logs') }}">
-                  <i class="material-icons">find_in_page</i>
-                  <p>Activity Logs</p>
-                </a>
-              </li>
-              <li class="{{ ($current_route_name == 'users') ? 'nav-item active' : 'nav-item' }}">
-                <a class="nav-link" href="{{ url('users') }}">
-                  <i class="material-icons">account_circle</i>
-                  <p>Users</p>
-                </a>
-              </li>
-            @endif
-            <li class="{{ ($current_route_name == 'applicants') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('applicants') }}">
-                <i class="material-icons">assignment_ind</i>
-                <p>Applicants</p>
+            <li class="{{ ($current_route_name == 'requests' || $current_route_name =='' ) ? 'nav-item active' : 'nav-item' }}">
+              <a class="nav-link" href="{{ url('applicant/my_applications') }}">
+                <i class="material-icons">file_copy</i>
+                <p>My Applications</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'employers') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('employers') }}">
-                <i class="material-icons">people</i>
-                <p>Employers</p>
+            <li class="{{ ($current_route_name == 'search_jobs' ) ? 'nav-item active' : 'nav-item' }}">
+              <a class="nav-link" href="{{ url('applicant/search_jobs') }}">
+                <i class="material-icons">search</i>
+                <p>Search Jobs</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'requests') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('requests') }}">
-                <i class="material-icons">assignment</i>
-                <p>Job Requests</p>
-              </a>
-            <!--
-            <li class="{{ ($current_route_name == 'archives') ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('archives') }}">
-                <i class="material-icons">archive</i>
-                <p>Archives</p>
-              </a>
-            </li>-->
             <li class="nav-item ">
                 <a class="nav-link" href="{{ url('logout') }}">
                   <i class="material-icons">exit_to_app</i>
@@ -116,7 +90,7 @@
                 <span class="navbar-toggler-icon icon-bar"></span>
                 <span class="navbar-toggler-icon icon-bar"></span>
               </button>
-              <a class="navbar-brand"><p><h5>Welcome {{ Auth::user()->name }}</h5> [ Access-level: {{ Auth::user()->role }}, Last log-in: {{ date('j F Y H:m A',strtotime(Auth::user()->last_login)) }} ]</a>
+              <a class="navbar-brand"><h5>Welcome {{ Auth::user()->name }}</h5> [ Access-level: {{ Auth::user()->role }}, Last log-in: {{ date('j F Y H:m A',strtotime(Auth::user()->last_login)) }} ]</a>
             </div>
             <div class="collapse navbar-collapse justify-content-end">
               <ul class="navbar-nav">

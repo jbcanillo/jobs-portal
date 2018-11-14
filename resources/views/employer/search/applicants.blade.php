@@ -5,13 +5,18 @@
         <h4 class="card-title"><i class="material-icons">search</i> Search Applicants</h4>
     </div>
     <div class="card-body">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </div>
-        @endif
+      @if (\Session::has('success'))
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>	
+            <strong>{{ \Session::get('success') }}</strong>
+        </div><br />
+      @endif
+      @if (\Session::has('error'))
+        <div class="alert alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>	
+            <strong>{{ \Session::get('error') }}</strong>
+        </div><br />
+      @endif
         <form method="post" action="{{ action('EmployersSearchController@store') }}" enctype="multipart/form-data">
             {{ csrf_field() }}
                 <div class="row">
@@ -69,7 +74,7 @@
                 <div class="row">
                     <div class="form-group col-md-12 col-lg-12">
                         <span class="pull-right">
-                            <a href="{{url('employer/search')}}" class="btn btn-md btn-danger">Clear</a>
+                            <a href="{{url('employer/search_applicants')}}" class="btn btn-md btn-danger">Clear</a>
                         </span>
                         <span class="pull-right">
                             <button type="submit" class="btn btn-md btn-success">Filter</button>
@@ -81,6 +86,12 @@
         @if(isset($applicants))
             <div class="row">
                 @foreach($applicants as $applicant)
+                    <?php 
+                        $birthdate = new DateTime($applicant->birthdate);
+                        $now = new DateTime();
+                        $interval = $now->diff($birthdate);
+                        $applicant_age = $interval->y;
+                    ?>
                     <div class="col-md-4">
                         <br> 
                         <div class="card card-profile" style="background-color: lavender;">
@@ -94,7 +105,7 @@
                                 <div class="card-body">
                                 <h4 class="card-title">{{ $applicant->lastname .", ". $applicant->firstname ." ". $applicant->middlename }}</h4>
                                     <p class="card-description">
-                                        {{ $applicant->gender . "-" . " years old"}}
+                                        {{ $applicant->gender . " - " . $applicant_age. " years old"}}
                                     </p>
                                     <a class='btn btn-info btn-round' onclick='viewRecord("/applicants/show/",{{ $applicant->applicant_id }});' href='#' style='color:white;'>View</a>
                                 </div>

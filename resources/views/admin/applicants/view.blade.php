@@ -9,7 +9,14 @@
             <?php } ?>
         </div>
         <div class="card-body">
-            <h3>"{{ $applicant->nickname }}"</h3>
+            <?php
+                if($applicant->nickname!=""){
+                    $nickname = ' "'.$applicant->nickname.'"';
+                }else{
+                    $nickname = '';
+                }
+            ?>
+            <h3>{{ $nickname }}</h3>
             <h4 class="card-title">{{ $applicant->lastname .", ". $applicant->firstname ." ". $applicant->middlename }}</h4>
             <?php
                 $birthdate = new DateTime($applicant->birthdate);
@@ -29,6 +36,7 @@
             @endif
         </div>
     </div>
+    @if($applicant->resume_public || Auth::user()->role=="Administrator")
     <div class="card">
         <div class="card-header card-header-tabs card-header-info">
             <div class="nav-tabs-navigation">
@@ -567,8 +575,12 @@
                     </div>
                 </div>
             </div> 
-        </div>  
+        </div>
     </div>
-
+    @else
+        <div class="alert alert-info alert-block">
+            <center><strong>Some information is hidden due to privacy.</strong></center>
+        </div>
+    @endif
 </table>
 </div>

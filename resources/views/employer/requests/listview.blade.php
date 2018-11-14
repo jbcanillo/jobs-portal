@@ -56,7 +56,7 @@
                         { data: 'status', name: 'status' },
                         { 
                           "render": function ( data, type, full, meta ) { 
-                           return '<a href="/employer/requests/show/'+full.id+'" class="btn btn-sm btn-default"><i class="material-icons">visibility</i></a><a href="#" onclick="editRecord('+full.id+',\''+full.status+'\');" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a><a href="#" onclick="deleteRecord('+full.id+',\''+full.status+'\');" class="btn btn-sm btn-danger"><i class="material-icons">close</i></a>';
+                           return '<a href="/employer/requests/show/'+full.id+'" class="btn btn-sm btn-primary"><i class="material-icons">update</i></a><a href="#" onclick="editRecord('+full.id+',\''+full.status+'\');" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a><a href="#" onclick="deleteRecord('+full.id+',\''+full.status+'\');" class="btn btn-sm btn-danger"><i class="material-icons">close</i></a>';
                            }
                         }  
                      ]

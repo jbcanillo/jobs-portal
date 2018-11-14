@@ -85,7 +85,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group bmd-form-group">
-                            <label >Contact Person</label>
+                            <label >Contact Person(s)</label>
                             <input type="text" id="contact_person" name="contact_person" class="form-control" value="{{ $employer_details->contact_person }}" required>
                         </div>
                     </div>

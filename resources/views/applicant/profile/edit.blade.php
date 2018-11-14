@@ -434,10 +434,9 @@ $language_spoken = '';
 $government_documents = '';
 $upload_video = '';
 
-if(!isset($applicant)){
-    $method = "Add Applicant";
-    $button = "Submit";
-}else{
+
+if(isset($applicant)){
+    
     $firstname = $applicant->firstname;
     $middlename = $applicant->middlename;
     $lastname = $applicant->lastname;
@@ -447,6 +446,7 @@ if(!isset($applicant)){
     $highest_educational_attainment = $applicant->highest_educational_attainment;
     $years_of_experience = $applicant->years_of_experience;
     $contact = $applicant->contact_number;
+    $email = $user->email;
     $picture = $applicant->picture ;
     $resume_file = $applicant->resume_filepath;
     $resume_public = $applicant->resume_public;
@@ -454,8 +454,6 @@ if(!isset($applicant)){
     $status = $applicant->status;
     $created_at = $applicant->created_at;
     $updated_at = $applicant->updated_at;
-    $method = "Edit Applicant";
-    $button = "Update";
 
     foreach($desired_jobs_details as $row){
 
@@ -891,11 +889,12 @@ if(!isset($applicant)){
 
 
 ?>
-@extends('layout/admin_container')
+@extends('layout/applicant_container')
 @section('content')
     <div class="card">
         <div class="card-header card-header-tabs card-header-info  ">
-        <h4 class="card-title"><i class="material-icons">assignment_ind</i> {{ $method }}</h4>
+        <h4 class="card-title"><i class="material-icons">edit</i> Edit Profile</h4>
+        <p class="card-category">Please complete your profile to keep your account activated.</p>
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -905,11 +904,9 @@ if(!isset($applicant)){
                   @endforeach
               </div>
             @endif
-            <?php if(!isset($applicant)){ ?>
-                <form method="post" action="{{ action('ApplicantsController@store') }}" enctype="multipart/form-data">
-            <?php }else{ ?>
-                <form method="post" action="{{ action('ApplicantsController@update',$applicant->id) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ action('ApplicantsProfileController@update',Auth::user()->id) }}" enctype="multipart/form-data">
                 <input name="_method" type="hidden" value="PATCH">
+                {{ csrf_field() }}
                 <?php if(isset($picture)){ ?><br><br>
                     <div class='col-md-12 col-lg-12'>
                         <div class="card card-profile">
@@ -920,8 +917,9 @@ if(!isset($applicant)){
                                 
                             </div>
                         </div>
-                    </div>
-                <?php }else{ ?><br><br>
+                    </div><br><br>
+                <?php }else{ ?>
+                    <br><br>
                     <div class='col-md-12 col-lg-12'>
                         <div class="card card-profile">
                             <div class="card-avatar">
@@ -933,8 +931,6 @@ if(!isset($applicant)){
                         </div>
                     </div>
                 <?php } ?>
-            <?php } ?>
-                {{ csrf_field() }}
               <div class="row">
                 <div class='col-md-12 col-lg-6'>
                   <label for="Firstname">Firstname:</label>
@@ -995,6 +991,10 @@ if(!isset($applicant)){
                     <input type="number" class="form-control" name="years_of_experience" value="{{ (isset($applicant))? $years_of_experience : old('years_of_experience') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
+                    <label for="Email">Email:</label>
+                    <input type="email" class="form-control" name="email" value="{{ (isset($applicant))? $email : old('email') }}">
+                </div>
+                <div class='col-md-12 col-lg-6'>  
                     <label for="Picture">Picture:</label>
                     <input type="text" class="form-control" name="picture_def" value="{{ (isset($applicant))? $picture : old('picture_def') }}" readonly>
                     <input type="file" class="form-control" id="picture" name="picture" accept=".jpeg,.jpg,.png">
@@ -1008,6 +1008,7 @@ if(!isset($applicant)){
                     <input type="text" class="form-control" name="resume_file_def" value="{{ (isset($applicant))? $resume_file : old('resume_file_def') }}" readonly>
                     <input type="file" class="form-control" id="resume_file" name="resume_file" accept=".jpeg,.jpg,application/pdf,application/msword">
                 </div>
+               
                 <div class='col-md-12 col-lg-6'>  
                     <label for="Resume_Public">Resume viewable in public?</label>
                     <select class="form-control" name="resume_public" required>
@@ -1019,34 +1020,6 @@ if(!isset($applicant)){
                             <option value="1" {{ ($resume_public == 1) ? 'selected' : '' }}>Yes</option>
                             <option value="0" {{ ($resume_public == 0) ? 'selected' : '' }}>No</option>
                         <?php }?>
-                    </select>
-                </div>
-                <div class='col-md-12 col-lg-6'>  
-                    <label for="Username">Link to User ID:</label>
-                    <select class="form-control" name="user_id" required>
-                        <option value="" selected></option>
-                        @foreach ($users as $user)
-                            @if($user->role=='Applicant')
-                                @if(!isset($applicant))
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @else
-                                    <option value="{{ $user->id }}" {{ ($user_id == $user->id) ? 'selected' : '' }}>{{ $user->name }}</option>
-                                @endif
-                            @endif   
-                        @endforeach
-                    </select>
-                </div>
-                <div class='col-md-12 col-lg-6'>  
-                    <label for="Status">Status:</label>
-                    <select class="form-control" name="status" required>
-                      <option value="" selected></option>
-                      <?php if(!isset($applicant)){ ?>
-                        <option value="Active" {{ (old('status') == 'Active') ? 'selected' : '' }}>Active</option>
-                        <option value="Inactive" {{ (old('status') == 'Inactive') ? 'selected' : '' }}>Inactive</option>
-                      <?php }else{ ?>
-                        <option value="Active" {{ ($status == 'Active') ? 'selected' : '' }}>Active</option>
-                        <option value="Inactive" {{ ($status == 'Inactive') ? 'selected' : '' }}>Inactive</option>
-                      <?php }?>
                     </select>
                 </div>
               </div>
@@ -1317,10 +1290,10 @@ if(!isset($applicant)){
               <div class="row">
                 <div class="form-group col-md-8 col-lg-12">
                   <span class="pull-right">
-                      <a href="{{url('applicants')}}" class="btn btn-md btn-danger">Cancel</a>
+                      <a href="{{url('applicant/profile')}}" class="btn btn-md btn-danger">Cancel</a>
                   </span>
                   <span class="pull-right">
-                    <button type="submit" class="btn btn-md btn-success">{{ $button }}</button>
+                    <button type="submit" class="btn btn-md btn-success">Update</button>
                   </span>
                 </div>
               </div>

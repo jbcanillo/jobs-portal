@@ -24,32 +24,19 @@ class EmployersProfileController extends Controller
         return view('employer/profile/view',compact('employer_details','user_details'));
     }
 
-    private function validation($inputs,$id=NULL){
+    private function validation($inputs,$id,$emp_id=NULL){
         $rules =[
             'firstname' => 'required|string',
             'middlename' => 'required|string',
             'lastname' => 'required|string',
             'email' => 'required|string|unique:users,email,'.$id,
-            'company_name' => 'required|string',
+            'company_name' => 'required|string|unique:employers,company_name,'.$emp_id,
             'company_address' => 'required|string',
             'company_size' => 'required|integer',
             'contact_person' => 'required|string',
             'contact_number' => 'required|string'
         ];
         return $this->validate($inputs, $rules);
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-     
     }
 
     /**
@@ -76,9 +63,9 @@ class EmployersProfileController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $validationError = $this->validation($request,$id);
+        $employer = \App\Employer::where('user_id','=',$id)->firstOrFail();
+        $validationError = $this->validation($request,$id,$employer->id);
         if(!$validationError){
-            $employer = \App\Employer::where('user_id','=',$id)->firstOrFail();
             $this->validate($request, ['picture.*' => 'mimes:jpg,jpeg,png','file' => 'max:10240']); 
             if($request->hasFile('picture')){
                 //Storage::delete($employer->picture);
@@ -105,7 +92,7 @@ class EmployersProfileController extends Controller
             $user =  \App\User::find($employer->user_id);
             $user->email = strip_tags($request->get('email'));
             $user->save();
-            return redirect('employer/profile')->with('success', 'Your account has been updated.');
+            return redirect('employer/profile')->with('success', 'Your profile has been updated.');
         }
     }
 

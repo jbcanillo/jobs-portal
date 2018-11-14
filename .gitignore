@@ -5,4 +5,5 @@
 .envPROD
 /public/storage
 /public/storagex
+/public_html/storage
 .gitignore

@@ -36,6 +36,7 @@
 @section('datatable')
   <script type="text/javascript">
     $(document).ready(function() {
+      var xlink ="/employers/show/";
          $('.datatable').DataTable({
             responsive: true,
              processing: true,
@@ -51,7 +52,7 @@
                         { data: 'status', name: 'status' },
                         { 
                           "render": function ( data, type, full, meta ) { 
-                           return '<a href="/employers/'+full.id+'/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a><a href="#" onclick="deleteRecord('+full.id+');" class="btn btn-sm btn-danger"><i class="material-icons">close</i></a>';
+                           return '<a href="#" onclick="viewRecord(\''+xlink+'\','+full.id+');" class="btn btn-sm btn-primary"><i class="material-icons">visibility</i><a href="/employers/'+full.id+'/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a><a href="#" onclick="deleteRecord('+full.id+');" class="btn btn-sm btn-danger"><i class="material-icons">close</i></a>';
                            }
                         }  
                      ],

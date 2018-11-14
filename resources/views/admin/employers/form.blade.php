@@ -67,7 +67,7 @@ if(!isset($employer)){
                     <input type="number" class="form-control" name="company_size" value="{{ (isset($employer))? $company_size : old('company_size') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  
-                    <label for="Contact">Contact Person:</label>
+                    <label for="Contact">Contact Person(s):</label>
                     <input type="text" class="form-control" name="contact_person" value="{{ (isset($employer))? $contact_person : old('contact_person') }}" required>
                 </div>
                 <div class='col-md-12 col-lg-6'>  

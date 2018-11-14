@@ -25,7 +25,7 @@ if(isset($request)){
 @section('content')
     <div class="card">
         <div class="card-header card-header-tabs card-header-info ">
-        <h4 class="card-title"><i class="material-icons">visibility</i> View Job Request</h4>
+        <h4 class="card-title"><i class="material-icons">update</i> View Job Request</h4>
         </div>
         <div class="card-body">
               <div class="row">
@@ -105,7 +105,7 @@ if(isset($request)){
                                             <td><b>Applicant</b></td>
                                             <td><b>Remarks</b></td>
                                             <td><b>Status</b></td>
-                                            <td><b>Info</b></td>
+                                            <td><b>View Info</b></td>
                                             <?php
                                                 if(count($request_assignments)<>0){
                                                     $ctr=1;
@@ -121,7 +121,7 @@ if(isset($request)){
                                                             echo "<td>".$row->lastname.", ".$row->firstname." ".$row->middlename." ( ".$row->gender.", ".$applicant_age." years old".", ". $row->years_of_experience . " year(s) of experience )</td>";
                                                             echo "<td>".$row->remarks."</td>";
                                                             echo "<td>".$row->status."</td>";
-                                                            echo "<td><a class='btn btn-warning btn-sm' onclick='viewRecord(\"/applicants/show/\",".$row->applicant_id.");' href='#' style='color:white;'><i class='material-icons'>search</i></a></td>";
+                                                            echo "<td><a class='btn btn-warning btn-sm' onclick='viewRecord(\"/applicants/show/\",".$row->applicant_id.");' href='#' style='color:white;'><i class='material-icons'>visibility</i></a></td>";
                                                         echo "</tr>";
                                                         $ctr++;
                                                     }

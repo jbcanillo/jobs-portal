@@ -64,8 +64,8 @@
                 <p>Post Job Requests</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'search' ) ? 'nav-item active' : 'nav-item' }}">
-              <a class="nav-link" href="{{ url('employer/search') }}">
+            <li class="{{ ($current_route_name == 'search_applicants' ) ? 'nav-item active' : 'nav-item' }}">
+              <a class="nav-link" href="{{ url('employer/search_applicants') }}">
                 <i class="material-icons">search</i>
                 <p>Search Applicants</p>
               </a>

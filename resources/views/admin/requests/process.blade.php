@@ -17,7 +17,7 @@ $applicant = '<div class="row item-row-applicant command-row-applicant card-body
                                 <option value=""></option>
                                 '.$applicant_name.'
                             </select>
-                            <a class="btn btn-warning btn-sm" onclick="" href="#" style="color:white;left:700px;bottom:43px"><i class="material-icons">search</i></a>
+                            <a class="btn btn-warning btn-sm" onclick="" href="#" style="color:white;left:700px;bottom:43px"><i class="material-icons">visibility</i></a>
                         </div>
                         
                         <div class="col-md-1 col-sm-12 col-xs-12">
@@ -84,7 +84,7 @@ if(isset($request)){
                                     <option value="'.$row->applicant_id.'" selected>'.$row->lastname.', '.$row->firstname.' '.$row->middlename.' ( '.$row->gender.', '.$applicant_age.' years old'.', '. $row->years_of_experience . ' year(s) of experience )</option>
                                     '.$applicant_name.'
                                 </select>
-                                <a class="btn btn-warning btn-sm" onclick="viewRecord(\'/applicants/show/\','.$row->applicant_id.');" href="#" style="color:white;left:700px;bottom:43px"><i class="material-icons">search</i></a>
+                                <a class="btn btn-warning btn-sm" onclick="viewRecord(\'/applicants/show/\','.$row->applicant_id.');" href="#" style="color:white;left:700px;bottom:43px"><i class="material-icons">visibility</i></a>
                             </div>
                            
                             <div class="col-md-1 col-sm-12 col-xs-12">
@@ -120,7 +120,7 @@ if(isset($request)){
 @section('content')
     <div class="card">
         <div class="card-header card-header-tabs card-header-info ">
-        <h4 class="card-title"><i class="material-icons">search</i> Process Job Request</h4>
+        <h4 class="card-title"><i class="material-icons">update</i> Process Job Request</h4>
         </div>
         <div class="card-body">
             @if ($errors->any())

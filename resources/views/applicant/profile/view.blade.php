@@ -1,4 +1,4 @@
-@extends('layout/employer_container')
+@extends('layout/applicant_container')
 @section('content')
         <div class="card">
             <div class="card-header card-header-info">
@@ -13,7 +13,7 @@
                                 <strong>{{ \Session::get('success') }}</strong>
                             </div><br />
                         @endif
-                        @if ($employer_details->status=='Inactive')
+                        @if ($applicant_details->status=='Inactive')
                             <div class="alert alert-danger alert-block">
                                 <center><i class="material-icons" style="color:white">warning</i> <strong> You're account is still inactive. Kindly complete your information to activate your account.</strong></center>
                             </div><br />
@@ -25,20 +25,16 @@
                         <br><br><br><br><br><br>
                         <div class="card card-profile" style="background-color: lavender;">
                             <div class="card-avatar">
-                                <?php if(isset($employer_details->picture)){ ?>
-                                    <center><img src="{{ URL::asset('storage'.substr($employer_details->picture,6)) }}" width="200px" height="200px"></center>
+                                <?php if(isset($applicant_details->picture)){ ?>
+                                    <center><img src="{{ URL::asset('storage'.substr($applicant_details->picture,6)) }}" width="200px" height="200px"></center>
                                 <?php }else{ ?>   
                                     <center><img src="{{ asset('img/no_pic.png') }}" width='200px' height='200px'></center>
                                 <?php } ?>  
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title">{{ $employer_details->company_name }}</h4>
-                                <label>About Us</label>
-                                <p class="card-description">
-                                    {{ $employer_details->about_me }}
-                                </p>
+                                <h4 class="card-title">{{ $applicant_details->lastname .', '. $applicant_details->firstname .' '. $applicant_details->middlename}}</h4>
                                 <?php
-                                    if($employer_details->status=='Active'){
+                                    if($applicant_details->status=='Active'){
                                         echo ' <a href="" class="btn btn-success btn-round">Active</a>';
                                     }else{
                                         echo ' <a href="" class="btn btn-danger btn-round">Inactive</a>';
@@ -52,41 +48,41 @@
                             <div style="overflow-x:auto">
                             <table class="mdl-data-table mdl-js-data-table mdl-data-table-default-non-numeric" cellspacing="0" style="width:100%; text-align:left;">
                                 <tr>
-                                    <td><b><h5>Employer Information</h5><b></td>
-                                    <td style="text-align:right"><a href="#" onclick='viewRecord("/employers/show/",{{ $employer_details->id }});' class="btn btn-sm btn-primary"><i class="material-icons">visibility</i><a href="/employer/profile/0/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a></td>
+                                    <td><b><h5>Applicant Information</h5><b></td>
+                                    <td style="text-align:right"><a href="#" onclick='viewRecord("/applicants/show/",{{ $applicant_details->id }});' class="btn btn-sm btn-primary"><i class="material-icons">visibility</i><a href="/applicant/profile/0/edit" class="btn btn-sm btn-warning"><i class="material-icons">edit</i></a></td>
                                 </tr>
                                 <tr>
-                                    <td><b>Firstname:</b></td><td>{{ $employer_details->firstname }}</td>
+                                    <td><b>Firstname:</b></td><td>{{ $applicant_details->firstname }}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Middle:</b></td><td>{{ $employer_details->middlename }}</td>
+                                    <td><b>Middle:</b></td><td>{{ $applicant_details->middlename }}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Lastname:</b></td><td>{{ $employer_details->lastname }}</td>
+                                    <td><b>Lastname:</b></td><td>{{ $applicant_details->lastname }}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Nickname:</b></td><td>{{ $employer_details->nickname }}</td>
+                                    <td><b>Nickname:</b></td><td>{{ $applicant_details->nickname }}</td>
                                 </tr>
                                 <tr>
                                     <td><b>Email Address:</b></td><td>{{ $user_details->email }}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Company Name:</b></td><td>{{ $employer_details->company_name }}</td>
+                                    <td><b>Gender:</b></td><td>{{ $applicant_details->gender }}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Company Address:</b></td><td>{{ $employer_details->company_address }}</td>
+                                    <td><b>Birth Date:</b></td><td>{{ $applicant_details->birthdate }}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Company Size:</b></td><td>{{ $employer_details->company_size }} employees</td>
+                                    <td><b>Years of Work Experience:</b></td><td>{{ $applicant_details->years_of_experience }}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Contact Person:</b></td><td>{{ $employer_details->contact_person }}</td>
+                                    <td><b>Highest Educational Attainment:</b></td><td>{{ $applicant_details->highest_educational_attainment }}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Contact Number:</b></td><td>{{ $employer_details->contact_number }}</td>
+                                    <td><b>Contact Number:</b></td><td>{{ $applicant_details->contact_number }}</td>
                                 </tr>
                                 <tr>
-                                    <td><b>How did you know us?</b></td><td>{{ $employer_details->how }}</td>
+                                    <td><b>Resume is viewable in public?</b></td><td>{{ ($applicant_details->resume_public==1)?"Yes":"No" }}</td>
                                 </tr>
                             </table>
                             </div>

@@ -81,10 +81,9 @@ Route::resource('/employer/requests','EmployersRequestController');
 Route::get('/employer/requests/delete/{id}',['uses' =>'EmployersRequestController@destroy']);
 Route::get('/employer/requests/show/{id}',['uses' =>'EmployersRequestController@show']);
 
-Route::resource('/applicant/profile','ApplicantsProfileController');
-Route::get('/applicant/requests/show/{id}',['uses' =>'ApplicantsProfileController@show']);
+Route::resource('/employer/search_applicants','EmployersSearchController');
 
-Route::resource('/employer/search','EmployersSearchController');
+Route::resource('/applicant/profile','ApplicantsProfileController');
 
 Route::get('/symlink', function () {
     $storage = App::make('files')->link(storage_path('app/public'), public_path('storage'));

@@ -37,7 +37,7 @@ class EmployersController extends Controller
             'firstname' => 'required|string',
             'middlename' => 'required|string',
             'lastname' => 'required|string',
-            'company_name' => 'required|string'.$id,
+            'company_name' => 'required|string|unique:employers,company_name,'.$id,
             'company_size' => 'required|integer',
             'contact_person' => 'required|string',
             'contact_number' => 'required|string',
@@ -89,7 +89,9 @@ class EmployersController extends Controller
             return Datatables::of(Employer::query())->make(true);
         }else{
             $employer= \App\Employer::find($id);
-            return $employer->toJson(JSON_PRETTY_PRINT);
+            $user= \App\User::find($employer->user_id);
+            return view('admin/employers/view',compact('employer','user'));
+            //return $employer->toJson(JSON_PRETTY_PRINT);
         }
     }
 
