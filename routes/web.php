@@ -84,6 +84,8 @@ Route::get('/employer/requests/show/{id}',['uses' =>'EmployersRequestController@
 Route::resource('/employer/search_applicants','EmployersSearchController');
 
 Route::resource('/applicant/profile','ApplicantsProfileController');
+Route::get('/applicant/my_applications',['uses' =>'ApplicantsProfileController@myApplications']);
+Route::get('/applicant/my_applications/show/{id}',['uses' =>'ApplicantsProfileController@show']);
 
 Route::resource('/activity_logs','ActivityLogsController');
 Route::get('/activity_logs/show/{id}',['uses' =>'ActivityLogsController@show']);

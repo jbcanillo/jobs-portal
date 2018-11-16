@@ -64,12 +64,12 @@
                 <p>My Applications</p>
               </a>
             </li>
-            <li class="{{ ($current_route_name == 'search_jobs' ) ? 'nav-item active' : 'nav-item' }}">
+            <!--<li class="{{ ($current_route_name == 'search_jobs' ) ? 'nav-item active' : 'nav-item' }}">
               <a class="nav-link" href="{{ url('applicant/search_jobs') }}">
                 <i class="material-icons">search</i>
                 <p>Search Jobs</p>
               </a>
-            </li>
+            </li>-->
             <li class="nav-item ">
                 <a class="nav-link" href="{{ url('logout') }}">
                   <i class="material-icons">exit_to_app</i>

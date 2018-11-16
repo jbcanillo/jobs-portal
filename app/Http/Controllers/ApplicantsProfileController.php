@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use File;
 use App\Applicant;
 use App\User;
-use Auth,DB;
+use Auth,DB,Datatables;
 
 class ApplicantsProfileController extends Controller
 {
@@ -380,6 +380,38 @@ class ApplicantsProfileController extends Controller
             }
             
             return redirect('applicant/profile')->with('success', 'Your profile has been updated.');
+        }
+    }
+
+    public function myApplications(){
+        return view('applicant/my_applications/listview');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id){
+        if(!is_numeric($id)){
+            $applicant = \App\Applicant::where('user_id','=',Auth::user()->id)->firstOrFail();
+            $applications = DB::table('requests')
+                            ->join('request_assignments','request_assignments.request_id','=','requests.id')
+                            ->select('requests.*','request_assignments.status AS application_status',DB::raw('count(*) as number_applicants'))
+                            ->where('request_assignments.applicant_id','=',$applicant->id)
+                            ->get();
+            return Datatables::of($applications)->make(true);
+        }else{
+            $applicant = \App\Applicant::where('user_id','=',Auth::user()->id)->firstOrFail();
+            $request = \App\Requests::find($id);
+            $request_assignments = DB::table('request_assignments')
+                                ->join('applicants','applicants.id','=','request_assignments.applicant_id')
+                                ->select('request_assignments.*','request_assignments.status as application_status')
+                                ->where('request_assignments.request_id','=',$id)
+                                ->where('request_assignments.applicant_id','=',$applicant->id)
+                                ->get();
+            return view('applicant/my_applications/view',compact('request','request_assignments'));
         }
     }
 

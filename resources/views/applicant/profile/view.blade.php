@@ -33,6 +33,15 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title">{{ $applicant_details->lastname .', '. $applicant_details->firstname .' '. $applicant_details->middlename}}</h4>
+                                <p class="card-description">
+                                    <?php
+                                        $birthdate = new DateTime($applicant_details->birthdate);
+                                        $now = new DateTime();
+                                        $interval = $now->diff($birthdate);
+                                        $applicant_age = $interval->y;    
+                                        echo $applicant_details->gender. " - ".$applicant_age . " years old";
+                                    ?>
+                                </p>
                                 <?php
                                     if($applicant_details->status=='Active'){
                                         echo ' <a href="" class="btn btn-success btn-round">Active</a>';
